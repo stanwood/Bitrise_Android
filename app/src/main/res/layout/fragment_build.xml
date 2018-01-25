@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="io.stanwood.bitrise.ui.build.vm.BuildViewModel" />
+            type="io.stanwood.bitrise.ui.build_details.vm.BuildViewModel" />
 
         <import type="android.support.v7.widget.LinearLayoutManager" />
     </data>

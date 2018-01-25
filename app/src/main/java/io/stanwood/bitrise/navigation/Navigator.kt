@@ -7,7 +7,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import io.stanwood.bitrise.data.model.App
 import io.stanwood.bitrise.data.model.Build
-import io.stanwood.bitrise.ui.build.ui.BuildFragment
+import io.stanwood.bitrise.ui.build_details.ui.BuildFragment
 import io.stanwood.bitrise.ui.builds.ui.BuildsFragment
 import io.stanwood.bitrise.ui.dashboard.ui.DashboardFragment
 import io.stanwood.bitrise.ui.splash.ui.SplashFragment

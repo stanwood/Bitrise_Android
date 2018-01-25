@@ -1,6 +1,6 @@
 package io.stanwood.bitrise.ui.logs.di
 
-import io.stanwood.bitrise.ui.build.di.PROPERTY_BUILD
+import io.stanwood.bitrise.ui.build_details.di.PROPERTY_BUILD
 import io.stanwood.bitrise.ui.builds.di.PROPERTY_APP
 import io.stanwood.bitrise.ui.logs.vm.LogsViewModel
 import org.koin.dsl.module.applicationContext

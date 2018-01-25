@@ -3,7 +3,7 @@ package io.stanwood.bitrise
 import android.app.Application
 import io.stanwood.bitrise.di.applicationModule
 import io.stanwood.bitrise.ui.artifacts.di.artifactsModule
-import io.stanwood.bitrise.ui.build.di.buildModule
+import io.stanwood.bitrise.ui.build_details.di.buildModule
 import io.stanwood.bitrise.ui.builds.di.buildsModule
 import io.stanwood.bitrise.ui.dashboard.di.dashboardModule
 import io.stanwood.bitrise.ui.logs.di.logsModule

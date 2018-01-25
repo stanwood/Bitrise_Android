@@ -1,7 +1,7 @@
 package io.stanwood.bitrise.ui.artifacts.di
 
 import io.stanwood.bitrise.ui.artifacts.vm.ArtifactsViewModel
-import io.stanwood.bitrise.ui.build.di.PROPERTY_BUILD
+import io.stanwood.bitrise.ui.build_details.di.PROPERTY_BUILD
 import io.stanwood.bitrise.ui.builds.di.PROPERTY_APP
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module.applicationContext
