@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="io.stanwood.bitrise.ui.builds.vm.BuildItemViewModel" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:onClick="@{() -> vm.onClick()}">
+
+        <View
+            android:layout_width="4dp"
+            android:layout_height="match_parent"
+            android:background="@{vm.color}"
+            android:tint="@color/build_status_aborted"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@color/build_status_success" />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/type_icon"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:src="@{vm.icon}"
+            android:tint="@{vm.color}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_pull_request" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@{vm.status}"
+            android:textColor="@{vm.color}"
+            android:textSize="@dimen/listPrimaryItemTextSize"
+            app:layout_constraintStart_toEndOf="@+id/type_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Success"
+            tools:textColor="@color/build_status_success" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/last_build_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            android:text="@{vm.triggeredAt}"
+            android:textSize="@dimen/listSecondaryItemTextSize"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/type_icon"
+            tools:text="Triggered @ 12:04" />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/ic_duration"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/ic_duration"
+            android:tint="@android:color/secondary_text_dark"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/last_build_time"
+            app:layout_constraintTop_toTopOf="@+id/last_build_time" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/build_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@{vm.duration}"
+            android:textSize="@dimen/listSecondaryItemTextSize"
+            app:layout_constraintBottom_toBottomOf="@+id/ic_duration"
+            app:layout_constraintStart_toEndOf="@+id/ic_duration"
+            app:layout_constraintTop_toTopOf="@+id/ic_duration"
+            tools:text="5m 43s" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/build_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@{vm.number}"
+            android:textSize="@dimen/listSecondaryItemTextSize"
+            app:layout_constraintBottom_toBottomOf="@+id/build_duration"
+            app:layout_constraintStart_toEndOf="@+id/build_duration"
+            app:layout_constraintTop_toTopOf="@+id/build_duration"
+            tools:text="#56" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/branch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{vm.branch}"
+            android:textSize="@dimen/listSecondaryItemTextSize"
+            app:layout_constraintBottom_toBottomOf="@+id/status"
+            app:layout_constraintStart_toEndOf="@+id/status"
+            app:layout_constraintTop_toTopOf="@+id/status"
+            tools:text="feature/CIN-426 CI fix > Develop" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
