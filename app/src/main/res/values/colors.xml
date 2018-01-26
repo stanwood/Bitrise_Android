@@ -9,4 +9,5 @@
     <color name="build_status_aborted">#ffe500</color>
     <color name="build_status_in_progress">#8c3da9</color>
     <color name="log_bg_color">#293e51</color>
+    <color name="tab_indicator_color">#fff</color>
 </resources>
