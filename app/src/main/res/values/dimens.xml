@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="listPrimaryItemTextSize">16sp</dimen>
+    <dimen name="listSecondaryItemTextSize">14sp</dimen>
+    <dimen name="titleTextSize">22sp</dimen>
+    <dimen name="logo_size">120dp</dimen>
+</resources>

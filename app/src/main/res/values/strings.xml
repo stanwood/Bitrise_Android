@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Bitrise</string>
+    <string name="app_description">Unnofficial Bitrise Android client</string>
+    <string name="build_status_success">Success</string>
+    <string name="build_status_failure">Failure</string>
+    <string name="build_status_aborted">Aborted</string>
+    <string name="build_status_in_progress">In progress</string>
+    <string name="build_triggered_at">Trigerred @ %1$s</string>
+    <string name="title_logs">Logs</string>
+    <string name="title_artifacts">Artifacts</string>
+    <string name="artifact_type_file">file</string>
+    <string name="artifact_type_apk">APK</string>
+    <string name="label_token">Token</string>
+    <string name="login_instructions">Don\'t have a token? Get it <a href="https://www.bitrise.io/me/profile#/security">here!</a></string>
+    <string name="invalid_token">Invalid token</string>
+    <string name="default_error_message">Unexpected error</string>
+    <string name="error_title">GAME OVER</string>
+</resources>

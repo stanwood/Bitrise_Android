@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="io.stanwood.bitrise.ui.dashboard.vm.AppViewModel" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:onClick="@{() -> vm.onClick()}">
+
+        <View
+            android:layout_width="4dp"
+            android:layout_height="match_parent"
+            android:background="@{vm.buildStatusColor}"
+            android:tint="@color/build_status_aborted"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@color/build_status_aborted"/>
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/icon"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:src="@{vm.icon}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_platform_android" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/repo_owner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@{vm.repoOwner}"
+            android:textSize="@dimen/listPrimaryItemTextSize"
+            app:layout_constraintStart_toEndOf="@+id/icon"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Repo/" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@{vm.title}"
+            android:textSize="@dimen/listPrimaryItemTextSize"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/repo_owner"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Title" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/last_build_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@{vm.lastBuildTime}"
+            android:textColor="@{vm.buildStatusColor}"
+            android:textSize="@dimen/listSecondaryItemTextSize"
+            app:layout_constraintBottom_toBottomOf="@+id/build_status_icon"
+            app:layout_constraintStart_toEndOf="@+id/build_status_icon"
+            app:layout_constraintTop_toTopOf="@+id/build_status_icon"
+            tools:text="2 days ago" />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/build_status_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            android:src="@{vm.buildStatusIcon}"
+            android:tint="@{vm.buildStatusColor}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/icon"
+            tools:src="@drawable/ic_build_status_aborted" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
