@@ -10,6 +10,8 @@
             type="io.stanwood.bitrise.ui.dashboard.vm.DashboardViewModel" />
 
         <import type="android.support.v7.widget.LinearLayoutManager" />
+
+        <import type="io.stanwood.bitrise.BuildConfig" />
     </data>
 
     <LinearLayout
@@ -31,8 +33,10 @@
 
             <android.support.v7.widget.RecyclerView
                 divider="@{LinearLayoutManager.VERTICAL}"
+                endOfListReached="@{vm.onEndOfListReached}"
                 itemLayout="@{@layout/item_app}"
                 items="@{vm.items}"
+                loadMoreThreshold="@{BuildConfig.PAGE_LOAD_THRESHOLD}"
                 orientation="@{LinearLayoutManager.VERTICAL}"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
