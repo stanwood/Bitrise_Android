@@ -15,4 +15,5 @@
     <string name="invalid_token">Invalid token</string>
     <string name="default_error_message">Unexpected error</string>
     <string name="error_title">GAME OVER</string>
+    <string name="logout">Logout</string>
 </resources>
