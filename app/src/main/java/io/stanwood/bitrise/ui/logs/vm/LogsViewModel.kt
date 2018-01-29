@@ -6,7 +6,6 @@ import android.arch.lifecycle.OnLifecycleEvent
 import android.databinding.BaseObservable
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
-import io.stanwood.bitrise.BuildConfig
 import io.stanwood.bitrise.data.model.App
 import io.stanwood.bitrise.data.model.Build
 import io.stanwood.bitrise.data.net.BitriseService
