@@ -15,6 +15,8 @@ android {
         multiDexEnabled true
 
         buildConfigField "String", "BITRISE_API_BASE_URL", "\"https://api.bitrise.io/\""
+        buildConfigField "int", "DEFAULT_PAGE_SIZE", "10"
+        buildConfigField "int", "PAGE_LOAD_THRESHOLD", "2"
     }
     kotlin {
         experimental {

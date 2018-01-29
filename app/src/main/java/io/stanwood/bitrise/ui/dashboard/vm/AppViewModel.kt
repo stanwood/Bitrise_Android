@@ -5,7 +5,6 @@ import android.databinding.BaseObservable
 import android.databinding.Bindable
 import android.graphics.drawable.Drawable
 import io.stanwood.bitrise.BR
-import io.stanwood.bitrise.BuildConfig
 import io.stanwood.bitrise.data.model.App
 import io.stanwood.bitrise.data.model.Build
 import io.stanwood.bitrise.data.model.BuildStatus
@@ -77,7 +76,7 @@ class AppViewModel(
 
     private suspend fun fetchLastBuild() =
         service
-            .getBuilds(token, app.slug, 1)
+            .getBuilds(token, app.slug, limit = 1)
             .await()
             .data
             .firstOrNull()
