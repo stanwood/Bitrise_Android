@@ -3,10 +3,15 @@ package io.stanwood.bitrise.ui.dashboard.vm
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleObserver
 import android.arch.lifecycle.OnLifecycleEvent
+import android.content.SharedPreferences
 import android.content.res.Resources
 import android.databinding.ObservableArrayList
 import android.databinding.ObservableBoolean
 import io.stanwood.bitrise.data.net.BitriseService
+import io.stanwood.bitrise.di.Properties
+import io.stanwood.bitrise.navigation.SCREEN_ERROR
+import io.stanwood.bitrise.navigation.SCREEN_LOGIN
+import io.stanwood.bitrise.util.extensions.setProperty
 import kotlinx.coroutines.experimental.Deferred
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
@@ -17,6 +22,7 @@ import timber.log.Timber
 class DashboardViewModel(private val router: Router,
                          private val service: BitriseService,
                          private val token: String,
+                         private val sharedPreferences: SharedPreferences,
                          private val resources: Resources): LifecycleObserver {
 
     val isLoading = ObservableBoolean(false)
@@ -51,6 +57,15 @@ class DashboardViewModel(private val router: Router,
         }
     }
 
+    fun onLogout() {
+        setProperty(Properties.TOKEN, null)
+        sharedPreferences
+                .edit()
+                .remove(Properties.TOKEN)
+                .apply()
+        router.newRootScreen(SCREEN_LOGIN)
+    }
+
     private fun loadMoreItems() {
         deferred = async(UI) {
             try {
@@ -62,6 +77,7 @@ class DashboardViewModel(private val router: Router,
                     }
             } catch (exception: Exception) {
                 Timber.e(exception)
+                router.navigateTo(SCREEN_ERROR, exception.message)
             } finally {
                 isLoading.set(false)
             }

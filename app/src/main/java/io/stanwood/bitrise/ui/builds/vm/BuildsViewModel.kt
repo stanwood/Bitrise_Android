@@ -8,6 +8,7 @@ import android.databinding.ObservableArrayList
 import android.databinding.ObservableBoolean
 import io.stanwood.bitrise.data.model.App
 import io.stanwood.bitrise.data.net.BitriseService
+import io.stanwood.bitrise.navigation.SCREEN_ERROR
 import kotlinx.coroutines.experimental.Deferred
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
@@ -66,6 +67,7 @@ class BuildsViewModel(private val router: Router,
                     }
             } catch (exception: Exception) {
                 Timber.e(exception)
+                router.navigateTo(SCREEN_ERROR, exception.message)
             } finally {
                 isLoading.set(false)
             }

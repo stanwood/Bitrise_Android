@@ -10,6 +10,7 @@ import io.stanwood.bitrise.data.model.Build
 import io.stanwood.bitrise.data.model.BuildStatus
 import io.stanwood.bitrise.data.net.BitriseService
 import io.stanwood.bitrise.navigation.SCREEN_BUILDS
+import io.stanwood.bitrise.navigation.SCREEN_ERROR
 import kotlinx.coroutines.experimental.Deferred
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
@@ -62,6 +63,7 @@ class AppViewModel(
                 notifyPropertyChanged(BR.lastBuildTime)
             } catch (exception: Exception) {
                 Timber.e(exception)
+                router.navigateTo(SCREEN_ERROR, exception.message)
             }
         }
     }

@@ -15,6 +15,7 @@ val dashboardModule = applicationContext {
             get(),
             get(),
             getProperty(Properties.TOKEN),
+            get(),
             androidApplication().resources)
     }
 }
