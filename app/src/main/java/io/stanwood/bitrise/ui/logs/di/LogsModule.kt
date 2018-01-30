@@ -14,6 +14,7 @@ val logsModule = applicationContext {
         LogsViewModel(
                 get(),
                 getProperty(Properties.TOKEN),
+                get(),
                 getProperty(Properties.APP),
                 getProperty(Properties.BUILD))
     }

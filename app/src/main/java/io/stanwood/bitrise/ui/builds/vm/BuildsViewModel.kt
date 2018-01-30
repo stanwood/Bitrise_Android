@@ -8,6 +8,7 @@ import android.databinding.ObservableArrayList
 import android.databinding.ObservableBoolean
 import io.stanwood.bitrise.data.model.App
 import io.stanwood.bitrise.data.net.BitriseService
+import io.stanwood.bitrise.navigation.SCREEN_ERROR
 import kotlinx.coroutines.experimental.Deferred
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
@@ -30,6 +31,8 @@ class BuildsViewModel(private val router: Router,
 
     private var deferred: Deferred<Any>? = null
     private var nextCursor: String? = null
+    private val shouldLoadMoreItems: Boolean
+        get() = !isLoading.get() && nextCursor != null
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun start() {
@@ -43,30 +46,37 @@ class BuildsViewModel(private val router: Router,
 
     fun onRefresh() {
         deferred?.cancel()
-        deferred = async(UI) {
-            items.clear()
-            nextCursor = null
+        items.clear()
+        nextCursor = null
+        loadMoreItems()
+    }
+
+    fun onEndOfListReached(itemCount: Int) {
+        if(shouldLoadMoreItems) {
             loadMoreItems()
         }
     }
 
-    private suspend fun loadMoreItems() {
-        try {
-            isLoading.set(true)
-            fetchItems()
-                .forEach { viewModel ->
-                    items.add(viewModel)
-                }
-        } catch (exception: Exception) {
-            Timber.e(exception)
-        } finally {
-            isLoading.set(false)
+    private fun loadMoreItems() {
+        deferred = async(UI) {
+            try {
+                isLoading.set(true)
+                fetchItems()
+                    .forEach { viewModel ->
+                        items.add(viewModel)
+                    }
+            } catch (exception: Exception) {
+                Timber.e(exception)
+                router.navigateTo(SCREEN_ERROR, exception.message)
+            } finally {
+                isLoading.set(false)
+            }
         }
     }
 
     private suspend fun fetchItems() =
         service
-            .getBuilds(token, app.slug)
+            .getBuilds(token, app.slug, nextCursor)
             .await()
             .apply { nextCursor = paging.nextCursor }
             .data

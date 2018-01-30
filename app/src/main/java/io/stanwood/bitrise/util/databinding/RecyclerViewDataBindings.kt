@@ -7,6 +7,9 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import io.stanwood.bitrise.BR
 
+interface EndOfListReachedListener {
+    fun invoke(itemCount: Int)
+}
 
 @BindingAdapter(value = ["items", "itemLayout"], requireAll = true)
 fun setItems(
@@ -40,13 +43,13 @@ fun setDivider(
 @BindingAdapter(value = ["endOfListReached", "loadMoreThreshold"], requireAll = true)
 fun setEndOfListReachedLister(
         recyclerView: RecyclerView,
-        listener: (Int) -> Any?,
-        loadMoreThreshold: Int) {
+        listener: EndOfListReachedListener,
+        loadMoreThreshold: Int = 2) {
     recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
         override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
             super.onScrolled(recyclerView, dx, dy)
 
-            val layoutManager = recyclerView!!.layoutManager
+            val layoutManager = recyclerView?.layoutManager
 
             if (layoutManager is LinearLayoutManager) {
                 val lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition()

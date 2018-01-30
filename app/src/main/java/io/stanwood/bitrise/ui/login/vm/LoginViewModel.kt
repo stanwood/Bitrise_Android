@@ -29,16 +29,15 @@ class LoginViewModel(
     val isError = ObservableBoolean()
     val isLoading = ObservableBoolean()
     @get:Bindable
-    var token: String? = null
+    var token: String?
         set(value) {
-            field = value
             setProperty(Properties.TOKEN, value)
             sharedPreferences
                     .edit()
                     .putString(Properties.TOKEN, value)
                     .apply()
         }
-        get() = field ?: sharedPreferences.getString(Properties.TOKEN, null)
+        get() = sharedPreferences.getString(Properties.TOKEN, null)
 
     private var deferred: Deferred<Any>? = null
 

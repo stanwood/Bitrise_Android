@@ -10,11 +10,13 @@ android {
         minSdkVersion 21
         targetSdkVersion sdk_version
         versionCode 1
-        versionName "0.1"
+        versionName "0.9"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
 
         buildConfigField "String", "BITRISE_API_BASE_URL", "\"https://api.bitrise.io/\""
+        buildConfigField "int", "DEFAULT_PAGE_SIZE", "10"
+        buildConfigField "int", "PAGE_LOAD_THRESHOLD", "2"
     }
     kotlin {
         experimental {
