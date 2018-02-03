@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <string msgid="4600421777120114993" name="abc_action_bar_home_description">"Idi na početnu"</string>
+    <string msgid="1594238315039666878" name="abc_action_bar_up_description">"Idi gore"</string>
+    <string msgid="3588849162933574182" name="abc_action_menu_overflow_description">"Dodatne opcije"</string>
+    <string msgid="4076576682505996667" name="abc_action_mode_done">"Gotovo"</string>
+    <string msgid="7468859129482906941" name="abc_activity_chooser_view_see_all">"Prikaži sve"</string>
+    <string msgid="2031811694353399454" name="abc_activitychooserview_choose_application">"Odabir aplikacije"</string>
+    <string msgid="121134116657445385" name="abc_capital_off">"ISKLJUČENO"</string>
+    <string msgid="3405795526292276155" name="abc_capital_on">"UKLJUČENO"</string>
+    <string msgid="7723749260725869598" name="abc_search_hint">"Pretražite…"</string>
+    <string msgid="3691816814315814921" name="abc_searchview_description_clear">"Izbriši upit"</string>
+    <string msgid="2550479030709304392" name="abc_searchview_description_query">"Upit za pretraživanje"</string>
+    <string msgid="8264924765203268293" name="abc_searchview_description_search">"Pretraživanje"</string>
+    <string msgid="8928215447528550784" name="abc_searchview_description_submit">"Pošalji upit"</string>
+    <string msgid="893419373245838918" name="abc_searchview_description_voice">"Glasovno pretraživanje"</string>
+    <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"Dijeljenje sa"</string>
+    <string msgid="3300176832234831527" name="abc_shareactionprovider_share_with_application">"Dijeli putem aplikacije <ns1:g id="APPLICATION_NAME">%s</ns1:g>"</string>
+    <string msgid="1603543279005712093" name="abc_toolbar_collapse_description">"Sažmi"</string>
+    <string msgid="3698378085901466129" name="mr_button_content_description">"Gumb za emitiranje"</string>
+    <string msgid="5088427771788648085" name="mr_cast_button_connected">"Gumb za emitiranje. Povezan"</string>
+    <string msgid="2187642765091873834" name="mr_cast_button_connecting">"Gumb za emitiranje. Povezivanje"</string>
+    <string msgid="816305490427819240" name="mr_cast_button_disconnected">"Gumb za emitiranje. Veza prekinuta"</string>
+    <string msgid="6349900579507521956" name="mr_chooser_searching">"Traženje uređaja"</string>
+    <string msgid="414301941546135990" name="mr_chooser_title">"Emitiranje na"</string>
+    <string msgid="6422801843540543585" name="mr_controller_album_art">"Naslovnica albuma"</string>
+    <string msgid="4868457957151124867" name="mr_controller_casting_screen">"Emitiranje zaslona"</string>
+    <string msgid="7333862312480583260" name="mr_controller_close_description">"Zatvaranje"</string>
+    <string msgid="7924809056904240926" name="mr_controller_collapse_group">"Sažimanje"</string>
+    <string msgid="1227264889412989580" name="mr_controller_disconnect">"Prekini vezu"</string>
+    <string msgid="8062427022744266907" name="mr_controller_expand_group">"Proširivanje"</string>
+    <string msgid="5585418471741142924" name="mr_controller_no_info_available">"Informacije nisu dostupne"</string>
+    <string msgid="6547130360349182381" name="mr_controller_no_media_selected">"Nije odabran nijedan medij"</string>
+    <string msgid="5451884435510905406" name="mr_controller_pause">"Pauziranje"</string>
+    <string msgid="683634565969987458" name="mr_controller_play">"Reprodukcija"</string>
+    <string msgid="735874641921425123" name="mr_controller_stop">"Zaustavi"</string>
+    <string msgid="8857886794086583226" name="mr_controller_stop_casting">"Zaustavi emitiranje"</string>
+    <string msgid="2361785992211841709" name="mr_controller_volume_slider">"Klizač za glasnoću"</string>
+    <string msgid="5441529851481176817" name="mr_system_route_name">"Sustav"</string>
+    <string msgid="7498112907524977311" name="mr_user_route_category_name">"Uređaji"</string>
+    <string msgid="146198913615257606" name="search_menu_title">"Pretraživanje"</string>
+    <string msgid="2869576371154716097" name="status_bar_notification_info_overflow">"999+"</string>
+</resources>

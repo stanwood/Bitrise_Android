@@ -1,0 +1,180 @@
+-- Merging decision tree log ---
+provider#android.support.v4.content.FileProvider
+INJECTED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml:18:9-26:20
+	android:grantUriPermissions
+		ADDED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml:22:13-47
+	android:authorities
+		INJECTED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml:20:13-60
+	android:exported
+		ADDED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml:21:13-37
+	android:name
+		ADDED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml:19:13-67
+manifest
+ADDED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml:1:1-39:12
+INJECTED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml:1:1-39:12
+INJECTED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml:1:1-39:12
+INJECTED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml:1:1-39:12
+MERGED from [com.android.databinding:adapters:1.3.1] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/adapters-1.3.1.aar/1102a01965d921daad0489c0d5c4e0c9/AndroidManifest.xml:17:1-26:12
+MERGED from [com.android.databinding:library:1.3.1] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/library-1.3.1.aar/b17df4acb562f08e9e77dd79555cc2c3/AndroidManifest.xml:17:1-26:12
+MERGED from [com.android.support:design:27.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/design-27.0.2.aar/ae9a7f56dd42708e387a73166fd58e7a/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:mediarouter-v7:27.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-27.0.2.aar/e09572d3187436285789bf7871dfef87/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:appcompat-v7:27.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.0.2.aar/532d06fa74bf8d4e73450047a6068805/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:27.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.0.2.aar/029a8b07eae45f7a10772c67aecf31a1/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.0.2.aar/79435e0157ef8f927d3962b824388f32/AndroidManifest.xml:2:1-11:12
+MERGED from [com.android.support:support-v4:27.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/support-v4-27.0.2.aar/f3700fb0d21d66312a7f6a5abc99127e/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:recyclerview-v7:27.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-27.0.2.aar/f8c0c638a775ff7ea5bf450642c64133/AndroidManifest.xml:17:1-22:12
+MERGED from [com.github.bumptech.glide:glide:4.5.0] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/glide-4.5.0.aar/264517403d0d536b633d8c3fdc77649a/AndroidManifest.xml:2:1-13:12
+MERGED from [com.jakewharton.timber:timber:4.6.0] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/timber-4.6.0.aar/4ce575a7fd275460274f1c7827d8577d/AndroidManifest.xml:2:1-10:12
+MERGED from [org.koin:koin-android:0.8.0] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/koin-android-0.8.0.aar/9f963cb3602a6d4452527ff4009efcdd/AndroidManifest.xml:2:1-13:12
+MERGED from [com.android.support:support-fragment:27.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/support-fragment-27.0.2.aar/5a0c75e14f3409db19a96249b7d7e541/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:palette-v7:27.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/palette-v7-27.0.2.aar/0ad2fab703d6a8e82bf3e3f7ba520370/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:27.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.0.2.aar/80b0597ebe2f4b22e9c0d4e778bdeedf/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:27.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.0.2.aar/ed464a7d14f17156ade728c55bb2f3f7/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:transition:27.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/transition-27.0.2.aar/dfd97636786f8ddfc7fa2472e7e25822/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:27.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.0.2.aar/77a2c5361e2a18b386c87f085381179b/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-media-compat:27.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.0.2.aar/cccd8b7b318d51e7be025e7d2369145d/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:27.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/support-compat-27.0.2.aar/a01e959f7a0774aecf2b2d5d39bb5229/AndroidManifest.xml:17:1-22:12
+MERGED from [com.github.bumptech.glide:gifdecoder:4.5.0] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/gifdecoder-4.5.0.aar/fdf4656ec049319cd5d457ce1a16bfd9/AndroidManifest.xml:2:1-11:12
+MERGED from [android.arch.lifecycle:runtime:1.0.3] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/runtime-1.0.3.aar/3b189c1ee04926fbb72923bdb0057855/AndroidManifest.xml:17:1-24:12
+INJECTED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml:1:1-39:12
+INJECTED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml:1:1-39:12
+INJECTED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml:1:1-39:12
+	package
+		ADDED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml:2:5-34
+		INJECTED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml:1:1-39:12
+		INJECTED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml:1:1-39:12
+		INJECTED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml:1:11-69
+uses-permission#android.permission.INTERNET
+ADDED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml:4:5-67
+	android:name
+		ADDED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml:4:22-64
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml:5:5-79
+	android:name
+		ADDED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml:5:22-76
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml:6:5-81
+	android:name
+		ADDED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml:6:22-78
+uses-permission#android.permission.REQUEST_INSTALL_PACKAGES
+ADDED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml:7:5-83
+	android:name
+		ADDED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml:7:22-80
+application
+ADDED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml:9:5-38:19
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.0.2.aar/79435e0157ef8f927d3962b824388f32/AndroidManifest.xml:9:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.0.2.aar/79435e0157ef8f927d3962b824388f32/AndroidManifest.xml:9:5-20
+MERGED from [com.github.bumptech.glide:glide:4.5.0] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/glide-4.5.0.aar/264517403d0d536b633d8c3fdc77649a/AndroidManifest.xml:11:5-20
+MERGED from [com.github.bumptech.glide:glide:4.5.0] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/glide-4.5.0.aar/264517403d0d536b633d8c3fdc77649a/AndroidManifest.xml:11:5-20
+MERGED from [com.jakewharton.timber:timber:4.6.0] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/timber-4.6.0.aar/4ce575a7fd275460274f1c7827d8577d/AndroidManifest.xml:8:5-20
+MERGED from [com.jakewharton.timber:timber:4.6.0] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/timber-4.6.0.aar/4ce575a7fd275460274f1c7827d8577d/AndroidManifest.xml:8:5-20
+MERGED from [org.koin:koin-android:0.8.0] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/koin-android-0.8.0.aar/9f963cb3602a6d4452527ff4009efcdd/AndroidManifest.xml:11:5-20
+MERGED from [org.koin:koin-android:0.8.0] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/koin-android-0.8.0.aar/9f963cb3602a6d4452527ff4009efcdd/AndroidManifest.xml:11:5-20
+MERGED from [com.github.bumptech.glide:gifdecoder:4.5.0] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/gifdecoder-4.5.0.aar/fdf4656ec049319cd5d457ce1a16bfd9/AndroidManifest.xml:9:5-20
+MERGED from [com.github.bumptech.glide:gifdecoder:4.5.0] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/gifdecoder-4.5.0.aar/fdf4656ec049319cd5d457ce1a16bfd9/AndroidManifest.xml:9:5-20
+	android:supportsRtl
+		ADDED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml:15:9-35
+	android:label
+		ADDED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml:13:9-41
+	android:roundIcon
+		ADDED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml:14:9-54
+	android:icon
+		ADDED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml:12:9-43
+	android:allowBackup
+		ADDED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml:11:9-35
+	android:theme
+		ADDED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml:16:9-40
+	android:name
+		ADDED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml:10:9-36
+activity#io.stanwood.bitrise.MainActivity
+ADDED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml:28:9-36:20
+	android:screenOrientation
+		ADDED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml:31:13-49
+	android:label
+		ADDED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml:30:13-45
+	android:name
+		ADDED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml:29:13-41
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml:32:13-35:29
+action#android.intent.action.MAIN
+ADDED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml:33:17-69
+	android:name
+		ADDED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml:33:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml:34:17-77
+	android:name
+		ADDED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml:34:27-74
+uses-sdk
+INJECTED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml
+INJECTED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml
+MERGED from [com.android.databinding:adapters:1.3.1] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/adapters-1.3.1.aar/1102a01965d921daad0489c0d5c4e0c9/AndroidManifest.xml:22:5-24:41
+MERGED from [com.android.databinding:adapters:1.3.1] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/adapters-1.3.1.aar/1102a01965d921daad0489c0d5c4e0c9/AndroidManifest.xml:22:5-24:41
+MERGED from [com.android.databinding:library:1.3.1] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/library-1.3.1.aar/b17df4acb562f08e9e77dd79555cc2c3/AndroidManifest.xml:22:5-24:41
+MERGED from [com.android.databinding:library:1.3.1] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/library-1.3.1.aar/b17df4acb562f08e9e77dd79555cc2c3/AndroidManifest.xml:22:5-24:41
+MERGED from [com.android.support:design:27.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/design-27.0.2.aar/ae9a7f56dd42708e387a73166fd58e7a/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:design:27.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/design-27.0.2.aar/ae9a7f56dd42708e387a73166fd58e7a/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:mediarouter-v7:27.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-27.0.2.aar/e09572d3187436285789bf7871dfef87/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:mediarouter-v7:27.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-27.0.2.aar/e09572d3187436285789bf7871dfef87/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:27.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.0.2.aar/532d06fa74bf8d4e73450047a6068805/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:27.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.0.2.aar/532d06fa74bf8d4e73450047a6068805/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.0.2.aar/029a8b07eae45f7a10772c67aecf31a1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.0.2.aar/029a8b07eae45f7a10772c67aecf31a1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.0.2.aar/79435e0157ef8f927d3962b824388f32/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.0.2.aar/79435e0157ef8f927d3962b824388f32/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:support-v4:27.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/support-v4-27.0.2.aar/f3700fb0d21d66312a7f6a5abc99127e/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:27.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/support-v4-27.0.2.aar/f3700fb0d21d66312a7f6a5abc99127e/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:27.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-27.0.2.aar/f8c0c638a775ff7ea5bf450642c64133/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:27.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-27.0.2.aar/f8c0c638a775ff7ea5bf450642c64133/AndroidManifest.xml:20:5-44
+MERGED from [com.github.bumptech.glide:glide:4.5.0] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/glide-4.5.0.aar/264517403d0d536b633d8c3fdc77649a/AndroidManifest.xml:7:5-9:41
+MERGED from [com.github.bumptech.glide:glide:4.5.0] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/glide-4.5.0.aar/264517403d0d536b633d8c3fdc77649a/AndroidManifest.xml:7:5-9:41
+MERGED from [com.jakewharton.timber:timber:4.6.0] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/timber-4.6.0.aar/4ce575a7fd275460274f1c7827d8577d/AndroidManifest.xml:6:5-43
+MERGED from [com.jakewharton.timber:timber:4.6.0] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/timber-4.6.0.aar/4ce575a7fd275460274f1c7827d8577d/AndroidManifest.xml:6:5-43
+MERGED from [org.koin:koin-android:0.8.0] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/koin-android-0.8.0.aar/9f963cb3602a6d4452527ff4009efcdd/AndroidManifest.xml:7:5-9:41
+MERGED from [org.koin:koin-android:0.8.0] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/koin-android-0.8.0.aar/9f963cb3602a6d4452527ff4009efcdd/AndroidManifest.xml:7:5-9:41
+MERGED from [com.android.support:support-fragment:27.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/support-fragment-27.0.2.aar/5a0c75e14f3409db19a96249b7d7e541/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:27.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/support-fragment-27.0.2.aar/5a0c75e14f3409db19a96249b7d7e541/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:palette-v7:27.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/palette-v7-27.0.2.aar/0ad2fab703d6a8e82bf3e3f7ba520370/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:palette-v7:27.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/palette-v7-27.0.2.aar/0ad2fab703d6a8e82bf3e3f7ba520370/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.0.2.aar/80b0597ebe2f4b22e9c0d4e778bdeedf/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.0.2.aar/80b0597ebe2f4b22e9c0d4e778bdeedf/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.0.2.aar/ed464a7d14f17156ade728c55bb2f3f7/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.0.2.aar/ed464a7d14f17156ade728c55bb2f3f7/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:27.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/transition-27.0.2.aar/dfd97636786f8ddfc7fa2472e7e25822/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:27.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/transition-27.0.2.aar/dfd97636786f8ddfc7fa2472e7e25822/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.0.2.aar/77a2c5361e2a18b386c87f085381179b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.0.2.aar/77a2c5361e2a18b386c87f085381179b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:27.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.0.2.aar/cccd8b7b318d51e7be025e7d2369145d/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:27.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.0.2.aar/cccd8b7b318d51e7be025e7d2369145d/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/support-compat-27.0.2.aar/a01e959f7a0774aecf2b2d5d39bb5229/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.0.2] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/support-compat-27.0.2.aar/a01e959f7a0774aecf2b2d5d39bb5229/AndroidManifest.xml:20:5-44
+MERGED from [com.github.bumptech.glide:gifdecoder:4.5.0] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/gifdecoder-4.5.0.aar/fdf4656ec049319cd5d457ce1a16bfd9/AndroidManifest.xml:5:5-7:41
+MERGED from [com.github.bumptech.glide:gifdecoder:4.5.0] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/gifdecoder-4.5.0.aar/fdf4656ec049319cd5d457ce1a16bfd9/AndroidManifest.xml:5:5-7:41
+MERGED from [android.arch.lifecycle:runtime:1.0.3] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/runtime-1.0.3.aar/3b189c1ee04926fbb72923bdb0057855/AndroidManifest.xml:20:5-22:41
+MERGED from [android.arch.lifecycle:runtime:1.0.3] /Users/mmoczkowski/.gradle/caches/transforms-1/files-1.1/runtime-1.0.3.aar/3b189c1ee04926fbb72923bdb0057855/AndroidManifest.xml:20:5-22:41
+INJECTED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml
+INJECTED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml:23:13-25:48
+	android:resource
+		ADDED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml:25:17-46
+	android:name
+		ADDED from /Users/mmoczkowski/Development/Bitrise Android/app/src/main/AndroidManifest.xml:24:17-67

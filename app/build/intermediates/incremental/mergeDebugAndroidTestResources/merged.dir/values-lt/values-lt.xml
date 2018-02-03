@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <string msgid="4600421777120114993" name="abc_action_bar_home_description">"Eiti į pagrindinį puslapį"</string>
+    <string msgid="1594238315039666878" name="abc_action_bar_up_description">"Eiti į viršų"</string>
+    <string msgid="3588849162933574182" name="abc_action_menu_overflow_description">"Daugiau parinkčių"</string>
+    <string msgid="4076576682505996667" name="abc_action_mode_done">"Atlikta"</string>
+    <string msgid="7468859129482906941" name="abc_activity_chooser_view_see_all">"Peržiūrėti viską"</string>
+    <string msgid="2031811694353399454" name="abc_activitychooserview_choose_application">"Pasirinkti programą"</string>
+    <string msgid="121134116657445385" name="abc_capital_off">"IŠJUNGTA"</string>
+    <string msgid="3405795526292276155" name="abc_capital_on">"ĮJUNGTI"</string>
+    <string msgid="7723749260725869598" name="abc_search_hint">"Ieškoti..."</string>
+    <string msgid="3691816814315814921" name="abc_searchview_description_clear">"Išvalyti užklausą"</string>
+    <string msgid="2550479030709304392" name="abc_searchview_description_query">"Paieškos užklausa"</string>
+    <string msgid="8264924765203268293" name="abc_searchview_description_search">"Paieška"</string>
+    <string msgid="8928215447528550784" name="abc_searchview_description_submit">"Pateikti užklausą"</string>
+    <string msgid="893419373245838918" name="abc_searchview_description_voice">"Paieška balsu"</string>
+    <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"Bendrinti naudojant"</string>
+    <string msgid="3300176832234831527" name="abc_shareactionprovider_share_with_application">"Bendrinti naudojant programą „<ns1:g id="APPLICATION_NAME">%s</ns1:g>“"</string>
+    <string msgid="1603543279005712093" name="abc_toolbar_collapse_description">"Sutraukti"</string>
+    <string msgid="3698378085901466129" name="mr_button_content_description">"Perdavimo mygtukas"</string>
+    <string msgid="5088427771788648085" name="mr_cast_button_connected">"Perdavimo mygtukas. Prisijungta"</string>
+    <string msgid="2187642765091873834" name="mr_cast_button_connecting">"Perdavimo mygtukas. Prisijungiama"</string>
+    <string msgid="816305490427819240" name="mr_cast_button_disconnected">"Perdavimo mygtukas. Atsijungta"</string>
+    <string msgid="6349900579507521956" name="mr_chooser_searching">"Randami įrenginiai"</string>
+    <string msgid="414301941546135990" name="mr_chooser_title">"Perduoti į"</string>
+    <string msgid="6422801843540543585" name="mr_controller_album_art">"Albumo viršelis"</string>
+    <string msgid="4868457957151124867" name="mr_controller_casting_screen">"Perduodamas ekranas"</string>
+    <string msgid="7333862312480583260" name="mr_controller_close_description">"Uždaryti"</string>
+    <string msgid="7924809056904240926" name="mr_controller_collapse_group">"Sutraukti"</string>
+    <string msgid="1227264889412989580" name="mr_controller_disconnect">"Atjungti"</string>
+    <string msgid="8062427022744266907" name="mr_controller_expand_group">"Išskleisti"</string>
+    <string msgid="5585418471741142924" name="mr_controller_no_info_available">"Informacija nepasiekiama"</string>
+    <string msgid="6547130360349182381" name="mr_controller_no_media_selected">"Nepasirinkta jokia medija"</string>
+    <string msgid="5451884435510905406" name="mr_controller_pause">"Pristabdyti"</string>
+    <string msgid="683634565969987458" name="mr_controller_play">"Leisti"</string>
+    <string msgid="735874641921425123" name="mr_controller_stop">"Sustabdyti"</string>
+    <string msgid="8857886794086583226" name="mr_controller_stop_casting">"Sustabdyti perdavimą"</string>
+    <string msgid="2361785992211841709" name="mr_controller_volume_slider">"Garsumo šliaužiklis"</string>
+    <string msgid="5441529851481176817" name="mr_system_route_name">"Sistema"</string>
+    <string msgid="7498112907524977311" name="mr_user_route_category_name">"Įrenginiai"</string>
+    <string msgid="146198913615257606" name="search_menu_title">"Paieška"</string>
+    <string msgid="2869576371154716097" name="status_bar_notification_info_overflow">"999+"</string>
+</resources>
