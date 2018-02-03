@@ -7,6 +7,7 @@ import android.content.SharedPreferences
 import android.databinding.BaseObservable
 import android.databinding.Bindable
 import android.databinding.ObservableBoolean
+import io.stanwood.bitrise.BuildConfig
 import io.stanwood.bitrise.data.net.BitriseService
 import io.stanwood.bitrise.di.Properties
 import io.stanwood.bitrise.navigation.SCREEN_DASHBOARD
@@ -37,7 +38,7 @@ class LoginViewModel(
                     .putString(Properties.TOKEN, value)
                     .apply()
         }
-        get() = sharedPreferences.getString(Properties.TOKEN, null)
+        get() = sharedPreferences.getString(Properties.TOKEN, BuildConfig.BITRISE_API_TOKEN)
 
     private var deferred: Deferred<Any>? = null
 
