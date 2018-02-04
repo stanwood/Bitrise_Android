@@ -3,11 +3,11 @@ package io.stanwood.bitrise.ui.artifacts.vm
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleObserver
 import android.arch.lifecycle.OnLifecycleEvent
-import android.content.Context
 import android.databinding.BaseObservable
 import android.databinding.ObservableArrayList
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
+import io.stanwood.bitrise.PermissionActivity
 import io.stanwood.bitrise.data.model.App
 import io.stanwood.bitrise.data.model.Artifact
 import io.stanwood.bitrise.data.model.Build
@@ -24,7 +24,7 @@ class ArtifactsViewModel(
         private val router: Router,
         private val service: BitriseService,
         private val token: String,
-        private val context: Context,
+        private val activity: PermissionActivity,
         private val app: App,
         private val build: Build) : LifecycleObserver, BaseObservable() {
 
@@ -45,6 +45,7 @@ class ArtifactsViewModel(
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     fun stop() {
         deferred?.cancel()
+        items.forEach { viewModel -> viewModel.stop() }
     }
 
     fun onRefresh() {
@@ -84,7 +85,7 @@ class ArtifactsViewModel(
                     .apply { nextCursor = paging.nextCursor }
                     .data
                     .map { artifact -> fetchArtifact(artifact) }
-                    .map { artifact -> ArtifactItemViewModel(context, router, artifact) }
+                    .map { artifact -> ArtifactItemViewModel(activity, router, artifact) }
 
     private suspend fun fetchArtifact(artifact: Artifact) =
             service
