@@ -45,6 +45,7 @@ class ArtifactsViewModel(
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     fun stop() {
         deferred?.cancel()
+        items.forEach { viewModel -> viewModel.stop() }
     }
 
     fun onRefresh() {

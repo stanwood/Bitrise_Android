@@ -47,7 +47,6 @@ class Navigator(private val activity: FragmentActivity, private val cointainerId
         }
 
     override fun showSystemMessage(message: String?) {
-        super.showSystemMessage(message)
         val view = activity.findViewById<View>(cointainerId)
         if (view != null && message != null) {
             Snackbar
