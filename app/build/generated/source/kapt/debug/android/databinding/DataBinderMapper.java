@@ -123,7 +123,6 @@ class DataBinderMapper  {
             "_all"
             ,"buildStatusColor"
             ,"buildStatusIcon"
-            ,"downloading"
             ,"lastBuildTime"
             ,"size"
             ,"title"

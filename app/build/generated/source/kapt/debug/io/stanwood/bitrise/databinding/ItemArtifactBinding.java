@@ -36,17 +36,17 @@ public class ItemArtifactBinding extends android.databinding.ViewDataBinding imp
     // Inverse Binding Event Handlers
 
     public ItemArtifactBinding(@NonNull android.databinding.DataBindingComponent bindingComponent, @NonNull View root) {
-        super(bindingComponent, root, 3);
+        super(bindingComponent, root, 4);
         final Object[] bindings = mapBindings(bindingComponent, root, 5, sIncludes, sViewsWithIds);
-        this.lastBuildTime = (android.support.v7.widget.AppCompatTextView) bindings[3];
+        this.lastBuildTime = (android.support.v7.widget.AppCompatTextView) bindings[4];
         this.lastBuildTime.setTag(null);
         this.mboundView0 = (android.support.constraint.ConstraintLayout) bindings[0];
         this.mboundView0.setTag(null);
-        this.progress = (android.widget.ProgressBar) bindings[4];
+        this.progress = (android.widget.ProgressBar) bindings[1];
         this.progress.setTag(null);
-        this.status = (android.support.v7.widget.AppCompatTextView) bindings[2];
+        this.status = (android.support.v7.widget.AppCompatTextView) bindings[3];
         this.status.setTag(null);
-        this.typeIcon = (android.support.v7.widget.AppCompatImageView) bindings[1];
+        this.typeIcon = (android.support.v7.widget.AppCompatImageView) bindings[2];
         this.typeIcon.setTag(null);
         setRootTag(root);
         // listeners
@@ -85,10 +85,10 @@ public class ItemArtifactBinding extends android.databinding.ViewDataBinding imp
     }
 
     public void setVm(@Nullable io.stanwood.bitrise.ui.artifacts.vm.ArtifactItemViewModel Vm) {
-        updateRegistration(0, Vm);
+        updateRegistration(1, Vm);
         this.mVm = Vm;
         synchronized(this) {
-            mDirtyFlags |= 0x1L;
+            mDirtyFlags |= 0x2L;
         }
         notifyPropertyChanged(BR.vm);
         super.requestRebind();
@@ -102,28 +102,33 @@ public class ItemArtifactBinding extends android.databinding.ViewDataBinding imp
     protected boolean onFieldChange(int localFieldId, Object object, int fieldId) {
         switch (localFieldId) {
             case 0 :
-                return onChangeVm((io.stanwood.bitrise.ui.artifacts.vm.ArtifactItemViewModel) object, fieldId);
+                return onChangeVmIsDownloading((android.databinding.ObservableBoolean) object, fieldId);
             case 1 :
-                return onChangeVmDownloadedSize((android.databinding.ObservableInt) object, fieldId);
+                return onChangeVm((io.stanwood.bitrise.ui.artifacts.vm.ArtifactItemViewModel) object, fieldId);
             case 2 :
+                return onChangeVmDownloadedSize((android.databinding.ObservableInt) object, fieldId);
+            case 3 :
                 return onChangeVmTotalSize((android.databinding.ObservableInt) object, fieldId);
         }
         return false;
     }
-    private boolean onChangeVm(io.stanwood.bitrise.ui.artifacts.vm.ArtifactItemViewModel Vm, int fieldId) {
+    private boolean onChangeVmIsDownloading(android.databinding.ObservableBoolean VmIsDownloading, int fieldId) {
         if (fieldId == BR._all) {
             synchronized(this) {
                     mDirtyFlags |= 0x1L;
             }
             return true;
         }
-        else if (fieldId == BR.size) {
+        return false;
+    }
+    private boolean onChangeVm(io.stanwood.bitrise.ui.artifacts.vm.ArtifactItemViewModel Vm, int fieldId) {
+        if (fieldId == BR._all) {
             synchronized(this) {
-                    mDirtyFlags |= 0x8L;
+                    mDirtyFlags |= 0x2L;
             }
             return true;
         }
-        else if (fieldId == BR.downloading) {
+        else if (fieldId == BR.size) {
             synchronized(this) {
                     mDirtyFlags |= 0x10L;
             }
@@ -134,7 +139,7 @@ public class ItemArtifactBinding extends android.databinding.ViewDataBinding imp
     private boolean onChangeVmDownloadedSize(android.databinding.ObservableInt VmDownloadedSize, int fieldId) {
         if (fieldId == BR._all) {
             synchronized(this) {
-                    mDirtyFlags |= 0x1aL;
+                    mDirtyFlags |= 0x14L;
             }
             return true;
         }
@@ -143,7 +148,7 @@ public class ItemArtifactBinding extends android.databinding.ViewDataBinding imp
     private boolean onChangeVmTotalSize(android.databinding.ObservableInt VmTotalSize, int fieldId) {
         if (fieldId == BR._all) {
             synchronized(this) {
-                    mDirtyFlags |= 0x4L;
+                    mDirtyFlags |= 0x8L;
             }
             return true;
         }
@@ -157,8 +162,9 @@ public class ItemArtifactBinding extends android.databinding.ViewDataBinding imp
             dirtyFlags = mDirtyFlags;
             mDirtyFlags = 0;
         }
-        boolean vmIsDownloading = false;
+        android.databinding.ObservableBoolean vmIsDownloading = null;
         io.stanwood.bitrise.ui.artifacts.vm.ArtifactItemViewModel vm = mVm;
+        boolean vmIsDownloadingGet = false;
         java.lang.String vmTitle = null;
         int vmDownloadedSizeGet = 0;
         android.databinding.ObservableInt vmDownloadedSize = null;
@@ -170,14 +176,21 @@ public class ItemArtifactBinding extends android.databinding.ViewDataBinding imp
         if ((dirtyFlags & 0x3fL) != 0) {
 
 
-            if ((dirtyFlags & 0x31L) != 0) {
+            if ((dirtyFlags & 0x23L) != 0) {
 
                     if (vm != null) {
                         // read vm.isDownloading
                         vmIsDownloading = vm.isDownloading();
                     }
+                    updateRegistration(0, vmIsDownloading);
+
+
+                    if (vmIsDownloading != null) {
+                        // read vm.isDownloading.get()
+                        vmIsDownloadingGet = vmIsDownloading.get();
+                    }
             }
-            if ((dirtyFlags & 0x21L) != 0) {
+            if ((dirtyFlags & 0x22L) != 0) {
 
                     if (vm != null) {
                         // read vm.title
@@ -186,13 +199,13 @@ public class ItemArtifactBinding extends android.databinding.ViewDataBinding imp
                         vmIcon = vm.getIcon();
                     }
             }
-            if ((dirtyFlags & 0x23L) != 0) {
+            if ((dirtyFlags & 0x26L) != 0) {
 
                     if (vm != null) {
                         // read vm.downloadedSize
                         vmDownloadedSize = vm.getDownloadedSize();
                     }
-                    updateRegistration(1, vmDownloadedSize);
+                    updateRegistration(2, vmDownloadedSize);
 
 
                     if (vmDownloadedSize != null) {
@@ -200,20 +213,20 @@ public class ItemArtifactBinding extends android.databinding.ViewDataBinding imp
                         vmDownloadedSizeGet = vmDownloadedSize.get();
                     }
             }
-            if ((dirtyFlags & 0x29L) != 0) {
+            if ((dirtyFlags & 0x32L) != 0) {
 
                     if (vm != null) {
                         // read vm.size
                         vmSize = vm.getSize();
                     }
             }
-            if ((dirtyFlags & 0x25L) != 0) {
+            if ((dirtyFlags & 0x2aL) != 0) {
 
                     if (vm != null) {
                         // read vm.totalSize
                         vmTotalSize = vm.getTotalSize();
                     }
-                    updateRegistration(2, vmTotalSize);
+                    updateRegistration(3, vmTotalSize);
 
 
                     if (vmTotalSize != null) {
@@ -223,7 +236,7 @@ public class ItemArtifactBinding extends android.databinding.ViewDataBinding imp
             }
         }
         // batch finished
-        if ((dirtyFlags & 0x29L) != 0) {
+        if ((dirtyFlags & 0x32L) != 0) {
             // api target 1
 
             android.databinding.adapters.TextViewBindingAdapter.setText(this.lastBuildTime, vmSize);
@@ -233,22 +246,22 @@ public class ItemArtifactBinding extends android.databinding.ViewDataBinding imp
 
             this.mboundView0.setOnClickListener(mCallback9);
         }
-        if ((dirtyFlags & 0x25L) != 0) {
+        if ((dirtyFlags & 0x2aL) != 0) {
             // api target 1
 
             this.progress.setMax(vmTotalSizeGet);
         }
-        if ((dirtyFlags & 0x23L) != 0) {
+        if ((dirtyFlags & 0x26L) != 0) {
             // api target 1
 
             this.progress.setProgress(vmDownloadedSizeGet);
         }
-        if ((dirtyFlags & 0x31L) != 0) {
+        if ((dirtyFlags & 0x23L) != 0) {
             // api target 1
 
-            io.stanwood.bitrise.util.databinding.ViewDataBindingsKt.setVisibility(this.progress, vmIsDownloading);
+            io.stanwood.bitrise.util.databinding.ViewDataBindingsKt.setVisibility(this.progress, vmIsDownloadingGet);
         }
-        if ((dirtyFlags & 0x21L) != 0) {
+        if ((dirtyFlags & 0x22L) != 0) {
             // api target 1
 
             android.databinding.adapters.TextViewBindingAdapter.setText(this.status, vmTitle);
@@ -304,11 +317,11 @@ public class ItemArtifactBinding extends android.databinding.ViewDataBinding imp
         return new ItemArtifactBinding(bindingComponent, view);
     }
     /* flag mapping
-        flag 0 (0x1L): vm
-        flag 1 (0x2L): vm.downloadedSize
-        flag 2 (0x3L): vm.totalSize
-        flag 3 (0x4L): vm.size
-        flag 4 (0x5L): vm.isDownloading
+        flag 0 (0x1L): vm.isDownloading
+        flag 1 (0x2L): vm
+        flag 2 (0x3L): vm.downloadedSize
+        flag 3 (0x4L): vm.totalSize
+        flag 4 (0x5L): vm.size
         flag 5 (0x6L): null
     flag mapping end*/
     //end

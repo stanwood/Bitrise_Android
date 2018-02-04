@@ -13,5 +13,6 @@ public final class BuildConfig {
   // Fields from default config.
   public static final String BITRISE_API_BASE_URL = "https://api.bitrise.io/";
   public static final int DEFAULT_PAGE_SIZE = 10;
+  public static final long DOWNLOAD_STATUS_REFRESH_DELAY = 500L;
   public static final int PAGE_LOAD_THRESHOLD = 2;
 }

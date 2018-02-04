@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Sat Feb 03 16:38:26 CET 2018
+#Sun Feb 04 12:39:55 CET 2018
 1.base=/Users/mmoczkowski/Development/Bitrise Android/app/build/intermediates/transforms/dexMerger/debug/19
 2.path=classes.dex
 0.baseType=DIRECTORY
