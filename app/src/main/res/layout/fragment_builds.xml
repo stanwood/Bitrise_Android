@@ -38,10 +38,9 @@
 
                 <android.support.v7.widget.RecyclerView
                     divider="@{LinearLayoutManager.VERTICAL}"
-                    endOfListReached="@{vm.onEndOfListReached}"
-                    itemLayout="@{@layout/item_build}"
-                    items="@{vm.items}"
-                    loadMoreThreshold="@{BuildConfig.PAGE_LOAD_THRESHOLD}"
+                    liveDataItemLayout="@{@layout/item_build}"
+                    liveDataItems="@{vm.items}"
+                    diff="@{vm.diffCallback}"
                     orientation="@{LinearLayoutManager.VERTICAL}"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
