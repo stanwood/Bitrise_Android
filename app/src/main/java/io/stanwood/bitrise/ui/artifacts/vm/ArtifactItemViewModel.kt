@@ -44,15 +44,17 @@ class ArtifactItemViewModel(
     val title: String
         get() = artifact.title
 
-    @get:Bindable("downloadedSize")
+    @get:Bindable("downloadedSize", "isDownloading")
     val size: String
-        get() = if (isDownloading.get()) {
-            val progress = (downloadedSize.get() / totalSize.get().toFloat() * 100).toInt()
-            val totalSizeFormatted = Formatter.formatShortFileSize(activity, totalSize.get().toLong())
-            val downloadedSizeFormatted = Formatter.formatShortFileSize(activity, downloadedSize.get().toLong())
-            "$downloadedSizeFormatted/$totalSizeFormatted ($progress%)"
-        } else {
-            Formatter.formatShortFileSize(activity, artifact.fileSizeBytes.toLong())
+        get() = when {
+            isAwaitingDownload -> activity.getString(R.string.download_awaiting_message)
+            isDownloading.get() -> {
+                val progress = (downloadedSize.get() / totalSize.get().toFloat() * 100).toInt()
+                val totalSizeFormatted = Formatter.formatShortFileSize(activity, totalSize.get().toLong())
+                val downloadedSizeFormatted = Formatter.formatShortFileSize(activity, downloadedSize.get().toLong())
+                "$downloadedSizeFormatted/$totalSizeFormatted ($progress%)"
+            }
+            else -> Formatter.formatShortFileSize(activity, artifact.fileSizeBytes.toLong())
         }
 
     val totalSize = ObservableInt(0)
@@ -60,6 +62,10 @@ class ArtifactItemViewModel(
     val downloadedSize = ObservableInt(0)
 
     val isDownloading = ObservableBoolean()
+
+    @get:Bindable("downloadedSize", "isDownloading")
+    val isAwaitingDownload
+        get() = isDownloading.get() && downloadedSize.get() == 0
 
     val downloadUri: Uri
         get() = Uri.parse(artifact.expiringDownloadUrl)
