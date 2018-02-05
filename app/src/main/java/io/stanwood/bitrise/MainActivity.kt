@@ -24,7 +24,7 @@ import timber.log.Timber
 import timber.log.Timber.DebugTree
 
 
-class MainActivity: AppCompatActivity() {
+class MainActivity: PermissionActivity() {
 
     private val navigator: Navigator by inject()
     private val navigatorHolder: NavigatorHolder by inject()

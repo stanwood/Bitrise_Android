@@ -8,12 +8,35 @@
         <variable
             name="vm"
             type="io.stanwood.bitrise.ui.artifacts.vm.ArtifactItemViewModel" />
+
+        <import type="android.view.View" />
     </data>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="72dp"
         android:onClick="@{() -> vm.onClick()}">
+
+        <ProgressBar
+            android:id="@+id/progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="0dp"
+            android:layout_marginTop="8dp"
+            android:alpha="0.5"
+            android:max="@{vm.totalSize}"
+            android:padding="0dp"
+            android:indeterminate="@{vm.isAwaitingDownload}"
+            android:progress="@{vm.downloadedSize}"
+            android:progressDrawable="@drawable/progress_bar"
+            android:indeterminateDrawable="@drawable/progress_bar"
+            android:visibility="@{vm.isDownloading}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:progress="63" />
 
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/type_icon"
@@ -38,7 +61,7 @@
             android:textSize="@dimen/listPrimaryItemTextSize"
             app:layout_constraintStart_toEndOf="@+id/type_icon"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="bitrise-release-unsigned.apk"/>
+            tools:text="bitrise-release-unsigned.apk" />
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/last_build_time"
