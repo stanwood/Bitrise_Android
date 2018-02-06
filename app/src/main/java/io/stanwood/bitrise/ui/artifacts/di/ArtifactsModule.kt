@@ -15,7 +15,7 @@ val artifactsModule = applicationContext {
                 get(),
                 get(),
                 getProperty(Properties.TOKEN),
-                androidApplication(),
+                getProperty(Properties.ACTIVITY),
                 getProperty(Properties.APP),
                 getProperty(Properties.BUILD))
     }
