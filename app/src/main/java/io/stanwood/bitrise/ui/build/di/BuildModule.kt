@@ -12,7 +12,13 @@ val buildModule = applicationContext {
      * View Model
      */
     factory {
-        BuildViewModel(get(), getProperty(Properties.APP), getProperty(Properties.BUILD))
+        BuildViewModel(
+                adapter = get(),
+                router = get(),
+                app = getProperty(Properties.APP),
+                build = getProperty(Properties.BUILD),
+                token = getProperty(Properties.TOKEN),
+                bitriseTriggerService = get())
     }
 
     /**

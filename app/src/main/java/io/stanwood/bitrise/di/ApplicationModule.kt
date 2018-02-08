@@ -1,12 +1,12 @@
 package io.stanwood.bitrise.di
 
-import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.experimental.CoroutineCallAdapterFactory
 import io.stanwood.bitrise.BuildConfig
 import io.stanwood.bitrise.R
 import io.stanwood.bitrise.data.net.BitriseService
+import io.stanwood.bitrise.data.net.BitriseTriggerService
 import io.stanwood.bitrise.navigation.Navigator
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -17,6 +17,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Router
 
+const val NAME_BITRISE = "bitrise"
+const val NAME_BITRISE_TRIGGER = "bitrise_trigger"
 
 val applicationModule = applicationContext {
 
@@ -44,7 +46,7 @@ val applicationModule = applicationContext {
     /**
      * Retrofit
      */
-    provide {
+    provide(NAME_BITRISE) {
         Retrofit
                 .Builder()
                 .baseUrl(BuildConfig.BITRISE_API_BASE_URL)
@@ -55,9 +57,27 @@ val applicationModule = applicationContext {
     }
 
     /**
+     * Retrofit
+     */
+    provide(NAME_BITRISE_TRIGGER) {
+        Retrofit
+                .Builder()
+                .baseUrl(BuildConfig.BITRISE_TRIGGER_API_BASE_URL)
+                .client(get())
+                .addCallAdapterFactory(CoroutineCallAdapterFactory())
+                .addConverterFactory(GsonConverterFactory.create(get()))
+                .build()
+    }
+
+    /**
      * BitriseService
      */
-    provide { get<Retrofit>().create(BitriseService::class.java) }
+    provide { get<Retrofit>(NAME_BITRISE).create(BitriseService::class.java) }
+
+    /**
+     * BitriseTriggerService
+     */
+    provide { get<Retrofit>(NAME_BITRISE_TRIGGER).create(BitriseTriggerService::class.java) }
 
     /**
      * Cicerone

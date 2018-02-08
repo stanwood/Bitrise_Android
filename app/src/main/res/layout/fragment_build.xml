@@ -39,12 +39,27 @@
 
         </android.support.design.widget.AppBarLayout>
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/pager"
-            adapter="@{vm.adapter}"
-            tabs="@{tabs}"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/pager"
+                adapter="@{vm.adapter}"
+                tabs="@{tabs}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="16dp"
+                android:elevation="6dp"
+                rotate="@{vm.loading}"
+                android:onClick="@{() -> vm.restart()}"
+                android:src="@drawable/ic_restart_white_24dp"/>
+        </FrameLayout>
 
     </LinearLayout>
 </layout>

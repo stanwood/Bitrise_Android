@@ -22,6 +22,7 @@ android {
         multiDexEnabled true
 
         buildConfigField "String", "BITRISE_API_BASE_URL", "\"https://api.bitrise.io/\""
+        buildConfigField "String", "BITRISE_TRIGGER_API_BASE_URL", "\"https://www.bitrise.io/app/\""
         buildConfigField "int", "DEFAULT_PAGE_SIZE", "10"
         buildConfigField "int", "PAGE_LOAD_THRESHOLD", "2"
         buildConfigField "String", "BITRISE_API_TOKEN", "\"$bitriseApiToken\""
