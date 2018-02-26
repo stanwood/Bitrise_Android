@@ -17,6 +17,7 @@ import io.stanwood.bitrise.ui.logs.di.logsModule
 import org.koin.android.ext.android.inject
 import org.koin.android.ext.android.setProperty
 import org.koin.android.ext.koin.with
+import org.koin.error.AlreadyStartedException
 import org.koin.standalone.StandAloneContext
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
@@ -57,14 +58,19 @@ class MainActivity: PermissionActivity() {
     }
 
     private fun startKoin() {
-        StandAloneContext.startKoin(listOf(
-                applicationModule,
-                errorModule,
-                loginModule,
-                dashboardModule,
-                buildsModule,
-                buildModule,
-                logsModule,
-                artifactsModule)) with application
+        try {
+            StandAloneContext.startKoin(listOf(
+                    applicationModule,
+                    errorModule,
+                    loginModule,
+                    dashboardModule,
+                    buildsModule,
+                    buildModule,
+                    logsModule,
+                    artifactsModule)) with application
+        } catch (exception: AlreadyStartedException) {
+            // Can be safely ignored
+            Timber.e(exception)
+        }
     }
 }

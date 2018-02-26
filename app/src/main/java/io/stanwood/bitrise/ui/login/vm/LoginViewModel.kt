@@ -25,7 +25,7 @@ import java.net.HttpURLConnection
 class LoginViewModel(
         private val service: BitriseService,
         private val router: Router,
-        private val sharedPreferences: SharedPreferences): LifecycleObserver, BaseObservable() {
+        private val sharedPreferences: SharedPreferences) : LifecycleObserver, BaseObservable() {
 
     val isError = ObservableBoolean()
     val isLoading = ObservableBoolean()
@@ -64,16 +64,15 @@ class LoginViewModel(
         try {
             isLoading.set(true)
             service
-                .login(newToken)
-                .await()
+                    .login(newToken)
+                    .await()
             token = newToken
             router.newRootScreen(SCREEN_DASHBOARD)
-        } catch (exception: HttpException) {
-            if(exception.code() == HttpURLConnection.HTTP_UNAUTHORIZED) {
+        } catch (exception: Exception) {
+            if(exception is HttpException && exception.code() == HttpURLConnection.HTTP_UNAUTHORIZED) {
                 isError.set(true)
-            } else {
-                router.navigateTo(SCREEN_ERROR, exception.message)
             }
+            router.navigateTo(SCREEN_ERROR, exception.message)
             Timber.e(exception)
         } finally {
             isLoading.set(false)
