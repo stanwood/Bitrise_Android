@@ -10,6 +10,7 @@
     <string name="title_artifacts">Artifacts</string>
     <string name="artifact_type_file">file</string>
     <string name="artifact_type_apk">APK</string>
+    <string name="artifact_type_ipa">IPA</string>
     <string name="label_token">Token</string>
     <string name="login_instructions">Don\'t have a token? Get it <a href="https://www.bitrise.io/me/profile#/security">here!</a></string>
     <string name="invalid_token">Invalid token</string>

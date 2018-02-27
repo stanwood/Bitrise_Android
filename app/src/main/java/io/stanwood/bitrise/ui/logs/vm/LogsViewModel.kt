@@ -6,6 +6,8 @@ import android.arch.lifecycle.OnLifecycleEvent
 import android.databinding.BaseObservable
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
+import android.text.Html
+import android.text.Spanned
 import io.stanwood.bitrise.data.model.App
 import io.stanwood.bitrise.data.model.Build
 import io.stanwood.bitrise.data.net.BitriseService
@@ -25,7 +27,7 @@ class LogsViewModel(
         private val build: Build) : LifecycleObserver, BaseObservable() {
 
     val isLoading = ObservableBoolean(false)
-    var log = ObservableField<String>()
+    var log = ObservableField<Spanned>()
     private var deferred: Deferred<Any>? = null
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
@@ -44,7 +46,14 @@ class LogsViewModel(
         deferred = async(UI) {
             try {
                 isLoading.set(true)
-                log.let { it.set(fetchLog()) }
+                log.apply {
+                    val log = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                        Html.fromHtml(fetchLog(), Html.FROM_HTML_MODE_COMPACT)
+                    } else {
+                        Html.fromHtml(fetchLog())
+                    }
+                    set(log)
+                }
             } catch (exception: Exception) {
                 Timber.e(exception)
                 router.navigateTo(SCREEN_ERROR, exception.message)

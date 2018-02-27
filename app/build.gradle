@@ -2,6 +2,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'project-report'
+apply plugin: 'kotlin-android-extensions'
+
 
 Properties properties = new Properties()
 def propertiesFile = project.rootProject.file('local.properties')
@@ -31,6 +33,9 @@ android {
         experimental {
             coroutines 'enable'
         }
+    }
+    androidExtensions {
+        experimental = true
     }
     dataBinding {
         enabled = true
