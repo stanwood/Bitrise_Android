@@ -15,7 +15,6 @@ import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
-import android.text.Html
 import android.text.format.Formatter
 import io.stanwood.bitrise.BuildConfig
 import io.stanwood.bitrise.PermissionActivity
