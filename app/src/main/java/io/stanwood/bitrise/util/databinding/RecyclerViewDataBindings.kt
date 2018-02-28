@@ -1,7 +1,12 @@
 package io.stanwood.bitrise.util.databinding
 
+import android.arch.lifecycle.LifecycleOwner
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.Observer
+import android.arch.paging.PagedList
 import android.databinding.BindingAdapter
 import android.support.annotation.LayoutRes
+import android.support.v7.recyclerview.extensions.DiffCallback
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -17,8 +22,24 @@ fun setItems(
         items: List<Any>,
         @LayoutRes layoutResId: Int) {
     val adapter = recyclerView.adapter
-    if(adapter == null) {
+    if (adapter == null) {
         recyclerView.adapter = ViewModelAdapter(items, layoutResId, BR.vm)
+    }
+}
+
+typealias BitriseDiffCallback = DiffCallback<Any>
+typealias BitriseLiveData = LiveData<PagedList<Any>>
+@BindingAdapter(value = ["liveDataItems", "liveDataItemLayout", "diff"], requireAll = true)
+fun setLiveDataItems(
+        recyclerView: RecyclerView,
+        items: BitriseLiveData,
+        @LayoutRes layoutResId: Int,
+        diffCallback: BitriseDiffCallback) {
+    val adapter = recyclerView.adapter
+    if (adapter == null) {
+        val viewModelLiveDataAdapter = ViewModelLiveDataAdapter(diffCallback, layoutResId, BR.vm)
+        recyclerView.adapter = viewModelLiveDataAdapter
+        items.observe(recyclerView.context as LifecycleOwner, Observer { viewModelLiveDataAdapter.setList(it) })
     }
 }
 

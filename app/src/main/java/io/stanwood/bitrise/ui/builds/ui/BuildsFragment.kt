@@ -36,6 +36,7 @@ class BuildsFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
             FragmentBuildsBinding.inflate(inflater, container, false).apply {
+                setLifecycleOwner(this@BuildsFragment)
                 lifecycle.addObserver(viewModel)
                 vm = viewModel
             }.root

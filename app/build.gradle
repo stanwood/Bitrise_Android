@@ -71,7 +71,12 @@ dependencies {
 
     // Glide
     implementation "com.github.bumptech.glide:glide:$glide"
-    annotationProcessor "com.github.bumptech.glide:compiler:$glide"
+    kapt "com.github.bumptech.glide:compiler:$glide"
+
+    // Android Architecture components
+    implementation "android.arch.lifecycle:extensions:$architecture_components_version"
+    implementation "android.arch.paging:runtime:1.0.0-alpha5"
+    kapt "android.arch.lifecycle:compiler:$architecture_components_version"
 
     // Other
     implementation "ru.terrakok.cicerone:cicerone:$cicerone_version"
