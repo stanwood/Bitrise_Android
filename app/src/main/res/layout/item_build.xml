@@ -13,6 +13,7 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="72dp"
+        android:background="?selectableItemBackground"
         android:onClick="@{() -> vm.onClick()}">
 
         <View
@@ -72,7 +73,6 @@
             android:layout_marginBottom="8dp"
             android:layout_marginStart="16dp"
             android:src="@drawable/ic_duration"
-            android:tint="@android:color/secondary_text_dark"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/last_build_time"
             app:layout_constraintTop_toTopOf="@+id/last_build_time" />
