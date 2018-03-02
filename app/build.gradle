@@ -2,6 +2,15 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'project-report'
+apply plugin: 'kotlin-android-extensions'
+
+
+Properties properties = new Properties()
+def propertiesFile = project.rootProject.file('local.properties')
+if (propertiesFile.exists()) {
+    properties.load(propertiesFile.newDataInputStream())
+}
+def bitriseApiToken = properties.getProperty('bitrise.api.token')
 
 android {
     compileSdkVersion sdk_version
@@ -10,19 +19,23 @@ android {
         minSdkVersion 21
         targetSdkVersion sdk_version
         versionCode 1
-        versionName "1.0"
+        versionName "1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
 
         buildConfigField "String", "BITRISE_API_BASE_URL", "\"https://api.bitrise.io/\""
         buildConfigField "int", "DEFAULT_PAGE_SIZE", "10"
         buildConfigField "int", "PAGE_LOAD_THRESHOLD", "2"
+        buildConfigField "String", "BITRISE_API_TOKEN", "\"$bitriseApiToken\""
         buildConfigField "long", "DOWNLOAD_STATUS_REFRESH_DELAY", "500L"
     }
     kotlin {
         experimental {
             coroutines 'enable'
         }
+    }
+    androidExtensions {
+        experimental = true
     }
     dataBinding {
         enabled = true

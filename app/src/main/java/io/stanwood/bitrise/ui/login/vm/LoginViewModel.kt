@@ -7,6 +7,7 @@ import android.content.SharedPreferences
 import android.databinding.BaseObservable
 import android.databinding.Bindable
 import android.databinding.ObservableBoolean
+import io.stanwood.bitrise.BuildConfig
 import io.stanwood.bitrise.data.net.BitriseService
 import io.stanwood.bitrise.di.Properties
 import io.stanwood.bitrise.navigation.SCREEN_DASHBOARD
@@ -24,7 +25,7 @@ import java.net.HttpURLConnection
 class LoginViewModel(
         private val service: BitriseService,
         private val router: Router,
-        private val sharedPreferences: SharedPreferences): LifecycleObserver, BaseObservable() {
+        private val sharedPreferences: SharedPreferences) : LifecycleObserver, BaseObservable() {
 
     val isError = ObservableBoolean()
     val isLoading = ObservableBoolean()
@@ -37,7 +38,7 @@ class LoginViewModel(
                     .putString(Properties.TOKEN, value)
                     .apply()
         }
-        get() = sharedPreferences.getString(Properties.TOKEN, null)
+        get() = sharedPreferences.getString(Properties.TOKEN, BuildConfig.BITRISE_API_TOKEN)
 
     private var deferred: Deferred<Any>? = null
 
@@ -63,16 +64,15 @@ class LoginViewModel(
         try {
             isLoading.set(true)
             service
-                .login(newToken)
-                .await()
+                    .login(newToken)
+                    .await()
             token = newToken
             router.newRootScreen(SCREEN_DASHBOARD)
-        } catch (exception: HttpException) {
-            if(exception.code() == HttpURLConnection.HTTP_UNAUTHORIZED) {
+        } catch (exception: Exception) {
+            if(exception is HttpException && exception.code() == HttpURLConnection.HTTP_UNAUTHORIZED) {
                 isError.set(true)
-            } else {
-                router.navigateTo(SCREEN_ERROR, exception.message)
             }
+            router.navigateTo(SCREEN_ERROR, exception.message)
             Timber.e(exception)
         } finally {
             isLoading.set(false)

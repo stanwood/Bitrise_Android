@@ -62,9 +62,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title"
+            android:gravity="center"
             tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit" />
 
-        <android.support.v7.widget.AppCompatImageView
+        <android.support.v7.widget.AppCompatImageButton
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:id="@+id/retry"
             android:layout_width="48dp"
             android:layout_height="48dp"

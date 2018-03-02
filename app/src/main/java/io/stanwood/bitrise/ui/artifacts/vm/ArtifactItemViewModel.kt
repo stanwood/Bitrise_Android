@@ -38,8 +38,8 @@ class ArtifactItemViewModel(
         private val router: Router,
         private val artifact: Artifact) : BaseObservable() {
 
-    val icon: Drawable
-        get() = artifact.artifactType.getIcon(activity.resources)
+    val icon: Drawable?
+        get() = artifact.artifactType?.getIcon(activity.resources)
 
     val title: String
         get() = artifact.title
@@ -67,7 +67,7 @@ class ArtifactItemViewModel(
     val isAwaitingDownload
         get() = isDownloading.get() && downloadedSize.get() == 0
 
-    val downloadUri: Uri
+    private val downloadUri: Uri
         get() = Uri.parse(artifact.expiringDownloadUrl)
 
     private val downloadErrorMessage: String
@@ -103,7 +103,7 @@ class ArtifactItemViewModel(
         }
     }
 
-    suspend private fun download() {
+    private suspend fun download() {
         isDownloading.set(true)
         val request = Request(downloadUri).apply {
             setTitle(title)
@@ -156,8 +156,22 @@ class ArtifactItemViewModel(
         return DownloadStatus.FAILED
     }
 
+    private fun getDownloadedApkUri(downloadId: Long): Uri {
+        return if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N) {
+            downloadManager.getUriForDownloadedFile(downloadId)
+        } else {
+            val query = DownloadManager.Query()
+            query.setFilterById(downloadId)
+            downloadManager.query(query).use {
+                it.moveToFirst()
+                val path = it.getString(it.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI))
+                Uri.parse(path)
+            }
+        }
+    }
+
     private fun installApk(downloadId: Long) {
-        val uri = downloadManager.getUriForDownloadedFile(downloadId)
+        val uri = getDownloadedApkUri(downloadId)
         Intent(Intent.ACTION_VIEW).apply {
             setDataAndType(uri, "application/vnd.android.package-archive")
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
