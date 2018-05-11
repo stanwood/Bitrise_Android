@@ -20,8 +20,8 @@ val buildModule = applicationContext {
      */
     factory {
         FragmentAdapter(
-                androidApplication().resources,
-                getProperty(Properties.FRAGMENT_MANAGER),
-                getProperty(Properties.BUILD))
+                resources = androidApplication().resources,
+                fragmentManager = getProperty(Properties.FRAGMENT_MANAGER),
+                build = getProperty(Properties.BUILD))
     }
 }

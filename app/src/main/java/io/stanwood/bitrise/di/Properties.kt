@@ -8,4 +8,6 @@ object Properties {
     const val FRAGMENT_MANAGER = "fragment_manager"
     const val TOKEN = "token"
     const val MESSAGE = "message"
+    const val BRANCH = "branch"
+    const val WORKFLOW = "workflow"
 }

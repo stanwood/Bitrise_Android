@@ -9,6 +9,7 @@ import android.databinding.ObservableBoolean
 import io.stanwood.bitrise.data.model.App
 import io.stanwood.bitrise.data.net.BitriseService
 import io.stanwood.bitrise.navigation.SCREEN_ERROR
+import io.stanwood.bitrise.navigation.SCREEN_NEW_BUILD
 import kotlinx.coroutines.experimental.Deferred
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
@@ -35,12 +36,17 @@ class BuildsViewModel(private val router: Router,
         get() = !isLoading.get() && nextCursor != null
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-    fun start() {
+    fun onCreate() {
+        onRefresh()
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    fun onResume() {
         onRefresh()
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-    fun stop() {
+    fun onDestroy() {
         deferred?.cancel()
     }
 
@@ -56,6 +62,8 @@ class BuildsViewModel(private val router: Router,
             loadMoreItems()
         }
     }
+
+    fun onStartNewBuild() = router.navigateTo(SCREEN_NEW_BUILD)
 
     private fun loadMoreItems() {
         deferred = async(UI) {
