@@ -12,7 +12,14 @@ val buildModule = applicationContext {
      * View Model
      */
     factory {
-        BuildViewModel(get(), getProperty(Properties.APP), getProperty(Properties.BUILD))
+        BuildViewModel(
+                resources = androidApplication().resources,
+                router = get(),
+                service = get(),
+                adapter = get(),
+                token = getProperty(Properties.TOKEN),
+                app = getProperty(Properties.APP),
+                build = getProperty(Properties.BUILD))
     }
 
     /**
