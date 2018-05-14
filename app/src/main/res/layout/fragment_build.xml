@@ -59,7 +59,7 @@
             android:layout_margin="16dp"
             android:onClick="@{() -> vm.onRestartBuild()}"
             android:src="@drawable/ic_restart_build"
-            android:visibility="@{!vm.isLoading}"
+            android:visibility="@{!vm.loading &amp;&amp; !vm.currentlyRunning}"
             app:fabSize="normal" />
 
         <ProgressBar
@@ -68,6 +68,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:visibility="@{vm.isLoading}"/>
+            android:visibility="@{vm.loading}" />
     </android.support.design.widget.CoordinatorLayout>
 </layout>
