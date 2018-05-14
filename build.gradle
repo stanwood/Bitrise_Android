@@ -1,20 +1,21 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.android_plugin_version = '3.1.0-beta1'
+    ext.android_plugin_version = '3.1.2'
     ext.sdk_version = 27
-    ext.kotlin_version = '1.2.21'
+    ext.kotlin_version = '1.2.41'
     ext.support_version = '27.0.2'
     ext.koin_version = '0.8.0'
     ext.retrofit_version = '2.3.0'
     ext.retrofit_coroutines_adapter_version = '1.0.0'
     ext.retrofit_logging_interceptor = '3.9.1'
-    ext.kotlin_coroutines_version = '0.21'
+    ext.kotlin_coroutines_version = '0.22.5'
     ext.cicerone_version = '3.0.0'
     ext.constraint_layout_version = '1.0.2'
     ext.timber_version = '4.6.0'
     ext.glide = '4.5.0'
     ext.joda_version = '2.9.9'
+    ext.buildNumber = System.getenv("BITRISE_BUILD_NUMBER") ?: "local"
 
     repositories {
         google()

@@ -14,6 +14,7 @@ import io.stanwood.bitrise.ui.builds.ui.BuildsFragment
 import io.stanwood.bitrise.ui.dashboard.ui.DashboardFragment
 import io.stanwood.bitrise.ui.error.ui.ErrorFragment
 import io.stanwood.bitrise.ui.login.ui.LoginFragment
+import io.stanwood.bitrise.ui.newbuild.ui.NewBuildFragment
 import ru.terrakok.cicerone.android.SupportAppNavigator
 
 
@@ -22,6 +23,7 @@ const val SCREEN_LOGIN = "login"
 const val SCREEN_DASHBOARD = "dashboard"
 const val SCREEN_BUILDS = "builds"
 const val SCREEN_BUILD = "build"
+const val SCREEN_NEW_BUILD = "new_build"
 const val SCREEN_INSTALL = "install"
 
 class Navigator(private val activity: FragmentActivity, private val cointainerId: Int) :
@@ -40,6 +42,7 @@ class Navigator(private val activity: FragmentActivity, private val cointainerId
                 SCREEN_DASHBOARD -> DashboardFragment.newInstance()
                 SCREEN_BUILDS -> BuildsFragment.newInstance(data as App)
                 SCREEN_BUILD -> BuildFragment.newInstance(data as Build)
+                SCREEN_NEW_BUILD -> NewBuildFragment.newInstance()
                 else -> throw UnsupportedOperationException("Unsupported screen key: $screenKey")
             }
         } catch (exception: Exception) {
@@ -50,8 +53,8 @@ class Navigator(private val activity: FragmentActivity, private val cointainerId
         val view = activity.findViewById<View>(cointainerId)
         if (view != null && message != null) {
             Snackbar
-                    .make(view, message, Snackbar.LENGTH_SHORT)
-                    .show()
+                .make(view, message, Snackbar.LENGTH_SHORT)
+                .show()
         }
     }
 }

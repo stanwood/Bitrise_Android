@@ -3,10 +3,7 @@ package io.stanwood.bitrise.data.net
 import io.stanwood.bitrise.BuildConfig
 import io.stanwood.bitrise.data.model.*
 import kotlinx.coroutines.experimental.Deferred
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 
 interface BitriseService {
@@ -18,7 +15,8 @@ interface BitriseService {
     fun getApps(
             @Header("Authorization") token: String,
             @Query("next")  cursor: String? = null,
-            @Query("limit") limit: Int = BuildConfig.DEFAULT_PAGE_SIZE): Deferred<Response<List<App>>>
+            @Query("limit") limit: Int = BuildConfig.DEFAULT_PAGE_SIZE,
+            @Query("sort_by") sortBy: SortBy = SortBy.last_build_at): Deferred<Response<List<App>>>
 
     @GET("v0.1/apps/{APP-SLUG}/builds")
     fun getBuilds(
@@ -49,4 +47,10 @@ interface BitriseService {
             @Path("APP-SLUG") appSlug: String,
             @Path("BUILD-SLUG") buildSlug: String,
             @Path("ARTIFACT-SLUG") artifactSlug: String): Deferred<Response<Artifact>>
+
+    @POST("/v0.1/apps/{APP-SLUG}/builds")
+    fun startNewBuild(
+            @Header("Authorization") token: String,
+            @Path("APP-SLUG") appSlug: String,
+            @Body params: NewBuildParams): Deferred<NewBuildResponse>
 }

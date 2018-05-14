@@ -12,7 +12,14 @@ val buildModule = applicationContext {
      * View Model
      */
     factory {
-        BuildViewModel(get(), getProperty(Properties.APP), getProperty(Properties.BUILD))
+        BuildViewModel(
+                resources = androidApplication().resources,
+                router = get(),
+                service = get(),
+                adapter = get(),
+                token = getProperty(Properties.TOKEN),
+                app = getProperty(Properties.APP),
+                build = getProperty(Properties.BUILD))
     }
 
     /**
@@ -20,8 +27,8 @@ val buildModule = applicationContext {
      */
     factory {
         FragmentAdapter(
-                androidApplication().resources,
-                getProperty(Properties.FRAGMENT_MANAGER),
-                getProperty(Properties.BUILD))
+                resources = androidApplication().resources,
+                fragmentManager = getProperty(Properties.FRAGMENT_MANAGER),
+                build = getProperty(Properties.BUILD))
     }
 }
