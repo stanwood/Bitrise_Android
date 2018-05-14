@@ -28,6 +28,7 @@ android {
         buildConfigField "int", "PAGE_LOAD_THRESHOLD", "2"
         buildConfigField "String", "BITRISE_API_TOKEN", "\"$bitriseApiToken\""
         buildConfigField "long", "DOWNLOAD_STATUS_REFRESH_DELAY", "500L"
+        manifestPlaceholders.appName = "@string/app_name"
     }
     kotlin {
         experimental {
@@ -44,6 +45,16 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    applicationVariants.all { variant ->
+        final buildTypeName = variant.buildType.name
+        final flavorName = variant.flavorName
+        switch (buildTypeName) {
+        // release is handled in defaultConfig, but could also be handled here
+            case 'debug':
+                variant.mergedFlavor.manifestPlaceholders.appName = "$buildNumber Bitrise Unofficial $flavorName $buildTypeName"
+                break
         }
     }
 }
