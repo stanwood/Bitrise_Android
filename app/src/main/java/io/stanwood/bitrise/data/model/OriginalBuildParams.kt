@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class OriginalBuildParams(
-        @SerializedName("branch") val branch: String, //master
-        @SerializedName("commit_message") val commitMessage: String, //generate an APK
-        @SerializedName("workflow_id") val workflowId: String //gen-apk
+        @SerializedName("branch") val branch: String?, //master
+        @SerializedName("commit_message") val commitMessage: String?, //generate an APK
+        @SerializedName("workflow_id") val workflowId: String? //gen-apk
 ): Parcelable

@@ -8,7 +8,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class App(
         @SerializedName("is_disabled") val isDisabled: Boolean, //false
-        @SerializedName("project_type") val projectType: Platform, //xamarin
+        @SerializedName("project_type") val projectType: Platform?, //xamarin
         @SerializedName("provider") val provider: String, //github
         @SerializedName("repo_owner") val repoOwner: String, //bitrise-samples
         @SerializedName("repo_slug") val repoSlug: String, //sample-apps-xamarin-cross-platform

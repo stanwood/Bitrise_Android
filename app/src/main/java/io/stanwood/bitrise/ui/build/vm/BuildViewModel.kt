@@ -4,10 +4,7 @@ import android.arch.lifecycle.LifecycleObserver
 import android.content.res.Resources
 import android.databinding.ObservableBoolean
 import io.stanwood.bitrise.R
-import io.stanwood.bitrise.data.model.App
-import io.stanwood.bitrise.data.model.Build
-import io.stanwood.bitrise.data.model.BuildParams
-import io.stanwood.bitrise.data.model.NewBuildParams
+import io.stanwood.bitrise.data.model.*
 import io.stanwood.bitrise.data.net.BitriseService
 import io.stanwood.bitrise.navigation.SCREEN_ERROR
 import io.stanwood.bitrise.ui.build.ui.FragmentAdapter
@@ -30,6 +27,9 @@ class BuildViewModel(
         get() = "${app.title} #${build.number}"
 
     val isLoading = ObservableBoolean(false)
+
+    val isCurrentlyRunning
+        get() = build.status == BuildStatus.IN_PROGRESS
 
     fun onRestartBuild() {
         async(UI) {

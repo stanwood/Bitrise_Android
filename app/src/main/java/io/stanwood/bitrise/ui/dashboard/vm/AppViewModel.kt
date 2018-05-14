@@ -32,8 +32,8 @@ class AppViewModel(
     val repoOwner: String
         get() = "${app.repoOwner}/"
 
-    val icon: Drawable
-        get() = app.projectType.getIcon(resources)
+    val icon: Drawable?
+        get() = app.projectType?.getIcon(resources)
 
     @get:Bindable
     val lastBuildTime: String?
