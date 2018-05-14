@@ -14,6 +14,7 @@ import io.stanwood.bitrise.ui.dashboard.di.dashboardModule
 import io.stanwood.bitrise.ui.error.di.errorModule
 import io.stanwood.bitrise.ui.login.di.loginModule
 import io.stanwood.bitrise.ui.logs.di.logsModule
+import io.stanwood.bitrise.ui.newbuild.di.newBuildModule
 import org.koin.android.ext.android.inject
 import org.koin.android.ext.android.setProperty
 import org.koin.android.ext.koin.with
@@ -67,7 +68,8 @@ class MainActivity: PermissionActivity() {
                     buildsModule,
                     buildModule,
                     logsModule,
-                    artifactsModule)) with application
+                    artifactsModule,
+                    newBuildModule)) with application
         } catch (exception: AlreadyStartedException) {
             // Can be safely ignored
             Timber.e(exception)

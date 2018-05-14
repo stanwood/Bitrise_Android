@@ -3,10 +3,7 @@ package io.stanwood.bitrise.data.net
 import io.stanwood.bitrise.BuildConfig
 import io.stanwood.bitrise.data.model.*
 import kotlinx.coroutines.experimental.Deferred
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 
 interface BitriseService {
@@ -51,9 +48,9 @@ interface BitriseService {
             @Path("BUILD-SLUG") buildSlug: String,
             @Path("ARTIFACT-SLUG") artifactSlug: String): Deferred<Response<Artifact>>
 
-    @Suppress("EnumEntryName")
-    enum class SortBy {
-        last_build_at,
-        created_at
-    }
+    @POST("/v0.1/apps/{APP-SLUG}/builds")
+    fun startNewBuild(
+            @Header("Authorization") token: String,
+            @Path("APP-SLUG") appSlug: String,
+            @Body params: NewBuildParams): Deferred<NewBuildResponse>
 }
