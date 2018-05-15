@@ -34,6 +34,7 @@
                     android:background="?attr/colorPrimary"
                     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                    android:id="@+id/toolbar"
                     app:title="@{vm.title}" />
 
                 <android.support.design.widget.TabLayout

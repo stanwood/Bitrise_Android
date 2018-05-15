@@ -2,11 +2,16 @@ package io.stanwood.bitrise.ui.builds.ui
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
+import android.support.v7.widget.Toolbar
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import io.stanwood.bitrise.R
 import io.stanwood.bitrise.data.model.App
 import io.stanwood.bitrise.databinding.FragmentBuildsBinding
 import io.stanwood.bitrise.di.Properties
+import io.stanwood.bitrise.navigation.SCREEN_DASHBOARD
 import io.stanwood.bitrise.navigation.SCREEN_ERROR
 import io.stanwood.bitrise.ui.builds.vm.BuildsViewModel
 import org.koin.android.ext.android.inject
@@ -39,4 +44,14 @@ class BuildsFragment : Fragment() {
                 lifecycle.addObserver(viewModel)
                 vm = viewModel
             }.root
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        view.findViewById<Toolbar>(R.id.toolbar)?.let {
+            it.navigationIcon = ContextCompat.getDrawable(it.context, R.drawable.ic_arrow_back)
+            it.setNavigationOnClickListener {
+                router.backTo(SCREEN_DASHBOARD)
+            }
+        }
+    }
 }
