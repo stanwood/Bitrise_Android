@@ -46,7 +46,8 @@ class LoginViewModel(
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun start() {
         checkToken(token)?.let {
-            onTokenEntered(it)
+            this.token = it
+            onTokenEntered()
         }
     }
 
@@ -55,13 +56,13 @@ class LoginViewModel(
         deferred?.cancel()
     }
 
-    fun onTokenEntered(newToken: String) {
+    fun onTokenEntered() {
         deferred = async(UI) {
-            tryLogin(newToken)
+            tryLogin(token)
         }
     }
 
-    private suspend fun tryLogin(newToken: String) {
+    private suspend fun tryLogin(newToken: String?) {
         checkToken(newToken)?.let {
             try {
                 isLoading.set(true)
