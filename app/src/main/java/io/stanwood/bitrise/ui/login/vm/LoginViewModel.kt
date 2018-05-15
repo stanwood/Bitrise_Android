@@ -32,20 +32,22 @@ class LoginViewModel(
     @get:Bindable
     var token: String?
         set(value) {
-            setProperty(Properties.TOKEN, value)
+            val normalized = checkToken(value)
+            setProperty(Properties.TOKEN, normalized)
             sharedPreferences
                     .edit()
-                    .putString(Properties.TOKEN, value)
+                    .putString(Properties.TOKEN, normalized)
                     .apply()
         }
-        get() = sharedPreferences.getString(Properties.TOKEN, BuildConfig.BITRISE_API_TOKEN)
+        get() = sharedPreferences.getString(Properties.TOKEN, checkToken(BuildConfig.BITRISE_API_TOKEN))
 
     private var deferred: Deferred<Any>? = null
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun start() {
-        token?.let {
-            onTokenEntered(it)
+        checkToken(token)?.let {
+            this.token = it
+            onTokenEntered()
         }
     }
 
@@ -54,28 +56,33 @@ class LoginViewModel(
         deferred?.cancel()
     }
 
-    fun onTokenEntered(newToken: String) {
+    fun onTokenEntered() {
         deferred = async(UI) {
-            tryLogin(newToken)
+            tryLogin(token)
         }
     }
 
-    private suspend fun tryLogin(newToken: String) {
-        try {
-            isLoading.set(true)
-            service
-                    .login(newToken)
-                    .await()
-            token = newToken
-            router.newRootScreen(SCREEN_DASHBOARD)
-        } catch (exception: Exception) {
-            if(exception is HttpException && exception.code() == HttpURLConnection.HTTP_UNAUTHORIZED) {
-                isError.set(true)
+    private suspend fun tryLogin(newToken: String?) {
+        checkToken(newToken)?.let {
+            try {
+                isLoading.set(true)
+                service
+                        .login(it)
+                        .await()
+                token = it
+                router.newRootScreen(SCREEN_DASHBOARD)
+            } catch (exception: Exception) {
+                if (exception is HttpException && exception.code() == HttpURLConnection.HTTP_UNAUTHORIZED) {
+                    isError.set(true)
+                }
+                router.navigateTo(SCREEN_ERROR, exception.message)
+                Timber.e(exception)
+            } finally {
+                isLoading.set(false)
             }
-            router.navigateTo(SCREEN_ERROR, exception.message)
-            Timber.e(exception)
-        } finally {
-            isLoading.set(false)
         }
     }
+
+    private fun checkToken(newToken: String?): String? =
+            newToken.takeIf { it.isNullOrBlank().not() && it != "null" }
 }
