@@ -32,22 +32,26 @@ class LoginViewModel(
     @get:Bindable
     var token: String?
         set(value) {
-            val normalized = checkToken(value)
-            setProperty(Properties.TOKEN, normalized)
+            if (value?.isBlank() == true) {
+                /**
+                 * Sanity check. We don't want to store an empty or null token.
+                 */
+                return
+            }
+            setProperty(Properties.TOKEN, value)
             sharedPreferences
-                    .edit()
-                    .putString(Properties.TOKEN, normalized)
-                    .apply()
+                .edit()
+                .putString(Properties.TOKEN, value)
+                .apply()
         }
-        get() = sharedPreferences.getString(Properties.TOKEN, checkToken(BuildConfig.BITRISE_API_TOKEN))
+        get() = sharedPreferences.getString(Properties.TOKEN, BuildConfig.BITRISE_API_TOKEN)
 
     private var deferred: Deferred<Any>? = null
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun start() {
-        checkToken(token)?.let {
-            this.token = it
-            onTokenEntered()
+        token?.let {
+            onTokenEntered(it)
         }
     }
 
@@ -56,14 +60,14 @@ class LoginViewModel(
         deferred?.cancel()
     }
 
-    fun onTokenEntered() {
+    fun onTokenEntered(newToken: String) {
         deferred = async(UI) {
-            tryLogin(token)
+            tryLogin(newToken)
         }
     }
 
     private suspend fun tryLogin(newToken: String?) {
-        checkToken(newToken)?.let {
+        newToken?.let {
             try {
                 isLoading.set(true)
                 service
@@ -82,7 +86,4 @@ class LoginViewModel(
             }
         }
     }
-
-    private fun checkToken(newToken: String?): String? =
-            newToken.takeIf { it.isNullOrBlank().not() && it != "null" }
 }

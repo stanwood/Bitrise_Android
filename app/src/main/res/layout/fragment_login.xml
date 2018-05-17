@@ -51,11 +51,12 @@
             app:layout_constraintTop_toBottomOf="@+id/logo">
 
             <android.support.v7.widget.AppCompatEditText
-                onTextSubmitted="@{(text) -> vm.onTokenEntered()}"
+                android:id="@+id/test"
+                onTextSubmitted="@{(text) -> vm.onTokenEntered(text)}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:text="@={vm.token}" />
+                android:text="@{vm.token}" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -102,20 +103,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/input" />
-
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/buttonLogin"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:background="@color/colorPrimary"
-            android:text="@string/login"
-            android:textColor="@android:color/white"
-            android:onClick="@{() -> vm.onTokenEntered()}"
-            android:visibility="@{vm.isLoading? View.INVISIBLE : View.VISIBLE}"
-            app:layout_constraintEnd_toEndOf="@+id/token_instructions"
-            app:layout_constraintStart_toStartOf="@+id/token_instructions"
-            app:layout_constraintTop_toBottomOf="@+id/token_instructions" />
 
     </android.support.constraint.ConstraintLayout>
 

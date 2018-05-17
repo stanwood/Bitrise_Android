@@ -26,7 +26,7 @@ android {
         buildConfigField "String", "BITRISE_API_BASE_URL", "\"https://api.bitrise.io/\""
         buildConfigField "int", "DEFAULT_PAGE_SIZE", "10"
         buildConfigField "int", "PAGE_LOAD_THRESHOLD", "2"
-        buildConfigField "String", "BITRISE_API_TOKEN", "\"$bitriseApiToken\""
+        buildConfigField "String", "BITRISE_API_TOKEN", properties.containsKey('bitrise.api.token')? "\"$bitriseApiToken\"" : "null"
         buildConfigField "long", "DOWNLOAD_STATUS_REFRESH_DELAY", "500L"
         manifestPlaceholders.appName = "@string/app_name"
     }
