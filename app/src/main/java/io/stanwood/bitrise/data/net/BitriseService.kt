@@ -11,6 +11,11 @@ interface BitriseService {
     @GET("v0.1/me")
     fun login(@Header("Authorization") token: String): Deferred<Response<Me>>
 
+    @GET("v0.1/apps/{APP-SLUG}")
+    fun getApp(
+            @Header("Authorization") token: String,
+            @Path("APP-SLUG") appSlug: String): Deferred<Response<App>>
+
     @GET("v0.1/me/apps")
     fun getApps(
             @Header("Authorization") token: String,

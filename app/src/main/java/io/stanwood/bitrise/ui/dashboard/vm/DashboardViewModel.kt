@@ -7,6 +7,7 @@ import android.content.SharedPreferences
 import android.content.res.Resources
 import android.databinding.ObservableArrayList
 import android.databinding.ObservableBoolean
+import io.stanwood.bitrise.data.model.App
 import io.stanwood.bitrise.data.net.BitriseService
 import io.stanwood.bitrise.di.Properties
 import io.stanwood.bitrise.navigation.SCREEN_ERROR
@@ -26,12 +27,14 @@ class DashboardViewModel(private val router: Router,
                          private val resources: Resources): LifecycleObserver {
 
     val isLoading = ObservableBoolean(false)
-    val items = ObservableArrayList<AppViewModel>()
+    val items = ObservableArrayList<AppItemViewModel>()
 
     private var deferred: Deferred<Any>? = null
     private var nextCursor: String? = null
     private val shouldLoadMoreItems: Boolean
         get() = !isLoading.get() && nextCursor != null
+    private val favoriteAppsSlugs: Set<String>?
+        get() = sharedPreferences.getStringSet(Properties.FAVORITE_APPS, null)
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun start() {
@@ -51,6 +54,7 @@ class DashboardViewModel(private val router: Router,
         loadMoreItems()
     }
 
+    @Suppress("UNUSED_PARAMETER")
     fun onEndOfListReached(itemCount: Int) {
         if(shouldLoadMoreItems) {
             loadMoreItems()
@@ -70,7 +74,8 @@ class DashboardViewModel(private val router: Router,
         deferred = async(UI) {
             try {
                 isLoading.set(true)
-                fetchItems()
+
+                fetchAllApps()
                     .forEach { viewModel ->
                         viewModel.start()
                         items.add(viewModel)
@@ -84,11 +89,27 @@ class DashboardViewModel(private val router: Router,
         }
     }
 
-    private suspend fun fetchItems() =
+    private suspend fun fetchFavoriteApps(): List<App> =
+        favoriteAppsSlugs
+            ?.map {
+                service
+                    .getApp(token, it)
+                    .await()
+                    .data
+            }
+            ?: emptyList()
+
+    private suspend fun fetchNonFavoriteApps(): List<App> =
         service
             .getApps(token, nextCursor)
             .await()
             .apply { nextCursor = paging.nextCursor }
             .data
-            .map { app -> AppViewModel(service, token, resources, router, app) }
+            .filter { !(favoriteAppsSlugs?.contains(it.slug) ?: false) }
+
+
+    private suspend fun fetchAllApps() =
+        listOf(if(items.isEmpty()) fetchFavoriteApps() else emptyList(), fetchNonFavoriteApps())
+            .flatten()
+            .map { app -> AppItemViewModel(service, token, resources, router, sharedPreferences, app) }
 }
