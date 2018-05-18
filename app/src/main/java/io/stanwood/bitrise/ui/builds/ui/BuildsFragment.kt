@@ -50,7 +50,7 @@ class BuildsFragment : Fragment() {
         view.findViewById<Toolbar>(R.id.toolbar)?.let {
             it.navigationIcon = ContextCompat.getDrawable(it.context, R.drawable.ic_arrow_back)
             it.setNavigationOnClickListener {
-                router.backTo(SCREEN_DASHBOARD)
+                router.exit()
             }
         }
     }

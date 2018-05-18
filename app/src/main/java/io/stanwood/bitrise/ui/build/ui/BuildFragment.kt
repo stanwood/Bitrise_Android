@@ -11,7 +11,6 @@ import io.stanwood.bitrise.R
 import io.stanwood.bitrise.data.model.Build
 import io.stanwood.bitrise.databinding.FragmentBuildBinding
 import io.stanwood.bitrise.di.Properties
-import io.stanwood.bitrise.navigation.SCREEN_BUILDS
 import io.stanwood.bitrise.navigation.SCREEN_ERROR
 import io.stanwood.bitrise.ui.build.vm.BuildViewModel
 import org.koin.android.ext.android.inject
@@ -57,7 +56,7 @@ class BuildFragment : Fragment() {
         view.findViewById<Toolbar>(R.id.toolbar)?.let {
             it.navigationIcon = ContextCompat.getDrawable(it.context, R.drawable.ic_arrow_back)
             it.setNavigationOnClickListener {
-                router.backTo(SCREEN_BUILDS)
+                router.exit()
             }
         }
     }

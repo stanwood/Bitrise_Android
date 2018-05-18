@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import io.stanwood.bitrise.R
 import io.stanwood.bitrise.databinding.FragmentNewBuildBinding
-import io.stanwood.bitrise.navigation.SCREEN_BUILDS
 import io.stanwood.bitrise.ui.newbuild.vm.NewBuildViewModel
 import org.koin.android.ext.android.inject
 import ru.terrakok.cicerone.Router
@@ -33,7 +32,7 @@ class NewBuildFragment : Fragment() {
         view.findViewById<Toolbar>(R.id.toolbar)?.let {
             it.navigationIcon = ContextCompat.getDrawable(it.context, R.drawable.ic_arrow_back)
             it.setNavigationOnClickListener {
-                router.backTo(SCREEN_BUILDS)
+                router.exit()
             }
         }
     }
