@@ -25,7 +25,7 @@
             android:orientation="vertical">
 
             <include
-                layout="@layout/layout_toolbar"
+                layout="@layout/layout_toolbar_builds"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:title="@{vm.title}" />
