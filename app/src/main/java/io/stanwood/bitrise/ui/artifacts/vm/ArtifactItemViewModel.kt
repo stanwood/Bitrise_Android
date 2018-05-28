@@ -157,7 +157,7 @@ class ArtifactItemViewModel(
     }
 
     private fun getDownloadedApkUri(downloadId: Long): Uri {
-        return if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N) {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             downloadManager.getUriForDownloadedFile(downloadId)
         } else {
             val query = DownloadManager.Query()
