@@ -73,6 +73,7 @@
             android:layout_marginBottom="8dp"
             android:layout_marginStart="16dp"
             android:src="@drawable/ic_duration"
+            android:visibility="@{vm.isBuildCompleted}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/last_build_time"
             app:layout_constraintTop_toTopOf="@+id/last_build_time" />
@@ -81,10 +82,11 @@
             android:id="@+id/build_duration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:layout_marginStart="4dp"
             android:text="@{vm.duration}"
             android:textSize="@dimen/listSecondaryItemTextSize"
-            app:layout_constraintBottom_toBottomOf="@+id/ic_duration"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ic_duration"
             app:layout_constraintTop_toTopOf="@+id/ic_duration"
             tools:text="5m 43s" />
