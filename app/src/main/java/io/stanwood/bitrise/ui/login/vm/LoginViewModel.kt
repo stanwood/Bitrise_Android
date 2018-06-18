@@ -32,11 +32,17 @@ class LoginViewModel(
     @get:Bindable
     var token: String?
         set(value) {
+            if (value?.isBlank() == true) {
+                /**
+                 * Sanity check. We don't want to store an empty or null token.
+                 */
+                return
+            }
             setProperty(Properties.TOKEN, value)
             sharedPreferences
-                    .edit()
-                    .putString(Properties.TOKEN, value)
-                    .apply()
+                .edit()
+                .putString(Properties.TOKEN, value)
+                .apply()
         }
         get() = sharedPreferences.getString(Properties.TOKEN, BuildConfig.BITRISE_API_TOKEN)
 
@@ -60,22 +66,24 @@ class LoginViewModel(
         }
     }
 
-    private suspend fun tryLogin(newToken: String) {
-        try {
-            isLoading.set(true)
-            service
-                    .login(newToken)
-                    .await()
-            token = newToken
-            router.newRootScreen(SCREEN_DASHBOARD)
-        } catch (exception: Exception) {
-            if(exception is HttpException && exception.code() == HttpURLConnection.HTTP_UNAUTHORIZED) {
-                isError.set(true)
+    private suspend fun tryLogin(newToken: String?) {
+        newToken?.let {
+            try {
+                isLoading.set(true)
+                service
+                        .login(it)
+                        .await()
+                token = it
+                router.newRootScreen(SCREEN_DASHBOARD)
+            } catch (exception: Exception) {
+                if (exception is HttpException && exception.code() == HttpURLConnection.HTTP_UNAUTHORIZED) {
+                    isError.set(true)
+                }
+                router.navigateTo(SCREEN_ERROR, exception.message)
+                Timber.e(exception)
+            } finally {
+                isLoading.set(false)
             }
-            router.navigateTo(SCREEN_ERROR, exception.message)
-            Timber.e(exception)
-        } finally {
-            isLoading.set(false)
         }
     }
 }

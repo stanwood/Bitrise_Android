@@ -10,4 +10,5 @@ object Properties {
     const val MESSAGE = "message"
     const val BRANCH = "branch"
     const val WORKFLOW = "workflow"
+    const val FAVORITE_APPS = "fav_apps"
 }

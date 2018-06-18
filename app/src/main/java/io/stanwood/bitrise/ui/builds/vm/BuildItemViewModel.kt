@@ -59,6 +59,9 @@ class BuildItemViewModel(
             "${build.branch}>${build.pullRequestTargetBranch}"
         }
 
+    val isBuildCompleted: Boolean
+        get() = build.status != BuildStatus.IN_PROGRESS
+
     fun onClick() {
         router.navigateTo(SCREEN_BUILD, build)
     }

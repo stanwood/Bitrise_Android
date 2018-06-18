@@ -51,14 +51,14 @@
             app:layout_constraintTop_toBottomOf="@+id/logo">
 
             <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/test"
                 onTextSubmitted="@{(text) -> vm.onTokenEntered(text)}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:text="@={vm.token}" />
+                android:text="@{vm.token}" />
 
         </android.support.design.widget.TextInputLayout>
-
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/token_instructions"
