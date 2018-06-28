@@ -19,7 +19,7 @@ android {
         minSdkVersion 21
         targetSdkVersion sdk_version
         versionCode 1
-        versionName "1.2"
+        versionName "1.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
 
@@ -27,6 +27,7 @@ android {
         buildConfigField "int", "DEFAULT_PAGE_SIZE", "10"
         buildConfigField "int", "PAGE_LOAD_THRESHOLD", "2"
         buildConfigField "String", "BITRISE_API_TOKEN", properties.containsKey('bitrise.api.token')? "\"$bitriseApiToken\"" : "null"
+        buildConfigField "String", "API_DATE_TIME_FORMAT", "\"yyyy-MM-dd'T'HH:mm:ss'Z'\""
         buildConfigField "long", "DOWNLOAD_STATUS_REFRESH_DELAY", "500L"
         manifestPlaceholders.appName = "@string/app_name"
     }
