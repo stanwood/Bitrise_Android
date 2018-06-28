@@ -32,7 +32,7 @@ val dashboardModule = applicationContext {
     /**
      * View Model
      */
-    provide {
+    bean {
         DashboardViewModel(
             get(),
             get(),

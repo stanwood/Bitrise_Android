@@ -24,6 +24,7 @@
 package io.stanwood.bitrise
 
 import android.os.Bundle
+import androidx.navigation.NavController
 import io.stanwood.bitrise.di.Properties
 import io.stanwood.bitrise.di.applicationModule
 import io.stanwood.bitrise.ui.artifacts.di.artifactsModule
@@ -34,6 +35,7 @@ import io.stanwood.bitrise.ui.error.di.errorModule
 import io.stanwood.bitrise.ui.login.di.loginModule
 import io.stanwood.bitrise.ui.logs.di.logsModule
 import io.stanwood.bitrise.ui.newbuild.di.newBuildModule
+import org.koin.android.ext.android.inject
 import org.koin.android.ext.android.setProperty
 import org.koin.android.ext.koin.with
 import org.koin.error.AlreadyStartedException
@@ -42,6 +44,8 @@ import timber.log.Timber
 
 
 class MainActivity: PermissionActivity() {
+
+    private val router: NavController by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

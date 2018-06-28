@@ -22,5 +22,24 @@
 
 package io.stanwood.bitrise.util
 
-class Snacker {
+import android.app.Activity
+import android.support.annotation.IdRes
+import android.support.annotation.StringRes
+import android.support.design.widget.Snackbar
+import android.view.View
+
+class Snacker(private val view: View) {
+    constructor(activity: Activity, @IdRes layoutResId: Int) : this(activity.findViewById(layoutResId))
+
+    fun show(message: String, length: Int = Snackbar.LENGTH_LONG) {
+        Snackbar
+            .make(view, message, length)
+            .show()
+    }
+
+    fun show(@StringRes messageResId: Int, length: Int = Snackbar.LENGTH_LONG) {
+        Snackbar
+            .make(view, messageResId, length)
+            .show()
+    }
 }

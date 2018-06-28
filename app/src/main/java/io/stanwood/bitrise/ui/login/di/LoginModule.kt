@@ -31,5 +31,5 @@ val loginModule = applicationContext {
     /**
      * View Model
      */
-    provide { LoginViewModel(get(), get(), get()) }
+    bean { LoginViewModel(get(), get(), get()) }
 }

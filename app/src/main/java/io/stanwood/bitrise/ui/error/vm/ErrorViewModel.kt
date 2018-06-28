@@ -33,6 +33,6 @@ class ErrorViewModel(
         get() = msg
 
     fun onRetryClick() {
-        router.popBackStack()
+        router.navigateUp()
     }
 }

@@ -39,6 +39,7 @@ val buildModule = applicationContext {
                 router = get(),
                 service = get(),
                 adapter = get(parameters = { args.values }),
+                snacker = get(),
                 token = args[Properties.TOKEN],
                 app = args[Properties.APP],
                 build = args[Properties.BUILD])

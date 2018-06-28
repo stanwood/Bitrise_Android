@@ -31,6 +31,7 @@ import io.stanwood.bitrise.data.model.*
 import io.stanwood.bitrise.data.net.BitriseService
 import io.stanwood.bitrise.di.Properties
 import io.stanwood.bitrise.ui.build.ui.FragmentAdapter
+import io.stanwood.bitrise.util.Snacker
 import io.stanwood.bitrise.util.extensions.bundleOf
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
@@ -42,6 +43,7 @@ class BuildViewModel(
         private val router: NavController,
         private val service: BitriseService,
         val adapter: FragmentAdapter,
+        private val snacker: Snacker,
         private val token: String,
         private val app: App,
         private val build: Build): LifecycleObserver {
@@ -60,7 +62,8 @@ class BuildViewModel(
                 isLoading.set(true)
                 restartBuild().let {
                     val message = resources.getString(R.string.new_build_started, it.buildNumber)
-                    //TODO: router.exitWithMessage(message)
+                    snacker.show(message)
+                    router.navigateUp()
                 }
             } catch (exception: Exception) {
                 Timber.e(exception)
