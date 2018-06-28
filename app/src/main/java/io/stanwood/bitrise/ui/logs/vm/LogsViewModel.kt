@@ -8,21 +8,23 @@ import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import android.text.Html
 import android.text.Spanned
+import androidx.navigation.NavController
+import io.stanwood.bitrise.R
 import io.stanwood.bitrise.data.model.App
 import io.stanwood.bitrise.data.model.Build
 import io.stanwood.bitrise.data.net.BitriseService
-import io.stanwood.bitrise.navigation.SCREEN_ERROR
+import io.stanwood.bitrise.di.Properties
+import io.stanwood.bitrise.util.extensions.bundleOf
 import kotlinx.coroutines.experimental.Deferred
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
-import ru.terrakok.cicerone.Router
 import timber.log.Timber
 
 
 class LogsViewModel(
         private val service: BitriseService,
         private val token: String,
-        private val router: Router,
+        private val router: NavController,
         private val app: App,
         private val build: Build) : LifecycleObserver, BaseObservable() {
 
@@ -56,7 +58,9 @@ class LogsViewModel(
                 }
             } catch (exception: Exception) {
                 Timber.e(exception)
-                router.navigateTo(SCREEN_ERROR, exception.message)
+                bundleOf(Properties.MESSAGE to exception.message).apply {
+                    router.navigate(R.id.action_error, this)
+                }
             } finally {
                 isLoading.set(false)
             }

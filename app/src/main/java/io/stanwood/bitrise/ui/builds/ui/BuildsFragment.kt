@@ -4,25 +4,18 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.NavController
+import io.stanwood.bitrise.R
 import io.stanwood.bitrise.data.model.App
 import io.stanwood.bitrise.databinding.FragmentBuildsBinding
 import io.stanwood.bitrise.di.Properties
-import io.stanwood.bitrise.navigation.SCREEN_ERROR
 import io.stanwood.bitrise.ui.builds.vm.BuildsViewModel
+import io.stanwood.bitrise.util.extensions.bundleOf
 import org.koin.android.ext.android.inject
 import org.koin.android.ext.android.setProperty
-import ru.terrakok.cicerone.Router
 
 class BuildsFragment : Fragment() {
-    companion object {
-        fun newInstance(app: App) = BuildsFragment().apply {
-            arguments = Bundle().apply {
-                putParcelable(Properties.APP, app)
-            }
-        }
-    }
-
-    private val router: Router by inject()
+    private val router: NavController by inject()
     private val viewModel: BuildsViewModel by inject()
     private val app: App?
         get() = arguments?.getParcelable(Properties.APP) as App?
@@ -31,7 +24,9 @@ class BuildsFragment : Fragment() {
         super.onCreate(savedInstanceState)
         app?.let {
             setProperty(Properties.APP, it)
-        } ?: router.navigateTo(SCREEN_ERROR)
+        } ?: bundleOf(Properties.MESSAGE to null).apply {
+            router.navigate(R.id.action_error, this)
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =

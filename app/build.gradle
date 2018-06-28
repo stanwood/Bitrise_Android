@@ -86,11 +86,11 @@ dependencies {
     annotationProcessor "com.github.bumptech.glide:compiler:$glide"
 
     // Other
-    implementation "ru.terrakok.cicerone:cicerone:$cicerone_version"
     implementation "com.jakewharton.timber:timber:$timber_version"
     implementation 'org.ocpsoft.prettytime:prettytime:4.0.1.Final'
     implementation "joda-time:joda-time:$joda_version"
     implementation "org.koin:koin-android:$koin_version"
 
     kapt "com.android.databinding:compiler:$android_plugin_version"
+    implementation 'android.arch.navigation:navigation-fragment:1.0.0-alpha02'
 }

@@ -5,19 +5,19 @@ import android.content.res.Resources
 import android.databinding.BaseObservable
 import android.databinding.Bindable
 import android.graphics.drawable.Drawable
+import androidx.navigation.NavController
 import io.stanwood.bitrise.BR
+import io.stanwood.bitrise.R
 import io.stanwood.bitrise.data.model.App
 import io.stanwood.bitrise.data.model.Build
 import io.stanwood.bitrise.data.model.BuildStatus
 import io.stanwood.bitrise.data.net.BitriseService
 import io.stanwood.bitrise.di.Properties
-import io.stanwood.bitrise.navigation.SCREEN_BUILDS
-import io.stanwood.bitrise.navigation.SCREEN_ERROR
+import io.stanwood.bitrise.util.extensions.bundleOf
 import kotlinx.coroutines.experimental.Deferred
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
 import org.ocpsoft.prettytime.PrettyTime
-import ru.terrakok.cicerone.Router
 import timber.log.Timber
 
 
@@ -25,7 +25,7 @@ class AppItemViewModel(
         private val service: BitriseService,
         private val token: String,
         private val resources: Resources,
-        private val router: Router,
+        private val router: NavController,
         private val sharedPreferences: SharedPreferences,
         private val app: App) : BaseObservable() {
 
@@ -101,7 +101,9 @@ class AppItemViewModel(
                 notifyPropertyChanged(BR.lastBuildTime)
             } catch (exception: Exception) {
                 Timber.e(exception)
-                router.navigateTo(SCREEN_ERROR, exception.message)
+                bundleOf(Properties.MESSAGE to exception.message).apply {
+                    router.navigate(R.id.action_error, this)
+                }
             }
         }
     }
@@ -111,7 +113,12 @@ class AppItemViewModel(
     }
 
     fun onClick() {
-        router.navigateTo(SCREEN_BUILDS, app)
+        bundleOf(
+                Properties.APP to app,
+                Properties.TOKEN to token)
+            .apply {
+                router.navigate(R.id.action_dashboard_to_builds, this)
+            }
     }
 
     private suspend fun fetchLastBuild() =

@@ -50,8 +50,8 @@
             android:id="@+id/action_builds_to_build"
             app:destination="@id/screen_build" />
         <action
-            android:id="@+id/action_screen_builds_to_newBuildFragment"
-            app:destination="@id/newBuildFragment" />
+            android:id="@+id/action_builds_to_new_build"
+            app:destination="@id/screen_new_build" />
     </fragment>
     <fragment
         android:id="@+id/screen_build"
@@ -65,7 +65,7 @@
             app:type="reference" />
     </fragment>
     <fragment
-        android:id="@+id/newBuildFragment"
+        android:id="@+id/screen_new_build"
         android:name="io.stanwood.bitrise.ui.newbuild.ui.NewBuildFragment"
         android:label="NewBuildFragment" />
 </navigation>
