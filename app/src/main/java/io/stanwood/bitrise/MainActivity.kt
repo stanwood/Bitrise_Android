@@ -44,9 +44,7 @@ import timber.log.Timber
 
 
 class MainActivity: PermissionActivity() {
-
-    private val router: NavController by inject()
-
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (BuildConfig.DEBUG) {
