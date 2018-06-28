@@ -4,6 +4,7 @@ import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import androidx.navigation.NavController
 import io.stanwood.bitrise.R
+import io.stanwood.bitrise.data.model.App
 import io.stanwood.bitrise.data.model.Build
 import io.stanwood.bitrise.data.model.BuildStatus
 import io.stanwood.bitrise.di.Properties
@@ -18,7 +19,8 @@ class BuildItemViewModel(
         private val periodFormatter: PeriodFormatter,
         private val router: NavController,
         private val build: Build,
-        private val token: String) {
+        private val token: String,
+        private val app: App) {
 
     val status: String
         get() = build.status.getTitle(resources)
@@ -66,8 +68,9 @@ class BuildItemViewModel(
 
     fun onClick() {
         bundleOf(
+                Properties.TOKEN to token,
                 Properties.BUILD to build,
-                Properties.TOKEN to token)
+                Properties.APP to app)
             .apply {
                 router.navigate(R.id.action_builds_to_build, this)
             }

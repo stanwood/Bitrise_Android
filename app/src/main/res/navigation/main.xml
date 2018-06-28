@@ -63,6 +63,9 @@
         <argument
             android:name="arg_build"
             app:type="reference" />
+        <argument
+            android:name="arg_app"
+            app:type="reference" />
     </fragment>
     <fragment
         android:id="@+id/screen_new_build"

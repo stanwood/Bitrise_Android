@@ -87,7 +87,7 @@ dependencies {
 
     // Other
     implementation "com.jakewharton.timber:timber:$timber_version"
-    implementation 'org.ocpsoft.prettytime:prettytime:4.0.1.Final'
+    implementation "org.ocpsoft.prettytime:prettytime:$pretty_time_version"
     implementation "joda-time:joda-time:$joda_version"
     implementation "org.koin:koin-android:$koin_version"
 

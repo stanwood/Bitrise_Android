@@ -13,7 +13,6 @@ import io.stanwood.bitrise.data.model.App
 import io.stanwood.bitrise.data.net.BitriseService
 import io.stanwood.bitrise.di.Properties
 import io.stanwood.bitrise.util.extensions.bundleOf
-import io.stanwood.bitrise.util.extensions.setProperty
 import kotlinx.coroutines.experimental.Deferred
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
@@ -62,7 +61,6 @@ class DashboardViewModel(private val router: NavController,
     }
 
     fun onLogout() {
-        setProperty(Properties.TOKEN, null)
         sharedPreferences
                 .edit()
                 .remove(Properties.TOKEN)

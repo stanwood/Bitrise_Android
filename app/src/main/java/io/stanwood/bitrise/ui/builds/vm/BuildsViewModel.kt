@@ -58,6 +58,7 @@ class BuildsViewModel(private val router: NavController,
         loadMoreItems()
     }
 
+    @Suppress("UNUSED_PARAMETER")
     fun onEndOfListReached(itemCount: Int) {
         if(shouldLoadMoreItems) {
             loadMoreItems()
@@ -91,5 +92,5 @@ class BuildsViewModel(private val router: NavController,
             .await()
             .apply { nextCursor = paging.nextCursor }
             .data
-            .map { build -> BuildItemViewModel(resources, periodFormatter, router, build, token) }
+            .map { build -> BuildItemViewModel(resources, periodFormatter, router, build, token, app) }
 }

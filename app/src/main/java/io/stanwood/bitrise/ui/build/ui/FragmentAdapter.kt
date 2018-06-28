@@ -4,6 +4,7 @@ import android.content.res.Resources
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import io.stanwood.bitrise.R
+import io.stanwood.bitrise.data.model.App
 import io.stanwood.bitrise.data.model.Build
 import io.stanwood.bitrise.ui.artifacts.ui.ArtifactsFragment
 import io.stanwood.bitrise.ui.logs.ui.LogsFragment
@@ -12,12 +13,14 @@ import io.stanwood.bitrise.ui.logs.ui.LogsFragment
 class FragmentAdapter(
         private val resources: Resources,
         fragmentManager: FragmentManager,
+        private val token: String,
+        private val app: App,
         private val build: Build):
         FragmentStatePagerAdapter(fragmentManager) {
 
     override fun getItem(position: Int) = when(position) {
-        0 -> LogsFragment.newInstance(build)
-        else -> ArtifactsFragment.newInstance()
+        0 -> LogsFragment.newInstance(token, build, app)
+        else -> ArtifactsFragment.newInstance(token, build, app)
     }
 
     override fun getCount() = 2
