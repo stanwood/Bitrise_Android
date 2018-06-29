@@ -24,13 +24,19 @@ package io.stanwood.bitrise.ui.builds.ui
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
+import android.support.v7.widget.Toolbar
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import io.stanwood.bitrise.R
 import io.stanwood.bitrise.data.model.App
 import io.stanwood.bitrise.databinding.FragmentBuildsBinding
 import io.stanwood.bitrise.di.Properties
 import io.stanwood.bitrise.navigation.SCREEN_ERROR
 import io.stanwood.bitrise.ui.builds.vm.BuildsViewModel
+import kotlinx.android.synthetic.main.fragment_builds.*
+import kotlinx.android.synthetic.main.layout_toolbar.*
 import org.koin.android.ext.android.inject
 import org.koin.android.ext.android.setProperty
 import ru.terrakok.cicerone.Router
@@ -61,4 +67,10 @@ class BuildsFragment : Fragment() {
                 lifecycle.addObserver(viewModel)
                 vm = viewModel
             }.root
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        toolbar?.setNavigationOnClickListener { router.exit() }
+    }
 }
