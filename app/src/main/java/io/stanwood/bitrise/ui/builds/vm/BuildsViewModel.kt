@@ -87,7 +87,13 @@ class BuildsViewModel(private val router: NavController,
         }
     }
 
-    fun onStartNewBuild() = router.navigate(R.id.screen_new_build)
+    fun onStartNewBuild() =
+            bundleOf(
+                Properties.TOKEN to token,
+                Properties.APP to app)
+            .let {
+                router.navigate(R.id.screen_new_build, it)
+            }
 
     private fun loadMoreItems() {
         deferred = async(UI) {

@@ -70,5 +70,12 @@
     <fragment
         android:id="@+id/screen_new_build"
         android:name="io.stanwood.bitrise.ui.newbuild.ui.NewBuildFragment"
-        android:label="NewBuildFragment" />
+        android:label="NewBuildFragment" >
+        <argument
+            android:name="arg_token"
+            app:type="string" />
+        <argument
+            android:name="arg_app"
+            app:type="reference" />
+    </fragment>
 </navigation>

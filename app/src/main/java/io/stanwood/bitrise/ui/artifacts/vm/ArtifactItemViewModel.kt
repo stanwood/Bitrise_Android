@@ -44,6 +44,7 @@ import io.stanwood.bitrise.PermissionActivity
 import io.stanwood.bitrise.R
 import io.stanwood.bitrise.data.model.Artifact
 import io.stanwood.bitrise.di.Properties
+import io.stanwood.bitrise.util.Snacker
 import io.stanwood.bitrise.util.extensions.bundleOf
 import kotlinx.coroutines.experimental.*
 import kotlinx.coroutines.experimental.android.UI
@@ -57,6 +58,7 @@ private enum class DownloadStatus {
 }
 
 class ArtifactItemViewModel(
+        private val snacker: Snacker,
         private val activity: PermissionActivity,
         private val router: NavController,
         private val artifact: Artifact) : BaseObservable() {
@@ -146,7 +148,7 @@ class ArtifactItemViewModel(
                 } while (status == DownloadStatus.RUNNING)
             } catch (e: CancellationException) {
                 Timber.d("Download canceled: $title")
-                showMessage(downloadCancelledMessage)
+                snacker.show(downloadCancelledMessage)
                 remove(id)
                 return
             } finally {
@@ -158,7 +160,7 @@ class ArtifactItemViewModel(
                 installApk(id)
             } else {
                 Timber.d("Download failed: $title")
-                showMessage(downloadErrorMessage)
+                snacker.show(downloadErrorMessage)
             }
         }
     }
@@ -213,11 +215,5 @@ class ArtifactItemViewModel(
         isDownloading.set(false)
         totalSize.set(0)
         downloadedSize.set(0)
-    }
-
-    private fun showMessage(message: String) {
-        async(UI) {
-            //router.showSystemMessage(message)
-        }
     }
 }

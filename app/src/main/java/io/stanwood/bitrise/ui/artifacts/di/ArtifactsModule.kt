@@ -34,6 +34,7 @@ val artifactsModule = applicationContext {
      */
     factory { args ->
         ArtifactsViewModel(
+                snacker = get(),
                 router = get(),
                 service = get(),
                 token = args[Properties.TOKEN],

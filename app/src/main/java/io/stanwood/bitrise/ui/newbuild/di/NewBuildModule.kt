@@ -32,14 +32,15 @@ val newBuildModule = applicationContext {
     /**
      * View Model
      */
-    bean {
+    factory { args ->
         NewBuildViewModel(
+                gson = get(),
                 resources = androidApplication().resources,
                 router = get(),
                 service = get(),
                 sharedPreferences = get(),
                 snacker = get(),
-                token = getProperty(Properties.TOKEN),
-                app = getProperty(Properties.APP))
+                token = args[Properties.TOKEN],
+                app = args[Properties.APP])
     }
 }

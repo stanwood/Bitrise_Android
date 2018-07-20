@@ -32,7 +32,7 @@ interface TextSubmissionListener {
 }
 
 @BindingAdapter(value = ["onTextSubmitted"])
-fun test(editText: EditText, listener: TextSubmissionListener) {
+fun setTextSubmissionListener(editText: EditText, listener: TextSubmissionListener) {
     editText.setOnEditorActionListener { _, actionId, _ ->
         if(actionId == EditorInfo.IME_ACTION_DONE) {
             listener.invoke(editText.text.toString())
@@ -43,6 +43,6 @@ fun test(editText: EditText, listener: TextSubmissionListener) {
 }
 
 @BindingAdapter(value = ["error"])
-fun test(editText: EditText, error: String?) {
+fun setError(editText: EditText, error: String?) {
     editText.error = error
 }

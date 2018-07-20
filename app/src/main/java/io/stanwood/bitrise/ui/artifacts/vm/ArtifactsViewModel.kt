@@ -37,6 +37,7 @@ import io.stanwood.bitrise.data.model.Artifact
 import io.stanwood.bitrise.data.model.Build
 import io.stanwood.bitrise.data.net.BitriseService
 import io.stanwood.bitrise.di.Properties
+import io.stanwood.bitrise.util.Snacker
 import io.stanwood.bitrise.util.extensions.bundleOf
 import kotlinx.coroutines.experimental.Deferred
 import kotlinx.coroutines.experimental.android.UI
@@ -45,6 +46,7 @@ import timber.log.Timber
 
 
 class ArtifactsViewModel(
+        private val snacker: Snacker,
         private val router: NavController,
         private val service: BitriseService,
         private val token: String,
@@ -112,7 +114,7 @@ class ArtifactsViewModel(
                     .apply { nextCursor = paging.nextCursor }
                     .data
                     .map { artifact -> fetchArtifact(artifact) }
-                    .map { artifact -> ArtifactItemViewModel(activity, router, artifact) }
+                    .map { artifact -> ArtifactItemViewModel(snacker, activity, router, artifact) }
 
     private suspend fun fetchArtifact(artifact: Artifact) =
             service

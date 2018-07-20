@@ -28,19 +28,25 @@ import android.databinding.BaseObservable
 import android.databinding.Bindable
 import android.databinding.ObservableBoolean
 import androidx.navigation.NavController
+import com.google.gson.Gson
+import com.google.gson.JsonSyntaxException
 import io.stanwood.bitrise.R
 import io.stanwood.bitrise.data.model.App
 import io.stanwood.bitrise.data.model.BuildParams
 import io.stanwood.bitrise.data.model.NewBuildParams
+import io.stanwood.bitrise.data.model.NewBuildResponse
 import io.stanwood.bitrise.data.net.BitriseService
 import io.stanwood.bitrise.di.Properties
 import io.stanwood.bitrise.util.Snacker
 import io.stanwood.bitrise.util.extensions.bundleOf
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
+import retrofit2.HttpException
 import timber.log.Timber
 
-class NewBuildViewModel(private val resources: Resources,
+class NewBuildViewModel(
+                        private val gson: Gson,
+                        private val resources: Resources,
                         private val router: NavController,
                         private val service: BitriseService,
                         private val sharedPreferences: SharedPreferences,
@@ -72,14 +78,27 @@ class NewBuildViewModel(private val resources: Resources,
                     snacker.show(message)
                     router.navigateUp()
                 }
-            } catch (exception: Exception) {
-                Timber.e(exception)
-                bundleOf(Properties.MESSAGE to exception.message).apply {
-                    router.navigate(R.id.action_error, this)
-                }
+            } catch (exception: HttpException) {
+                onError(exception)
             } finally {
                 isLoading.set(false)
             }
+        }
+    }
+
+    fun onError(httpException: HttpException) {
+        val errorBody = httpException.response().errorBody()?.string()
+        val response = try {
+            gson
+                .fromJson(errorBody, NewBuildResponse::class.java)
+                .message
+        } catch (jsonException: JsonSyntaxException) {
+            httpException.message()
+        }
+
+        Timber.e(response)
+        bundleOf(Properties.MESSAGE to response).apply {
+            router.navigate(R.id.action_error, this)
         }
     }
 
