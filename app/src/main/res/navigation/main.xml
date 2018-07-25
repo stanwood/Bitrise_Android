@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    app:startDestination="@id/screen_login">
+
+    <fragment
+        android:id="@+id/screen_login"
+        android:name="io.stanwood.bitrise.ui.login.ui.LoginFragment"
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_login_to_dashboard"
+            app:destination="@id/screen_dashboard" />
+    </fragment>
+    <fragment
+        android:id="@+id/screen_dashboard"
+        android:name="io.stanwood.bitrise.ui.dashboard.ui.DashboardFragment"
+        android:label="DashboardFragment" >
+        <argument
+            android:name="arg_token"
+            app:type="string" />
+        <action
+            android:id="@+id/action_dashboard_to_builds"
+            app:destination="@id/screen_builds" />
+    </fragment>
+    <fragment
+        android:id="@+id/screen_error"
+        android:name="io.stanwood.bitrise.ui.error.ui.ErrorFragment"
+        android:label="ErrorFragment" >
+        <argument
+            android:name="arg_message"
+            app:type="string" />
+    </fragment>
+    <action
+        android:id="@+id/action_error"
+        app:destination="@id/screen_error" />
+    <action
+        android:id="@+id/action_logout"
+        app:destination="@id/screen_login" />
+    <fragment
+        android:id="@+id/screen_builds"
+        android:name="io.stanwood.bitrise.ui.builds.ui.BuildsFragment"
+        android:label="BuildsFragment" >
+        <argument
+            android:name="arg_app"
+            app:type="reference" />
+        <argument
+            android:name="arg_token"
+            app:type="string" />
+        <action
+            android:id="@+id/action_builds_to_build"
+            app:destination="@id/screen_build" />
+        <action
+            android:id="@+id/action_builds_to_new_build"
+            app:destination="@id/screen_new_build" />
+    </fragment>
+    <fragment
+        android:id="@+id/screen_build"
+        android:name="io.stanwood.bitrise.ui.build.ui.BuildFragment"
+        android:label="BuildFragment" >
+        <argument
+            android:name="arg_token"
+            app:type="string" />
+        <argument
+            android:name="arg_build"
+            app:type="reference" />
+        <argument
+            android:name="arg_app"
+            app:type="reference" />
+    </fragment>
+    <fragment
+        android:id="@+id/screen_new_build"
+        android:name="io.stanwood.bitrise.ui.newbuild.ui.NewBuildFragment"
+        android:label="NewBuildFragment" >
+        <argument
+            android:name="arg_token"
+            app:type="string" />
+        <argument
+            android:name="arg_app"
+            app:type="reference" />
+    </fragment>
+</navigation>

@@ -32,13 +32,13 @@ val logsModule = applicationContext {
     /**
      * View Model
      */
-    factory {
+    factory { args ->
         LogsViewModel(
                 get(),
-                getProperty(Properties.TOKEN),
+                args[Properties.TOKEN],
                 get(),
-                getProperty(Properties.APP),
-                getProperty(Properties.BUILD))
+                args[Properties.APP],
+                args[Properties.BUILD])
     }
 
 }

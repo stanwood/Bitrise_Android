@@ -33,20 +33,20 @@ val buildsModule = applicationContext {
     /**
      * View Model
      */
-    factory {
+    factory { args ->
         BuildsViewModel(
                 get(),
                 get(),
                 getProperty(Properties.TOKEN),
                 androidApplication().resources,
                 get(),
-                getProperty(Properties.APP))
+                args[Properties.APP])
     }
 
     /**
      * Period Formatter
      */
-    provide {
+    bean {
         PeriodFormatterBuilder()
             .printZeroAlways()
             .appendMinutes()

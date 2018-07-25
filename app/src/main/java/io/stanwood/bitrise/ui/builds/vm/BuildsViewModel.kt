@@ -28,19 +28,20 @@ import android.arch.lifecycle.OnLifecycleEvent
 import android.content.res.Resources
 import android.databinding.ObservableArrayList
 import android.databinding.ObservableBoolean
+import androidx.navigation.NavController
+import io.stanwood.bitrise.R
 import io.stanwood.bitrise.data.model.App
 import io.stanwood.bitrise.data.net.BitriseService
-import io.stanwood.bitrise.navigation.SCREEN_ERROR
-import io.stanwood.bitrise.navigation.SCREEN_NEW_BUILD
+import io.stanwood.bitrise.di.Properties
+import io.stanwood.bitrise.util.extensions.bundleOf
 import kotlinx.coroutines.experimental.Deferred
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
 import org.joda.time.format.PeriodFormatter
-import ru.terrakok.cicerone.Router
 import timber.log.Timber
 
 
-class BuildsViewModel(private val router: Router,
+class BuildsViewModel(private val router: NavController,
                       private val service: BitriseService,
                       private val token: String,
                       private val resources: Resources,
@@ -79,13 +80,20 @@ class BuildsViewModel(private val router: Router,
         loadMoreItems()
     }
 
+    @Suppress("UNUSED_PARAMETER")
     fun onEndOfListReached(itemCount: Int) {
         if(shouldLoadMoreItems) {
             loadMoreItems()
         }
     }
 
-    fun onStartNewBuild() = router.navigateTo(SCREEN_NEW_BUILD)
+    fun onStartNewBuild() =
+            bundleOf(
+                Properties.TOKEN to token,
+                Properties.APP to app)
+            .let {
+                router.navigate(R.id.screen_new_build, it)
+            }
 
     private fun loadMoreItems() {
         deferred = async(UI) {
@@ -97,7 +105,9 @@ class BuildsViewModel(private val router: Router,
                     }
             } catch (exception: Exception) {
                 Timber.e(exception)
-                router.navigateTo(SCREEN_ERROR, exception.message)
+                bundleOf(Properties.MESSAGE to null).apply {
+                    router.navigate(R.id.action_error, this)
+                }
             } finally {
                 isLoading.set(false)
             }
@@ -110,5 +120,5 @@ class BuildsViewModel(private val router: Router,
             .await()
             .apply { nextCursor = paging.nextCursor }
             .data
-            .map { build -> BuildItemViewModel(resources, periodFormatter, router, build) }
+            .map { build -> BuildItemViewModel(resources, periodFormatter, router, build, token, app) }
 }

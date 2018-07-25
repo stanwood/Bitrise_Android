@@ -24,21 +24,25 @@ package io.stanwood.bitrise.ui.builds.vm
 
 import android.content.res.Resources
 import android.graphics.drawable.Drawable
+import androidx.navigation.NavController
 import io.stanwood.bitrise.R
+import io.stanwood.bitrise.data.model.App
 import io.stanwood.bitrise.data.model.Build
 import io.stanwood.bitrise.data.model.BuildStatus
-import io.stanwood.bitrise.navigation.SCREEN_BUILD
+import io.stanwood.bitrise.di.Properties
+import io.stanwood.bitrise.util.extensions.bundleOf
 import org.joda.time.Duration
 import org.joda.time.format.PeriodFormatter
-import ru.terrakok.cicerone.Router
 import java.text.DateFormat
 
 
 class BuildItemViewModel(
         private val resources: Resources,
         private val periodFormatter: PeriodFormatter,
-        private val router: Router,
-        private val build: Build) {
+        private val router: NavController,
+        private val build: Build,
+        private val token: String,
+        private val app: App) {
 
     val status: String
         get() = build.status.getTitle(resources)
@@ -85,6 +89,12 @@ class BuildItemViewModel(
         get() = build.status != BuildStatus.IN_PROGRESS
 
     fun onClick() {
-        router.navigateTo(SCREEN_BUILD, build)
+        bundleOf(
+                Properties.TOKEN to token,
+                Properties.BUILD to build,
+                Properties.APP to app)
+            .apply {
+                router.navigate(R.id.action_builds_to_build, this)
+            }
     }
 }

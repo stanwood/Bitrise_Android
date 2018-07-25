@@ -38,14 +38,16 @@ import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.text.format.Formatter
+import androidx.navigation.NavController
 import io.stanwood.bitrise.BuildConfig
 import io.stanwood.bitrise.PermissionActivity
 import io.stanwood.bitrise.R
 import io.stanwood.bitrise.data.model.Artifact
-import io.stanwood.bitrise.navigation.SCREEN_ERROR
+import io.stanwood.bitrise.di.Properties
+import io.stanwood.bitrise.util.Snacker
+import io.stanwood.bitrise.util.extensions.bundleOf
 import kotlinx.coroutines.experimental.*
 import kotlinx.coroutines.experimental.android.UI
-import ru.terrakok.cicerone.Router
 import timber.log.Timber
 
 
@@ -56,8 +58,9 @@ private enum class DownloadStatus {
 }
 
 class ArtifactItemViewModel(
+        private val snacker: Snacker,
         private val activity: PermissionActivity,
-        private val router: Router,
+        private val router: NavController,
         private val artifact: Artifact) : BaseObservable() {
 
     val icon: Drawable?
@@ -121,7 +124,9 @@ class ArtifactItemViewModel(
         } catch (exception: Exception) {
             onDownloadStop()
             Timber.e(exception)
-            router.navigateTo(SCREEN_ERROR, exception.message)
+            bundleOf(Properties.MESSAGE to exception.message).apply {
+                router.navigate(R.id.action_error, this)
+            }
         }
     }
 
@@ -143,7 +148,7 @@ class ArtifactItemViewModel(
                 } while (status == DownloadStatus.RUNNING)
             } catch (e: CancellationException) {
                 Timber.d("Download canceled: $title")
-                showMessage(downloadCancelledMessage)
+                snacker.show(downloadCancelledMessage)
                 remove(id)
                 return
             } finally {
@@ -155,7 +160,7 @@ class ArtifactItemViewModel(
                 installApk(id)
             } else {
                 Timber.d("Download failed: $title")
-                showMessage(downloadErrorMessage)
+                snacker.show(downloadErrorMessage)
             }
         }
     }
@@ -210,11 +215,5 @@ class ArtifactItemViewModel(
         isDownloading.set(false)
         totalSize.set(0)
         downloadedSize.set(0)
-    }
-
-    private fun showMessage(message: String) {
-        async(UI) {
-            router.showSystemMessage(message)
-        }
     }
 }

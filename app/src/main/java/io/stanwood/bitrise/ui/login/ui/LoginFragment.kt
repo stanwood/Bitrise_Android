@@ -31,11 +31,7 @@ import io.stanwood.bitrise.ui.login.vm.LoginViewModel
 import org.koin.android.ext.android.inject
 
 
-class LoginFragment: Fragment() {
-    companion object {
-        fun newInstance() = LoginFragment()
-    }
-
+class LoginFragment : Fragment() {
     private val viewModel: LoginViewModel by inject()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =

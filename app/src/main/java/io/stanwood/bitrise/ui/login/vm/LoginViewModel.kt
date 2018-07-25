@@ -29,24 +29,24 @@ import android.content.SharedPreferences
 import android.databinding.BaseObservable
 import android.databinding.Bindable
 import android.databinding.ObservableBoolean
+import androidx.navigation.NavController
 import io.stanwood.bitrise.BuildConfig
+import io.stanwood.bitrise.R
 import io.stanwood.bitrise.data.net.BitriseService
 import io.stanwood.bitrise.di.Properties
-import io.stanwood.bitrise.navigation.SCREEN_DASHBOARD
-import io.stanwood.bitrise.navigation.SCREEN_ERROR
+import io.stanwood.bitrise.util.extensions.bundleOf
 import io.stanwood.bitrise.util.extensions.setProperty
 import kotlinx.coroutines.experimental.Deferred
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
 import retrofit2.HttpException
-import ru.terrakok.cicerone.Router
 import timber.log.Timber
 import java.net.HttpURLConnection
 
 
 class LoginViewModel(
         private val service: BitriseService,
-        private val router: Router,
+        private val router: NavController,
         private val sharedPreferences: SharedPreferences) : LifecycleObserver, BaseObservable() {
 
     val isError = ObservableBoolean()
@@ -96,12 +96,16 @@ class LoginViewModel(
                         .login(it)
                         .await()
                 token = it
-                router.newRootScreen(SCREEN_DASHBOARD)
+                bundleOf(Properties.TOKEN to token).apply {
+                    router.navigate(R.id.action_login_to_dashboard, this)
+                }
             } catch (exception: Exception) {
                 if (exception is HttpException && exception.code() == HttpURLConnection.HTTP_UNAUTHORIZED) {
                     isError.set(true)
                 }
-                router.navigateTo(SCREEN_ERROR, exception.message)
+                bundleOf(Properties.MESSAGE to exception.message).apply {
+                    router.navigate(R.id.action_error, this)
+                }
                 Timber.e(exception)
             } finally {
                 isLoading.set(false)

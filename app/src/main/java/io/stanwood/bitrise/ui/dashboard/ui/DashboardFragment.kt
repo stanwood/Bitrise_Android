@@ -34,17 +34,13 @@ import org.koin.android.ext.android.inject
 
 
 class DashboardFragment: Fragment() {
-    companion object {
-        fun newInstance() = DashboardFragment()
-    }
-
     private val viewModel: DashboardViewModel by inject()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
-            FragmentDashboardBinding.inflate(inflater, container, false).apply {
-                lifecycle.addObserver(viewModel)
-                vm = viewModel
-            }.root
+        FragmentDashboardBinding.inflate(inflater, container, false).apply {
+            lifecycle.addObserver(viewModel)
+            vm = viewModel
+        }.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
