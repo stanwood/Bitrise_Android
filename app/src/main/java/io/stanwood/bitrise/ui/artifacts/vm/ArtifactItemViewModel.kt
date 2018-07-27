@@ -37,6 +37,7 @@ import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
+import android.support.v4.app.ShareCompat
 import android.text.format.Formatter
 import androidx.navigation.NavController
 import io.stanwood.bitrise.BuildConfig
@@ -46,8 +47,10 @@ import io.stanwood.bitrise.data.model.Artifact
 import io.stanwood.bitrise.di.Properties
 import io.stanwood.bitrise.util.Snacker
 import io.stanwood.bitrise.util.extensions.bundleOf
-import kotlinx.coroutines.experimental.*
-import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.CancellationException
+import kotlinx.coroutines.experimental.Job
+import kotlinx.coroutines.experimental.delay
+import kotlinx.coroutines.experimental.launch
 import timber.log.Timber
 
 
@@ -92,6 +95,9 @@ class ArtifactItemViewModel(
     val isAwaitingDownload
         get() = isDownloading.get() && downloadedSize.get() == 0
 
+    val isPublishPageEnabled: Boolean
+        get() = artifact.isPublicPageEnabled
+
     private val downloadUri: Uri
         get() = Uri.parse(artifact.expiringDownloadUrl)
 
@@ -102,8 +108,8 @@ class ArtifactItemViewModel(
         get() = activity.getString(R.string.download_cancelled_message, title)
 
     private val downloadManager: DownloadManager
-            by lazy { activity.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager }
-
+        by lazy { activity.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager }
+    
     private var downloadingJob: Job? = null
 
     fun stop() {
@@ -128,6 +134,16 @@ class ArtifactItemViewModel(
                 router.navigate(R.id.action_error, this)
             }
         }
+    }
+
+    fun onShareClick() {
+        ShareCompat
+            .IntentBuilder
+            .from(activity)
+            .setType("text/plain")
+            .setChooserTitle(R.string.share_public_page_title)
+            .setText(artifact.publicInstallPageUrl)
+            .startChooser()
     }
 
     private suspend fun download() {

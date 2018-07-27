@@ -46,4 +46,5 @@
     <string name="download_error_message">Error while downloading %1$s</string>
     <string name="download_cancelled_message">Download cancelled %1$s</string>
     <string name="download_awaiting_message">Waiting for download. Tap to cancel.</string>
+    <string name="share_public_page_title">Share public install url</string>
 </resources>
