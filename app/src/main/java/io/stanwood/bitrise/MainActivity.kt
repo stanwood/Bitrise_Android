@@ -23,6 +23,7 @@
 
 package io.stanwood.bitrise
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import io.stanwood.bitrise.di.Properties
 import io.stanwood.bitrise.di.applicationModule
@@ -34,6 +35,7 @@ import io.stanwood.bitrise.ui.error.di.errorModule
 import io.stanwood.bitrise.ui.login.di.loginModule
 import io.stanwood.bitrise.ui.logs.di.logsModule
 import io.stanwood.bitrise.ui.newbuild.di.newBuildModule
+import org.koin.android.ext.android.inject
 import org.koin.android.ext.android.setProperty
 import org.koin.android.ext.koin.with
 import org.koin.error.AlreadyStartedException
@@ -43,6 +45,8 @@ import timber.log.Timber
 
 class MainActivity: PermissionActivity() {
 
+    private val sharedPreferences: SharedPreferences by inject()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (BuildConfig.DEBUG) {
@@ -50,6 +54,7 @@ class MainActivity: PermissionActivity() {
         }
         startKoin()
         setProperty(Properties.ACTIVITY, this)
+        setProperty(Properties.TOKEN, sharedPreferences.getString(Properties.TOKEN, BuildConfig.BITRISE_API_TOKEN))
         setContentView(R.layout.activity_main)
     }
 
