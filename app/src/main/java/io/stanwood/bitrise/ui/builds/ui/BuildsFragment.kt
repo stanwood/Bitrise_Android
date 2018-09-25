@@ -57,7 +57,6 @@ class BuildsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setHasOptionsMenu(true)
         val currentActivity = activity
         if (currentActivity is AppCompatActivity) {
             toolbar.let {

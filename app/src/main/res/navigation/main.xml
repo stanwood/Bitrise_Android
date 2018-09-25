@@ -21,6 +21,9 @@
         <action
             android:id="@+id/action_dashboard_to_builds"
             app:destination="@id/screen_builds" />
+        <action
+            android:id="@+id/action_dashboard_to_settings"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/screen_error"
@@ -78,4 +81,8 @@
             android:name="arg_app"
             app:argType="reference" />
     </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="io.stanwood.bitrise.ui.settings.ui.SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>

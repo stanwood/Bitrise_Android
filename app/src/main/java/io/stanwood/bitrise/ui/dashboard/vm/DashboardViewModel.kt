@@ -90,6 +90,10 @@ class DashboardViewModel(private val router: NavController,
         router.navigate(R.id.action_logout)
     }
 
+    fun onGoToSettings() {
+        router.navigate(R.id.action_dashboard_to_settings)
+    }
+
     private fun loadMoreItems() {
         deferred = async(UI) {
             try {
