@@ -23,31 +23,13 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.android_plugin_version = '3.2.0'
-    ext.sdk_version = 27
-    ext.kotlin_version = '1.2.71'
-    ext.support_version = '27.1.1'
-    ext.koin_version = '0.9.3'
-    ext.retrofit_version = '2.3.0'
-    ext.retrofit_coroutines_adapter_version = '1.0.0'
-    ext.retrofit_logging_interceptor = '3.9.1'
-    ext.kotlin_coroutines_version = '0.22.5'
-    ext.cicerone_version = '3.0.0'
-    ext.constraint_layout_version = '1.1.2'
-    ext.timber_version = '4.7.0'
-    ext.glide = '4.7.1'
-    ext.joda_version = '2.9.9'
-    ext.pretty_time_version = '4.0.1.Final'
-    ext.navigation_version = '1.0.0-alpha05'
-    ext.buildNumber = System.getenv("BITRISE_BUILD_NUMBER") ?: "local"
-
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:$android_plugin_version"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath("com.android.tools.build:gradle:${Config.Android.gradlePluginVersion}")
+        classpath(kotlin("gradle-plugin", version = Config.Kotlin.kotlinVersion))
     }
 }
 
@@ -58,6 +40,6 @@ allprojects {
     }
 }
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
+tasks.register("clean", Delete::class) {
+    delete(rootProject.buildDir)
 }
