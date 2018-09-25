@@ -25,11 +25,11 @@ package io.stanwood.bitrise.ui.dashboard.ui
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
 import android.view.*
 import io.stanwood.bitrise.R
 import io.stanwood.bitrise.databinding.FragmentDashboardBinding
 import io.stanwood.bitrise.ui.dashboard.vm.DashboardViewModel
+import kotlinx.android.synthetic.main.layout_toolbar.*
 import org.koin.android.ext.android.inject
 
 
@@ -47,7 +47,7 @@ class DashboardFragment: Fragment() {
         setHasOptionsMenu(true)
         val currentActivity = activity
         if(currentActivity is AppCompatActivity) {
-            view.findViewById<Toolbar>(R.id.toolbar)?.let {
+            toolbar.let {
                 currentActivity.setSupportActionBar(it)
             }
         }

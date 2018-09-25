@@ -22,7 +22,6 @@
 
 package io.stanwood.bitrise.data.model
 
-import android.os.Parcel
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
@@ -31,7 +30,7 @@ import kotlinx.android.parcel.Parcelize
 data class App(
         @SerializedName("is_disabled") val isDisabled: Boolean, //false
         @SerializedName("project_type") val projectType: Platform?, //xamarin
-        @SerializedName("provider") val provider: String, //github
+        @SerializedName("provider") val provider: RepoProvider?, //github
         @SerializedName("repo_owner") val repoOwner: String, //bitrise-samples
         @SerializedName("repo_slug") val repoSlug: String, //sample-apps-xamarin-cross-platform
         @SerializedName("repo_url") val repoUrl: String, //https://github.com/bitrise-samples/sample-apps-xamarin-cross-platform.git

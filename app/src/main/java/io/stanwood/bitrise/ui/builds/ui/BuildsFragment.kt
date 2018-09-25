@@ -25,12 +25,22 @@ package io.stanwood.bitrise.ui.builds.ui
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.ViewGroup
+import io.stanwood.bitrise.R
 import io.stanwood.bitrise.data.model.App
 import io.stanwood.bitrise.databinding.FragmentBuildsBinding
 import io.stanwood.bitrise.di.Properties
 import io.stanwood.bitrise.ui.builds.vm.BuildsViewModel
 import org.koin.android.ext.android.inject
+import android.content.Intent
+import android.net.Uri
+import android.support.v7.app.AppCompatActivity
+import android.view.View
+import kotlinx.android.synthetic.main.layout_toolbar.*
+
 
 class BuildsFragment : Fragment() {
 
@@ -44,4 +54,36 @@ class BuildsFragment : Fragment() {
             lifecycle.addObserver(viewModel)
             vm = viewModel
         }.root
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setHasOptionsMenu(true)
+        val currentActivity = activity
+        if(currentActivity is AppCompatActivity) {
+            toolbar.let {
+                currentActivity.setSupportActionBar(it)
+            }
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        if(viewModel.isProvidedByGithub) {
+            inflater?.inflate(R.menu.builds, menu)
+            super.onCreateOptionsMenu(menu, inflater)
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item?.itemId) {
+            R.id.menu_github -> openGithub()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun openGithub() {
+        Intent(Intent.ACTION_VIEW).apply {
+            data = Uri.parse(viewModel.repoUrl)
+            startActivity(this)
+        }
+    }
 }
