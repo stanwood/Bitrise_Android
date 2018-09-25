@@ -59,7 +59,7 @@ class BuildsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         val currentActivity = activity
-        if(currentActivity is AppCompatActivity) {
+        if (currentActivity is AppCompatActivity) {
             toolbar.let {
                 currentActivity.setSupportActionBar(it)
             }
@@ -67,7 +67,7 @@ class BuildsFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        if(viewModel.isProvidedByGithub) {
+        if (viewModel.isProvidedByGithub) {
             inflater?.inflate(R.menu.builds, menu)
             super.onCreateOptionsMenu(menu, inflater)
         }

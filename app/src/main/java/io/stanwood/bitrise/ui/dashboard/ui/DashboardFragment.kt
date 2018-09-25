@@ -46,7 +46,7 @@ class DashboardFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         val currentActivity = activity
-        if(currentActivity is AppCompatActivity) {
+        if (currentActivity is AppCompatActivity) {
             toolbar.let {
                 currentActivity.setSupportActionBar(it)
             }
@@ -59,7 +59,7 @@ class DashboardFragment: Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if(item?.itemId == R.id.menu_logout) {
+        if (item?.itemId == R.id.menu_logout) {
             viewModel.onLogout()
         }
         return super.onOptionsItemSelected(item)

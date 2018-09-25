@@ -93,7 +93,7 @@ class BuildsViewModel(private val router: NavController,
 
     @Suppress("UNUSED_PARAMETER")
     fun onEndOfListReached(itemCount: Int) {
-        if(shouldLoadMoreItems) {
+        if (shouldLoadMoreItems) {
             loadMoreItems()
         }
     }
