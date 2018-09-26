@@ -5,10 +5,6 @@ warn("PR is classed as Work in Progress") if github.pr_title.include? "[WIP]"
 warn "Big PR" if git.lines_of_code > 500
 # Check added files - for performance reasons bundle all added file checks in this loop!
 git.added_files.each do |file|
-    # Check whether Kotlin files are in the kotlin source directory
-    if file =~ /\.(kt)$/
-        warn "#{file}: New Kotlin class isn't in kotlin source directory!" unless file =~ /\/(kotlin)\//
-    end
     # Check whether Java files are in the java source directory
     if file =~ /\.(java)$/
         warn "#{file}: New Java class isn't in java source directory!" unless file =~ /\/(java)\//
@@ -44,7 +40,6 @@ modifiedWithoutDeleted.each do |file|
             warn "#{file}:#{linenumber}: Could it be that formatted='false' is missing." if li[/^(?:(?!formatted="false").)+(%\w*%)+/]
             warn "#{file}:#{linenumber}: Could it be that formatted='false' is not needed." if li[/(formatted="false")+(?:(?!(%.*%)).)+$/]
             warn "#{file}:#{linenumber}: Multiple spaces." if li[/<string.* {2,}.*string>/]
-            warn "#{file}:#{linenumber}: Translation contains linebreak" if li[/^(?!(\s*((<string)|(<item)|(<(\/?)plurals)|(<(\/?)resources)|(<\?xml)|(<!--)))+|(^\s*$)).*/]
         end
     end
 end
