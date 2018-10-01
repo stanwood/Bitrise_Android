@@ -17,7 +17,7 @@
         android:label="DashboardFragment" >
         <argument
             android:name="arg_token"
-            app:type="string" />
+            app:argType="string" />
         <action
             android:id="@+id/action_dashboard_to_builds"
             app:destination="@id/screen_builds" />
@@ -28,7 +28,7 @@
         android:label="ErrorFragment" >
         <argument
             android:name="arg_message"
-            app:type="string" />
+            app:argType="string" />
     </fragment>
     <action
         android:id="@+id/action_error"
@@ -42,10 +42,10 @@
         android:label="BuildsFragment" >
         <argument
             android:name="arg_app"
-            app:type="reference" />
+            app:argType="reference" />
         <argument
             android:name="arg_token"
-            app:type="string" />
+            app:argType="string" />
         <action
             android:id="@+id/action_builds_to_build"
             app:destination="@id/screen_build" />
@@ -59,13 +59,13 @@
         android:label="BuildFragment" >
         <argument
             android:name="arg_token"
-            app:type="string" />
+            app:argType="string" />
         <argument
             android:name="arg_build"
-            app:type="reference" />
+            app:argType="reference" />
         <argument
             android:name="arg_app"
-            app:type="reference" />
+            app:argType="reference" />
     </fragment>
     <fragment
         android:id="@+id/screen_new_build"
@@ -73,9 +73,9 @@
         android:label="NewBuildFragment" >
         <argument
             android:name="arg_token"
-            app:type="string" />
+            app:argType="string" />
         <argument
             android:name="arg_app"
-            app:type="reference" />
+            app:argType="reference" />
     </fragment>
 </navigation>

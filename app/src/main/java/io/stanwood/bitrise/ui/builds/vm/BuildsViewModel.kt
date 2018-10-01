@@ -31,6 +31,7 @@ import android.databinding.ObservableBoolean
 import androidx.navigation.NavController
 import io.stanwood.bitrise.R
 import io.stanwood.bitrise.data.model.App
+import io.stanwood.bitrise.data.model.RepoProvider
 import io.stanwood.bitrise.data.net.BitriseService
 import io.stanwood.bitrise.di.Properties
 import io.stanwood.bitrise.util.extensions.bundleOf
@@ -52,6 +53,16 @@ class BuildsViewModel(private val router: NavController,
     val items = ObservableArrayList<BuildItemViewModel>()
     val title: String
         get() = app.title
+
+    val isProvidedByGithub: Boolean
+        get() = app.provider == RepoProvider.GITHUB
+
+    val repoUrl: String?
+        get() = when(app.provider) {
+            RepoProvider.GITHUB -> "https://github.com/${app.repoOwner}/${app.repoSlug}"
+            else -> null
+        }
+
 
     private var deferred: Deferred<Any>? = null
     private var nextCursor: String? = null
@@ -82,7 +93,7 @@ class BuildsViewModel(private val router: NavController,
 
     @Suppress("UNUSED_PARAMETER")
     fun onEndOfListReached(itemCount: Int) {
-        if(shouldLoadMoreItems) {
+        if (shouldLoadMoreItems) {
             loadMoreItems()
         }
     }
