@@ -57,19 +57,13 @@ class BuildsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val currentActivity = activity
-        if (currentActivity is AppCompatActivity) {
-            toolbar.let {
-                currentActivity.setSupportActionBar(it)
-            }
-        }
+        setHasOptionsMenu(true)
+        (activity as? AppCompatActivity)?.setSupportActionBar(toolbar)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        if (viewModel.isProvidedByGithub) {
-            inflater?.inflate(R.menu.builds, menu)
-            super.onCreateOptionsMenu(menu, inflater)
-        }
+        inflater?.inflate(R.menu.builds, menu)
+        menu?.findItem(R.id.menu_github)?.isVisible = viewModel.isProvidedByGithub
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
