@@ -1,0 +1,258 @@
+{
+    ":": {
+        "conventions": [
+            
+        ],
+        "configurations": [
+            
+        ],
+        "extensions": [
+            {
+                "type": "org.gradle.api.plugins.ExtraPropertiesExtension",
+                "target": "org.gradle.api.Project",
+                "name": "ext"
+            }
+        ]
+    },
+    ":app": {
+        "conventions": [
+            {
+                "type": "org.gradle.api.plugins.BasePluginConvention",
+                "target": "org.gradle.api.Project",
+                "name": "base"
+            },
+            {
+                "type": "org.gradle.api.plugins.JavaPluginConvention",
+                "target": "org.gradle.api.Project",
+                "name": "java"
+            }
+        ],
+        "configurations": [
+            "androidTestAnnotationProcessor",
+            "androidTestApi",
+            "androidTestApk",
+            "androidTestCompile",
+            "androidTestCompileOnly",
+            "androidTestDebugAnnotationProcessor",
+            "androidTestDebugApi",
+            "androidTestDebugApk",
+            "androidTestDebugCompile",
+            "androidTestDebugCompileOnly",
+            "androidTestDebugImplementation",
+            "androidTestDebugProvided",
+            "androidTestDebugRuntimeOnly",
+            "androidTestDebugWearApp",
+            "androidTestImplementation",
+            "androidTestProvided",
+            "androidTestRuntimeOnly",
+            "androidTestUtil",
+            "androidTestWearApp",
+            "annotationProcessor",
+            "api",
+            "apk",
+            "archives",
+            "compile",
+            "compileOnly",
+            "debugAndroidTestAnnotationProcessorClasspath",
+            "debugAndroidTestCompileClasspath",
+            "debugAndroidTestRuntimeClasspath",
+            "debugAnnotationProcessor",
+            "debugAnnotationProcessorClasspath",
+            "debugApi",
+            "debugApiElements",
+            "debugApk",
+            "debugBundleElements",
+            "debugCompile",
+            "debugCompileClasspath",
+            "debugCompileOnly",
+            "debugImplementation",
+            "debugMetadataElements",
+            "debugProvided",
+            "debugRuntimeClasspath",
+            "debugRuntimeElements",
+            "debugRuntimeOnly",
+            "debugUnitTestAnnotationProcessorClasspath",
+            "debugUnitTestCompileClasspath",
+            "debugUnitTestRuntimeClasspath",
+            "debugWearApp",
+            "debugWearBundling",
+            "default",
+            "implementation",
+            "kapt",
+            "kaptAndroidTest",
+            "kaptAndroidTestDebug",
+            "kaptDebug",
+            "kaptRelease",
+            "kaptTest",
+            "kaptTestDebug",
+            "kaptTestRelease",
+            "kotlinCompilerClasspath",
+            "kotlinCompilerPluginClasspath",
+            "kotlinKaptWorkerDependencies",
+            "lintChecks",
+            "lintClassPath",
+            "provided",
+            "releaseAnnotationProcessor",
+            "releaseAnnotationProcessorClasspath",
+            "releaseApi",
+            "releaseApiElements",
+            "releaseApk",
+            "releaseBundleElements",
+            "releaseCompile",
+            "releaseCompileClasspath",
+            "releaseCompileOnly",
+            "releaseImplementation",
+            "releaseMetadataElements",
+            "releaseProvided",
+            "releaseRuntimeClasspath",
+            "releaseRuntimeElements",
+            "releaseRuntimeOnly",
+            "releaseUnitTestAnnotationProcessorClasspath",
+            "releaseUnitTestCompileClasspath",
+            "releaseUnitTestRuntimeClasspath",
+            "releaseWearApp",
+            "releaseWearBundling",
+            "runtimeOnly",
+            "testAnnotationProcessor",
+            "testApi",
+            "testApk",
+            "testCompile",
+            "testCompileOnly",
+            "testDebugAnnotationProcessor",
+            "testDebugApi",
+            "testDebugApk",
+            "testDebugCompile",
+            "testDebugCompileOnly",
+            "testDebugImplementation",
+            "testDebugProvided",
+            "testDebugRuntimeOnly",
+            "testDebugWearApp",
+            "testImplementation",
+            "testProvided",
+            "testReleaseAnnotationProcessor",
+            "testReleaseApi",
+            "testReleaseApk",
+            "testReleaseCompile",
+            "testReleaseCompileOnly",
+            "testReleaseImplementation",
+            "testReleaseProvided",
+            "testReleaseRuntimeOnly",
+            "testReleaseWearApp",
+            "testRuntimeOnly",
+            "testWearApp",
+            "wearApp"
+        ],
+        "extensions": [
+            {
+                "type": "org.gradle.api.plugins.ExtraPropertiesExtension",
+                "target": "org.gradle.api.Project",
+                "name": "ext"
+            },
+            {
+                "type": "org.gradle.api.internal.plugins.DefaultArtifactPublicationSet",
+                "target": "org.gradle.api.Project",
+                "name": "defaultArtifacts"
+            },
+            {
+                "type": "org.gradle.api.plugins.ExtraPropertiesExtension",
+                "target": "org.gradle.api.internal.plugins.DefaultArtifactPublicationSet",
+                "name": "ext"
+            },
+            {
+                "type": "org.gradle.api.reporting.ReportingExtension",
+                "target": "org.gradle.api.Project",
+                "name": "reporting"
+            },
+            {
+                "type": "org.gradle.api.plugins.ExtraPropertiesExtension",
+                "target": "org.gradle.api.reporting.ReportingExtension",
+                "name": "ext"
+            },
+            {
+                "type": "org.gradle.api.tasks.SourceSetContainer",
+                "target": "org.gradle.api.Project",
+                "name": "sourceSets"
+            },
+            {
+                "type": "org.gradle.api.plugins.ExtraPropertiesExtension",
+                "target": "org.gradle.api.tasks.SourceSetContainer",
+                "name": "ext"
+            },
+            {
+                "type": "org.gradle.api.plugins.JavaPluginExtension",
+                "target": "org.gradle.api.Project",
+                "name": "java"
+            },
+            {
+                "type": "org.gradle.api.plugins.ExtraPropertiesExtension",
+                "target": "org.gradle.api.plugins.JavaPluginExtension",
+                "name": "ext"
+            },
+            {
+                "type": "org.gradle.api.NamedDomainObjectContainer<com.android.build.gradle.api.BaseVariantOutput>",
+                "target": "org.gradle.api.Project",
+                "name": "buildOutputs"
+            },
+            {
+                "type": "org.gradle.api.plugins.ExtraPropertiesExtension",
+                "target": "org.gradle.api.NamedDomainObjectContainer<com.android.build.gradle.api.BaseVariantOutput>",
+                "name": "ext"
+            },
+            {
+                "type": "com.android.build.gradle.AppExtension",
+                "target": "org.gradle.api.Project",
+                "name": "android"
+            },
+            {
+                "type": "org.gradle.api.plugins.ExtraPropertiesExtension",
+                "target": "com.android.build.gradle.AppExtension",
+                "name": "ext"
+            },
+            {
+                "type": "org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptionsImpl",
+                "target": "com.android.build.gradle.AppExtension",
+                "name": "kotlinOptions"
+            },
+            {
+                "type": "org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension",
+                "target": "org.gradle.api.Project",
+                "name": "kotlin"
+            },
+            {
+                "type": "org.gradle.api.plugins.ExtraPropertiesExtension",
+                "target": "org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension",
+                "name": "ext"
+            },
+            {
+                "type": "org.jetbrains.kotlin.gradle.dsl.ExperimentalExtension",
+                "target": "org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension",
+                "name": "experimental"
+            },
+            {
+                "type": "org.gradle.api.plugins.ExtraPropertiesExtension",
+                "target": "org.jetbrains.kotlin.gradle.dsl.ExperimentalExtension",
+                "name": "ext"
+            },
+            {
+                "type": "org.jetbrains.kotlin.gradle.internal.AndroidExtensionsExtension",
+                "target": "org.gradle.api.Project",
+                "name": "androidExtensions"
+            },
+            {
+                "type": "org.gradle.api.plugins.ExtraPropertiesExtension",
+                "target": "org.jetbrains.kotlin.gradle.internal.AndroidExtensionsExtension",
+                "name": "ext"
+            },
+            {
+                "type": "org.jetbrains.kotlin.gradle.plugin.KaptExtension",
+                "target": "org.gradle.api.Project",
+                "name": "kapt"
+            },
+            {
+                "type": "org.gradle.api.plugins.ExtraPropertiesExtension",
+                "target": "org.jetbrains.kotlin.gradle.plugin.KaptExtension",
+                "name": "ext"
+            }
+        ]
+    }
+}
