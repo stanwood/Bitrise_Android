@@ -33,8 +33,10 @@ import io.stanwood.bitrise.di.Properties
 import io.stanwood.bitrise.ui.build.ui.FragmentAdapter
 import io.stanwood.bitrise.util.Snacker
 import io.stanwood.bitrise.util.extensions.bundleOf
+import kotlinx.coroutines.experimental.JobCancellationException
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.experimental.launch
 import timber.log.Timber
 
 
@@ -57,7 +59,7 @@ class BuildViewModel(
         get() = build.status == BuildStatus.IN_PROGRESS
 
     fun onRestartBuild() {
-        async(UI) {
+        launch(UI) {
             try {
                 isLoading.set(true)
                 restartBuild().let {
@@ -65,6 +67,8 @@ class BuildViewModel(
                     snacker.show(message)
                     router.navigateUp()
                 }
+            } catch (exception: JobCancellationException) {
+                /* noop */
             } catch (exception: Exception) {
                 Timber.e(exception)
                 bundleOf(Properties.MESSAGE to exception.message).apply {

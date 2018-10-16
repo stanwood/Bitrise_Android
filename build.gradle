@@ -38,7 +38,7 @@ buildscript {
     ext.glide = '4.7.1'
     ext.joda_version = '2.9.9'
     ext.pretty_time_version = '4.0.1.Final'
-    ext.navigation_version = '1.0.0-alpha05'
+    ext.navigation_version = '1.0.0-alpha06'
     ext.oss_version = '16.0.0'
     ext.oss_plugin_version = '0.9.3'
     ext.buildNumber = System.getenv("BITRISE_BUILD_NUMBER") ?: "local"
