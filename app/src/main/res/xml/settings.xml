@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.preference.PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Preference android:title="@string/contribute"
+                android:key="@string/pref_key_contribute"
+                android:summary="@string/make_bitrise_better"/>
+
+    <Preference android:title="@string/licenses"
+                android:key="@string/pref_key_licenses"
+                android:summary="@string/open_source_notices"/>
+
+    <Preference
+            android:selectable="false"
+            android:persistent="false"
+            android:summary="@string/copyright_notice"/>
+
+</android.support.v7.preference.PreferenceScreen>

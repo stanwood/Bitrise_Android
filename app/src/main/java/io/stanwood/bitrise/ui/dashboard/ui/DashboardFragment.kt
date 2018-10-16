@@ -33,7 +33,7 @@ import kotlinx.android.synthetic.main.layout_toolbar.*
 import org.koin.android.ext.android.inject
 
 
-class DashboardFragment: Fragment() {
+class DashboardFragment : Fragment() {
     private val viewModel: DashboardViewModel by inject()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
@@ -54,8 +54,9 @@ class DashboardFragment: Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item?.itemId == R.id.menu_logout) {
-            viewModel.onLogout()
+        when (item?.itemId) {
+            R.id.menu_logout -> viewModel.onLogout()
+            R.id.menu_settings -> viewModel.onGoToSettings()
         }
         return super.onOptionsItemSelected(item)
     }
