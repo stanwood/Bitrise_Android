@@ -1,3 +1,25 @@
+/*
+ * Copyright (c) 2018 stanwood Gmbh
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 package io.stanwood.bitrise.ui.artifacts.vm
 
 import android.Manifest
@@ -15,15 +37,20 @@ import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
+import android.support.v4.app.ShareCompat
 import android.text.format.Formatter
+import androidx.navigation.NavController
 import io.stanwood.bitrise.BuildConfig
 import io.stanwood.bitrise.PermissionActivity
 import io.stanwood.bitrise.R
 import io.stanwood.bitrise.data.model.Artifact
-import io.stanwood.bitrise.navigation.SCREEN_ERROR
-import kotlinx.coroutines.experimental.*
-import kotlinx.coroutines.experimental.android.UI
-import ru.terrakok.cicerone.Router
+import io.stanwood.bitrise.di.Properties
+import io.stanwood.bitrise.util.Snacker
+import io.stanwood.bitrise.util.extensions.bundleOf
+import kotlinx.coroutines.experimental.CancellationException
+import kotlinx.coroutines.experimental.Job
+import kotlinx.coroutines.experimental.delay
+import kotlinx.coroutines.experimental.launch
 import timber.log.Timber
 
 
@@ -34,8 +61,9 @@ private enum class DownloadStatus {
 }
 
 class ArtifactItemViewModel(
+        private val snacker: Snacker,
         private val activity: PermissionActivity,
-        private val router: Router,
+        private val router: NavController,
         private val artifact: Artifact) : BaseObservable() {
 
     val icon: Drawable?
@@ -67,6 +95,9 @@ class ArtifactItemViewModel(
     val isAwaitingDownload
         get() = isDownloading.get() && downloadedSize.get() == 0
 
+    val isPublishPageEnabled: Boolean
+        get() = artifact.isPublicPageEnabled
+
     private val downloadUri: Uri
         get() = Uri.parse(artifact.expiringDownloadUrl)
 
@@ -77,8 +108,8 @@ class ArtifactItemViewModel(
         get() = activity.getString(R.string.download_cancelled_message, title)
 
     private val downloadManager: DownloadManager
-            by lazy { activity.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager }
-
+        by lazy { activity.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager }
+    
     private var downloadingJob: Job? = null
 
     fun stop() {
@@ -99,8 +130,20 @@ class ArtifactItemViewModel(
         } catch (exception: Exception) {
             onDownloadStop()
             Timber.e(exception)
-            router.navigateTo(SCREEN_ERROR, exception.message)
+            bundleOf(Properties.MESSAGE to exception.message).apply {
+                router.navigate(R.id.action_error, this)
+            }
         }
+    }
+
+    fun onShareClick() {
+        ShareCompat
+            .IntentBuilder
+            .from(activity)
+            .setType("text/plain")
+            .setChooserTitle(R.string.share_public_page_title)
+            .setText(artifact.publicInstallPageUrl)
+            .startChooser()
     }
 
     private suspend fun download() {
@@ -121,7 +164,7 @@ class ArtifactItemViewModel(
                 } while (status == DownloadStatus.RUNNING)
             } catch (e: CancellationException) {
                 Timber.d("Download canceled: $title")
-                showMessage(downloadCancelledMessage)
+                snacker.show(downloadCancelledMessage)
                 remove(id)
                 return
             } finally {
@@ -133,7 +176,7 @@ class ArtifactItemViewModel(
                 installApk(id)
             } else {
                 Timber.d("Download failed: $title")
-                showMessage(downloadErrorMessage)
+                snacker.show(downloadErrorMessage)
             }
         }
     }
@@ -188,11 +231,5 @@ class ArtifactItemViewModel(
         isDownloading.set(false)
         totalSize.set(0)
         downloadedSize.set(0)
-    }
-
-    private fun showMessage(message: String) {
-        async(UI) {
-            router.showSystemMessage(message)
-        }
     }
 }
