@@ -36,11 +36,11 @@ import io.stanwood.bitrise.data.net.BitriseService
 import io.stanwood.bitrise.di.Properties
 import io.stanwood.bitrise.util.extensions.bundleOf
 import kotlinx.coroutines.experimental.Deferred
+import kotlinx.coroutines.experimental.JobCancellationException
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
 import org.joda.time.format.PeriodFormatter
 import timber.log.Timber
-
 
 class BuildsViewModel(private val router: NavController,
                       private val service: BitriseService,
@@ -110,10 +110,13 @@ class BuildsViewModel(private val router: NavController,
         deferred = async(UI) {
             try {
                 isLoading.set(true)
+
                 fetchItems()
                     .forEach { viewModel ->
                         items.add(viewModel)
                     }
+            } catch (exception: JobCancellationException) {
+                /* noop */
             } catch (exception: Exception) {
                 Timber.e(exception)
                 bundleOf(Properties.MESSAGE to null).apply {

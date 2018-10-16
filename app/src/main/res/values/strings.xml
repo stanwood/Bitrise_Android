@@ -43,9 +43,15 @@
     <string name="default_error_message">Unexpected error</string>
     <string name="error_title">GAME OVER</string>
     <string name="logout">Logout</string>
+    <string name="settings">Settings</string>
     <string name="open_repo">Open repo</string>
     <string name="download_error_message">Error while downloading %1$s</string>
     <string name="download_cancelled_message">Download cancelled %1$s</string>
     <string name="download_awaiting_message">Waiting for download. Tap to cancel.</string>
     <string name="share_public_page_title">Share public install url</string>
+    <string name="copyright_notice">Bitrise Unofficial Client\nCopyright © 2018 stanwood Gmbh</string>
+    <string name="licenses">Licenses</string>
+    <string name="contribute">Contribute</string>
+    <string name="make_bitrise_better">Make Bitrise Unofficial better</string>
+    <string name="open_source_notices">Open source notices</string>
 </resources>

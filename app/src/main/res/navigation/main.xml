@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    app:startDestination="@id/screen_login">
+    app:startDestination="@id/screen_login"
+    android:id="@+id/nav_main">
 
     <fragment
         android:id="@+id/screen_login"
@@ -9,7 +10,10 @@
         android:label="LoginFragment" >
         <action
             android:id="@+id/action_login_to_dashboard"
-            app:destination="@id/screen_dashboard" />
+            app:destination="@id/screen_dashboard"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/nav_main"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/screen_dashboard"
@@ -21,6 +25,9 @@
         <action
             android:id="@+id/action_dashboard_to_builds"
             app:destination="@id/screen_builds" />
+        <action
+            android:id="@+id/action_dashboard_to_settings"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/screen_error"
@@ -78,4 +85,8 @@
             android:name="arg_app"
             app:argType="reference" />
     </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="io.stanwood.bitrise.ui.settings.ui.SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>

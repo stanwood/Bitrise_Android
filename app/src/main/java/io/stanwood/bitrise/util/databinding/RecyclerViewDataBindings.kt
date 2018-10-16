@@ -68,7 +68,7 @@ fun setEndOfListReachedLister(
         listener: EndOfListReachedListener,
         loadMoreThreshold: Int = 2) {
     recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-        override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
             super.onScrolled(recyclerView, dx, dy)
 
             val layoutManager = recyclerView?.layoutManager

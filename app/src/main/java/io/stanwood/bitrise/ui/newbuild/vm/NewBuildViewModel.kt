@@ -41,6 +41,7 @@ import io.stanwood.bitrise.util.Snacker
 import io.stanwood.bitrise.util.extensions.bundleOf
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.experimental.launch
 import retrofit2.HttpException
 import timber.log.Timber
 
@@ -59,18 +60,18 @@ class NewBuildViewModel(
 
     @get:Bindable
     var branch: String
-        get() = sharedPreferences.getString(Properties.BRANCH, "")
+        get() = sharedPreferences.getString(Properties.BRANCH, "") ?: ""
         set(value) = sharedPreferences.edit().putString(Properties.BRANCH, value).apply()
 
     @get:Bindable
     var workflow: String
-        get() = sharedPreferences.getString(Properties.WORKFLOW, "")
+        get() = sharedPreferences.getString(Properties.WORKFLOW, "") ?: ""
         set(value) = sharedPreferences.edit().putString(Properties.WORKFLOW, value).apply()
 
     val isLoading = ObservableBoolean(false)
 
     fun onStartNewBuild() {
-        async(UI) {
+        launch(UI) {
             try {
                 isLoading.set(true)
                 startNewBuild().let {

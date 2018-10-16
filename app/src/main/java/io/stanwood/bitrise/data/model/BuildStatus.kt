@@ -50,7 +50,7 @@ enum class BuildStatus(
     @SerializedName("2")
     FAILURE(
             R.string.build_status_failure,
-            R.color.error_color_material,
+            R.color.build_status_failure,
             R.drawable.ic_build_status_error),
 
 
