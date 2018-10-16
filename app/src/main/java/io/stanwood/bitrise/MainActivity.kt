@@ -54,7 +54,7 @@ class MainActivity: PermissionActivity() {
         }
         startKoin()
         setProperty(Properties.ACTIVITY, this)
-        setProperty(Properties.TOKEN, sharedPreferences.getString(Properties.TOKEN, BuildConfig.BITRISE_API_TOKEN))
+        setProperty(Properties.TOKEN, sharedPreferences.getString(Properties.TOKEN, BuildConfig.BITRISE_API_TOKEN) ?: "")
         setContentView(R.layout.activity_main)
     }
 
