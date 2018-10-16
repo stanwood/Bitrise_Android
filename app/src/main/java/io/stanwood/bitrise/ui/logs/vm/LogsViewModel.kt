@@ -93,7 +93,19 @@ class LogsViewModel(
         service
             .getBuildLog(token, app.slug, build.slug)
             .await()
-            .logChunks
-            .sortedBy { logChunk -> logChunk.position }
-            .joinToString { logChunk -> logChunk.chunk }
+                .let {
+                    if (it.isArchived) {
+                        service.downloadFile(it.expiringRawLogUrl)
+                                .await()
+                                .charStream()
+                                .use {
+                                    it.readText()
+                                }
+                    } else {
+                        it.logChunks
+                                .asSequence()
+                                .sortedBy { logChunk -> logChunk.position }
+                                .joinToString { logChunk -> logChunk.chunk }
+                    }
+                }
 }
