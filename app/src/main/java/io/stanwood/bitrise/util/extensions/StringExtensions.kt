@@ -89,7 +89,7 @@ class AnsiInstruction(code: String) {
                 .substringBefore('m')
                 .split(';')
 
-        when(colorCodes.size) {
+        when (colorCodes.size) {
             3 -> {
                 colorCode = colorCodes[1].let { AnsiCode.fromString(it) }
                 decorationCode = colorCodes[2].let { AnsiCode.fromString(it) }
