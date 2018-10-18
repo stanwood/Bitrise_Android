@@ -22,74 +22,75 @@
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
-            name="vm"
-            type="io.stanwood.bitrise.ui.build.vm.BuildViewModel" />
+                name="vm"
+                type="io.stanwood.bitrise.ui.build.vm.BuildViewModel"/>
 
-        <import type="android.support.v7.widget.LinearLayoutManager" />
+        <import type="android.support.v7.widget.LinearLayoutManager"/>
     </data>
 
     <android.support.design.widget.CoordinatorLayout
-        android:id="@+id/main_content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+            android:id="@+id/main_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
             <android.support.design.widget.AppBarLayout
-                android:id="@+id/appbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+                    android:id="@+id/appbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
                 <android.support.v7.widget.Toolbar
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:background="?attr/colorPrimary"
-                    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                    app:title="@{vm.title}" />
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:background="?attr/colorPrimary"
+                        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                        app:title="@{vm.title}"/>
 
                 <android.support.design.widget.TabLayout
-                    android:id="@+id/tabs"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    app:tabGravity="fill" />
+                        android:id="@+id/tabs"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        style="@style/TabLayoutTheme"
+                        app:tabGravity="fill"/>
 
             </android.support.design.widget.AppBarLayout>
 
             <android.support.v4.view.ViewPager
-                android:id="@+id/pager"
-                adapter="@{vm.adapter}"
-                tabs="@{tabs}"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                    android:id="@+id/pager"
+                    adapter="@{vm.adapter}"
+                    tabs="@{tabs}"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
         </LinearLayout>
 
         <android.support.design.widget.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="16dp"
-            android:onClick="@{() -> vm.onRestartBuild()}"
-            android:src="@drawable/ic_restart_build"
-            android:visibility="@{!vm.loading &amp;&amp; !vm.currentlyRunning}"
-            app:fabSize="normal" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="16dp"
+                android:onClick="@{() -> vm.onRestartBuild()}"
+                android:src="@drawable/ic_restart_build"
+                android:visibility="@{!vm.loading &amp;&amp; !vm.currentlyRunning}"
+                app:fabSize="normal"/>
 
         <ProgressBar
-            android:id="@+id/progressBar"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:visibility="@{vm.loading}" />
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="@{vm.loading}"/>
     </android.support.design.widget.CoordinatorLayout>
 </layout>

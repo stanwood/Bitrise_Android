@@ -28,25 +28,20 @@ import android.arch.lifecycle.OnLifecycleEvent
 import android.databinding.BaseObservable
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
-import android.text.Html
-import android.text.Spanned
+import android.text.Spannable
 import androidx.navigation.NavController
 import io.stanwood.bitrise.R
 import io.stanwood.bitrise.data.model.App
 import io.stanwood.bitrise.data.model.Build
 import io.stanwood.bitrise.data.net.BitriseService
 import io.stanwood.bitrise.di.Properties
+import io.stanwood.bitrise.util.extensions.ansiEscapeToSpannable
 import io.stanwood.bitrise.util.extensions.bundleOf
-import io.stanwood.bitrise.util.extensions.stripAnsiEscapes
 import kotlinx.coroutines.experimental.Deferred
 import kotlinx.coroutines.experimental.JobCancellationException
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
 import timber.log.Timber
-import java.io.InputStreamReader
-import java.nio.ByteBuffer
-import java.nio.charset.Charset
-
 
 class LogsViewModel(
         private val service: BitriseService,
@@ -56,7 +51,7 @@ class LogsViewModel(
         private val build: Build) : LifecycleObserver, BaseObservable() {
 
     val isLoading = ObservableBoolean(false)
-    var log = ObservableField<String>()
+    var log = ObservableField<Spannable>()
     private var deferred: Deferred<Any>? = null
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
@@ -75,13 +70,8 @@ class LogsViewModel(
         deferred = async(UI) {
             try {
                 isLoading.set(true)
-                log.apply {
-//                    val log = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-//                        Html.fromHtml(fetchLog(), Html.FROM_HTML_MODE_COMPACT)
-//                    } else {
-//                        Html.fromHtml(fetchLog())
-//                    }
-                    set(fetchLog())
+         log.apply {
+                    set(fetchLog().ansiEscapeToSpannable())
                 }
             } catch (exception: JobCancellationException) {
                 /* noop */
@@ -106,13 +96,11 @@ class LogsViewModel(
                                 .await()
                                 .charStream()
                                 .readText()
-                                .stripAnsiEscapes()
                     } else {
                         it.logChunks
                                 .asSequence()
                                 .sortedBy { logChunk -> logChunk.position }
                                 .joinToString { logChunk -> logChunk.chunk }
-                                .stripAnsiEscapes()
                     }
                 }
 }
