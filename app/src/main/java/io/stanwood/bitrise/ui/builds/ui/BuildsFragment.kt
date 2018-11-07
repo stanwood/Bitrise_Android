@@ -40,14 +40,14 @@ import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import kotlinx.android.synthetic.main.layout_toolbar.*
-
+import org.koin.core.parameter.parametersOf
 
 class BuildsFragment : Fragment() {
 
     private val app: App
         get() = arguments?.getParcelable(Properties.APP) as App
 
-    private val viewModel: BuildsViewModel by inject(parameters = { mapOf(Properties.APP to app) })
+    private val viewModel: BuildsViewModel by inject(parameters = { parametersOf(app) })
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
         FragmentBuildsBinding.inflate(inflater, container, false).apply {

@@ -22,17 +22,16 @@
 
 package io.stanwood.bitrise.ui.newbuild.di
 
-import io.stanwood.bitrise.di.Properties
+import io.stanwood.bitrise.data.model.App
 import io.stanwood.bitrise.ui.newbuild.vm.NewBuildViewModel
 import org.koin.android.ext.koin.androidApplication
-import org.koin.dsl.module.applicationContext
+import org.koin.dsl.module.module
 
-
-val newBuildModule = applicationContext {
+val newBuildModule = module {
     /**
      * View Model
      */
-    factory { args ->
+    factory { (token: String, app: App) ->
         NewBuildViewModel(
                 gson = get(),
                 resources = androidApplication().resources,
@@ -40,7 +39,7 @@ val newBuildModule = applicationContext {
                 service = get(),
                 sharedPreferences = get(),
                 snacker = get(),
-                token = args[Properties.TOKEN],
-                app = args[Properties.APP])
+                token = token,
+                app = app)
     }
 }

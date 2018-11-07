@@ -22,23 +22,25 @@
 
 package io.stanwood.bitrise.ui.artifacts.di
 
+import io.stanwood.bitrise.data.model.App
+import io.stanwood.bitrise.data.model.Build
 import io.stanwood.bitrise.di.Properties
 import io.stanwood.bitrise.ui.artifacts.vm.ArtifactsViewModel
-import org.koin.dsl.module.applicationContext
+import org.koin.dsl.module.module
 
-
-val artifactsModule = applicationContext {
+val artifactsModule = module {
     /**
      * View Model
      */
-    factory { args ->
+    factory { (token: String, app: App, build: Build) ->
         ArtifactsViewModel(
-                snacker = get(),
-                router = get(),
-                service = get(),
-                token = args[Properties.TOKEN],
-                activity = getProperty(Properties.ACTIVITY),
-                app = args[Properties.APP],
-                build = args[Properties.BUILD])
+            snacker = get(),
+            router = get(),
+            service = get(),
+            token = token,
+            activity = getProperty(Properties.ACTIVITY),
+            app = app,
+            build = build
+        )
     }
 }
