@@ -26,14 +26,15 @@ import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleObserver
 import android.arch.lifecycle.OnLifecycleEvent
 import android.content.SharedPreferences
-import android.databinding.BaseObservable
 import android.databinding.Bindable
 import android.databinding.ObservableBoolean
+import android.util.Log
 import androidx.navigation.NavController
 import io.stanwood.bitrise.BuildConfig
 import io.stanwood.bitrise.R
 import io.stanwood.bitrise.data.net.BitriseService
 import io.stanwood.bitrise.di.Properties
+import io.stanwood.bitrise.util.databinding.ObservableViewModel
 import io.stanwood.bitrise.util.extensions.bundleOf
 import io.stanwood.bitrise.util.extensions.setProperty
 import kotlinx.coroutines.experimental.Deferred
@@ -43,11 +44,11 @@ import retrofit2.HttpException
 import timber.log.Timber
 import java.net.HttpURLConnection
 
-
 class LoginViewModel(
-        private val service: BitriseService,
-        private val router: NavController,
-        private val sharedPreferences: SharedPreferences) : LifecycleObserver, BaseObservable() {
+    private val service: BitriseService,
+    private val router: NavController,
+    private val sharedPreferences: SharedPreferences
+) : LifecycleObserver, ObservableViewModel() {
 
     val isError = ObservableBoolean()
     val isLoading = ObservableBoolean()
@@ -93,8 +94,8 @@ class LoginViewModel(
             try {
                 isLoading.set(true)
                 service
-                        .login(it)
-                        .await()
+                    .login(it)
+                    .await()
                 token = it
                 bundleOf(Properties.TOKEN to token).apply {
                     router.navigate(R.id.action_login_to_dashboard, this)

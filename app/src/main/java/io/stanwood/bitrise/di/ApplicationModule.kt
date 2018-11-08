@@ -34,18 +34,17 @@ import io.stanwood.bitrise.util.gson.GsonDateFormatAdapter
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidApplication
-import org.koin.dsl.module.applicationContext
+import org.koin.dsl.module.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.*
+import java.util.Date
 
-
-val applicationModule = applicationContext {
+val applicationModule = module {
 
     /**
      * Gson
      */
-    bean {
+    single {
         GsonBuilder()
             .registerTypeAdapter(Date::class.java, GsonDateFormatAdapter(BuildConfig.API_DATE_TIME_FORMAT))
             .create()
@@ -54,49 +53,50 @@ val applicationModule = applicationContext {
     /**
      * OkHttpClient
      */
-    bean {
+    single {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
         OkHttpClient
-                .Builder()
-                .addInterceptor(interceptor)
-                .build()
+            .Builder()
+            .addInterceptor(interceptor)
+            .build()
     }
 
     /**
      * Retrofit
      */
-    bean {
+    single {
         Retrofit
-                .Builder()
-                .baseUrl(BuildConfig.BITRISE_API_BASE_URL)
-                .client(get())
-                .addCallAdapterFactory(CoroutineCallAdapterFactory())
-                .addConverterFactory(GsonConverterFactory.create(get()))
-                .build()
+            .Builder()
+            .baseUrl(BuildConfig.BITRISE_API_BASE_URL)
+            .client(get())
+            .addCallAdapterFactory(CoroutineCallAdapterFactory())
+            .addConverterFactory(GsonConverterFactory.create(get()))
+            .build()
     }
 
     /**
      * BitriseService
      */
-    bean { get<Retrofit>().create(BitriseService::class.java) }
+    single { get<Retrofit>().create(BitriseService::class.java) }
 
     /**
      * Cicerone
      */
-    bean { Navigation.findNavController(getProperty(Properties.ACTIVITY), R.id.root) }
+    single { Navigation.findNavController(getProperty(Properties.ACTIVITY), R.id.root) }
 
     /**
      * SharedPreferences
      */
-    bean { PreferenceManager.getDefaultSharedPreferences(androidApplication()) }
+    single { PreferenceManager.getDefaultSharedPreferences(androidApplication()) }
 
     /**
      * Snacker
      */
-    bean {
+    single {
         Snacker(
             activity = getProperty(Properties.ACTIVITY),
-            layoutResId = R.id.root)
+            layoutResId = R.id.root
+        )
     }
 }

@@ -32,16 +32,18 @@ import io.stanwood.bitrise.databinding.FragmentBuildBinding
 import io.stanwood.bitrise.di.Properties
 import io.stanwood.bitrise.ui.build.vm.BuildViewModel
 import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 
 class BuildFragment : Fragment() {
 
     private val viewModel: BuildViewModel
         by inject(parameters = {
-            mapOf(
-                Properties.TOKEN to token,
-                Properties.BUILD to build,
-                Properties.APP to app,
-                Properties.FRAGMENT_MANAGER to fragmentManager!!)
+            parametersOf(
+                fragmentManager!!,
+                token,
+                build,
+                app
+            )
         })
 
     private val token: String

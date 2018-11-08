@@ -22,38 +22,43 @@
 
 package io.stanwood.bitrise.ui.build.di
 
-import io.stanwood.bitrise.di.Properties
+import android.support.v4.app.FragmentManager
+import io.stanwood.bitrise.data.model.App
+import io.stanwood.bitrise.data.model.Build
 import io.stanwood.bitrise.ui.build.ui.FragmentAdapter
 import io.stanwood.bitrise.ui.build.vm.BuildViewModel
 import org.koin.android.ext.koin.androidApplication
-import org.koin.dsl.module.applicationContext
+import org.koin.core.parameter.parametersOf
+import org.koin.dsl.module.module
 
-val buildModule = applicationContext {
+val buildModule = module {
 
     /**
      * View Model
      */
-    factory { args ->
+    factory { (fragmentManager: FragmentManager, token: String, build: Build, app: App) ->
         BuildViewModel(
-                resources = androidApplication().resources,
-                router = get(),
-                service = get(),
-                adapter = get(parameters = { args.values }),
-                snacker = get(),
-                token = args[Properties.TOKEN],
-                app = args[Properties.APP],
-                build = args[Properties.BUILD])
+            resources = androidApplication().resources,
+            router = get(),
+            service = get(),
+            adapter = get(parameters = { parametersOf(fragmentManager, token, build, app) }),
+            snacker = get(),
+            token = token,
+            app = app,
+            build = build
+        )
     }
 
     /**
      * FragmentAdapter
      */
-    factory { args ->
+    factory { (fragmentManager: FragmentManager, token: String, build: Build, app: App) ->
         FragmentAdapter(
-                resources = androidApplication().resources,
-                fragmentManager = args[Properties.FRAGMENT_MANAGER],
-                token = args[Properties.TOKEN],
-                build = args[Properties.BUILD],
-                app = args[Properties.APP])
+            resources = androidApplication().resources,
+            fragmentManager = fragmentManager,
+            token = token,
+            build = build,
+            app = app
+        )
     }
 }

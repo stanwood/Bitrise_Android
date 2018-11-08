@@ -26,10 +26,9 @@ import io.stanwood.bitrise.R
 import io.stanwood.bitrise.di.Properties
 import io.stanwood.bitrise.ui.error.vm.ErrorViewModel
 import org.koin.android.ext.koin.androidApplication
-import org.koin.dsl.module.applicationContext
+import org.koin.dsl.module.module
 
-
-val errorModule = applicationContext {
+val errorModule = module {
     /**
      * View Model
      */

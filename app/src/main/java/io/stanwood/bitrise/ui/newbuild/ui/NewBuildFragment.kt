@@ -31,6 +31,7 @@ import io.stanwood.bitrise.databinding.FragmentNewBuildBinding
 import io.stanwood.bitrise.di.Properties
 import io.stanwood.bitrise.ui.newbuild.vm.NewBuildViewModel
 import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 
 class NewBuildFragment : Fragment() {
 
@@ -40,12 +41,7 @@ class NewBuildFragment : Fragment() {
     private val token: String
         get() = arguments?.getString(Properties.TOKEN) as String
 
-    private val viewModel: NewBuildViewModel by inject(
-            parameters = {
-                mapOf(
-                    Properties.APP to app,
-                    Properties.TOKEN to token)
-            })
+    private val viewModel: NewBuildViewModel by inject(parameters = { parametersOf(app, token) })
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
         FragmentNewBuildBinding.inflate(inflater, container, false).apply {

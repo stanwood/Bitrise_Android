@@ -32,9 +32,9 @@ import io.stanwood.bitrise.databinding.FragmentArtifactsBinding
 import io.stanwood.bitrise.di.Properties
 import io.stanwood.bitrise.ui.artifacts.vm.ArtifactsViewModel
 import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 
-
-class ArtifactsFragment: Fragment() {
+class ArtifactsFragment : Fragment() {
     companion object {
         fun newInstance(token: String, build: Build, app: App) = ArtifactsFragment().apply {
             arguments = Bundle().apply {
@@ -56,15 +56,16 @@ class ArtifactsFragment: Fragment() {
 
     private val viewModel: ArtifactsViewModel
         by inject(parameters = {
-            mapOf(
-                    Properties.TOKEN to token,
-                    Properties.APP to app,
-                    Properties.BUILD to build)
+            parametersOf(
+                token,
+                app,
+                build
+            )
         })
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
-            FragmentArtifactsBinding.inflate(inflater, container, false).apply {
-                lifecycle.addObserver(viewModel)
-                vm = viewModel
-            }.root
+        FragmentArtifactsBinding.inflate(inflater, container, false).apply {
+            lifecycle.addObserver(viewModel)
+            vm = viewModel
+        }.root
 }
