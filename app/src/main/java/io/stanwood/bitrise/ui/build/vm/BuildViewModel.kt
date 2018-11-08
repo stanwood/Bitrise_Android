@@ -22,9 +22,9 @@
 
 package io.stanwood.bitrise.ui.build.vm
 
-import android.arch.lifecycle.LifecycleObserver
+import androidx.lifecycle.LifecycleObserver
 import android.content.res.Resources
-import android.databinding.ObservableBoolean
+import androidx.databinding.ObservableBoolean
 import androidx.navigation.NavController
 import io.stanwood.bitrise.R
 import io.stanwood.bitrise.data.model.*

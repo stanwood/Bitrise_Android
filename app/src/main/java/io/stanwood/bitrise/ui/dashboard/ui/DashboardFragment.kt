@@ -23,8 +23,8 @@
 package io.stanwood.bitrise.ui.dashboard.ui
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import android.view.*
 import io.stanwood.bitrise.R
 import io.stanwood.bitrise.databinding.FragmentDashboardBinding
@@ -48,13 +48,13 @@ class DashboardFragment : Fragment() {
         (activity as? AppCompatActivity)?.setSupportActionBar(toolbar)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        inflater?.inflate(R.menu.main, menu)
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.main, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
             R.id.menu_logout -> viewModel.onLogout()
             R.id.menu_settings -> viewModel.onGoToSettings()
         }

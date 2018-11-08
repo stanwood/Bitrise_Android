@@ -24,8 +24,8 @@ package io.stanwood.bitrise.ui.dashboard.vm
 
 import android.content.SharedPreferences
 import android.content.res.Resources
-import android.databinding.BaseObservable
-import android.databinding.Bindable
+import androidx.databinding.BaseObservable
+import androidx.databinding.Bindable
 import android.graphics.drawable.Drawable
 import androidx.navigation.NavController
 import io.stanwood.bitrise.BR
