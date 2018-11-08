@@ -1,8 +1,8 @@
 package io.stanwood.bitrise.util.databinding
 
-import android.arch.lifecycle.ViewModel
-import android.databinding.Observable
-import android.databinding.PropertyChangeRegistry
+import androidx.lifecycle.ViewModel
+import androidx.databinding.Observable
+import androidx.databinding.PropertyChangeRegistry
 
 /**
  * A ViewModel that is also an Observable,

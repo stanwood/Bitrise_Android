@@ -34,7 +34,7 @@
         <import type="android.view.View" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="72dp"
         android:background="?selectableItemBackground"
@@ -61,7 +61,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:progress="63" />
 
-        <android.support.v7.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/type_icon"
             android:layout_width="32dp"
             android:layout_height="32dp"
@@ -74,7 +74,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/ic_artifact_apk" />
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/status"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="bitrise-release-unsigned.apk" />
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/last_build_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -113,5 +113,5 @@
             app:srcCompat="@drawable/ic_share"
             android:padding="16dp"/>
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -31,7 +31,7 @@
             name="vm"
             type="io.stanwood.bitrise.ui.logs.vm.LogsViewModel" />
 
-        <import type="android.support.v7.widget.LinearLayoutManager" />
+        <import type="androidx.recyclerview.widget.LinearLayoutManager" />
     </data>
 
     <LinearLayout
@@ -40,7 +40,7 @@
         android:background="@color/log_bg_color"
         android:orientation="vertical">
 
-        <android.support.v4.widget.SwipeRefreshLayout
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:onRefreshListener="@{() -> vm.onRefresh()}"
@@ -60,6 +60,6 @@
                     android:textSize="12sp"
                     android:fontFamily="@font/sourcecodevariable_roman"/>
             </ScrollView>
-        </android.support.v4.widget.SwipeRefreshLayout>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </LinearLayout>
 </layout>

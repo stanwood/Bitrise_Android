@@ -32,7 +32,7 @@
             type="io.stanwood.bitrise.ui.builds.vm.BuildItemViewModel" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="72dp"
         android:background="?selectableItemBackground"
@@ -48,7 +48,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:background="@color/build_status_success" />
 
-        <android.support.v7.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/type_icon"
             android:layout_width="32dp"
             android:layout_height="32dp"
@@ -62,7 +62,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/ic_pull_request" />
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -76,7 +76,7 @@
             tools:text="Success"
             tools:textColor="@color/build_status_success" />
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/last_build_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
             app:layout_constraintStart_toEndOf="@+id/type_icon"
             tools:text="Triggered @ 12:04" />
 
-        <android.support.v7.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ic_duration"
             android:layout_width="16dp"
             android:layout_height="16dp"
@@ -100,7 +100,7 @@
             app:layout_constraintStart_toEndOf="@+id/last_build_time"
             app:layout_constraintTop_toTopOf="@+id/last_build_time" />
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/build_duration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -113,7 +113,7 @@
             app:layout_constraintTop_toTopOf="@+id/ic_duration"
             tools:text="5m 43s" />
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/build_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -125,7 +125,7 @@
             app:layout_constraintTop_toTopOf="@+id/build_duration"
             tools:text="#56" />
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/branch"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -141,5 +141,5 @@
             app:layout_constraintTop_toTopOf="@+id/status"
             tools:text="feature/CIN-426 CI fix > Develop" />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

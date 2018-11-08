@@ -22,10 +22,10 @@
 
 package io.stanwood.bitrise.util.databinding
 
-import android.support.v4.view.PagerAdapter
-import android.support.v4.view.ViewPager
-import android.databinding.BindingAdapter
-import android.support.design.widget.TabLayout
+import androidx.viewpager.widget.PagerAdapter
+import androidx.viewpager.widget.ViewPager
+import androidx.databinding.BindingAdapter
+import com.google.android.material.tabs.TabLayout
 
 
 @BindingAdapter(value = ["adapter"], requireAll = false)

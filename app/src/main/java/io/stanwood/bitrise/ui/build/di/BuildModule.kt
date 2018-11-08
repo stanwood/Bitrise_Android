@@ -22,7 +22,7 @@
 
 package io.stanwood.bitrise.ui.build.di
 
-import android.support.v4.app.FragmentManager
+import androidx.fragment.app.FragmentManager
 import io.stanwood.bitrise.data.model.App
 import io.stanwood.bitrise.data.model.Build
 import io.stanwood.bitrise.ui.build.ui.FragmentAdapter

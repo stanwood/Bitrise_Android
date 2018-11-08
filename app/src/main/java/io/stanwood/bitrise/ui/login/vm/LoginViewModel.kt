@@ -22,12 +22,12 @@
 
 package io.stanwood.bitrise.ui.login.vm
 
-import android.arch.lifecycle.Lifecycle
-import android.arch.lifecycle.LifecycleObserver
-import android.arch.lifecycle.OnLifecycleEvent
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.OnLifecycleEvent
 import android.content.SharedPreferences
-import android.databinding.Bindable
-import android.databinding.ObservableBoolean
+import androidx.databinding.Bindable
+import androidx.databinding.ObservableBoolean
 import android.util.Log
 import androidx.navigation.NavController
 import io.stanwood.bitrise.BuildConfig

@@ -24,9 +24,9 @@ package io.stanwood.bitrise.ui.newbuild.vm
 
 import android.content.SharedPreferences
 import android.content.res.Resources
-import android.databinding.BaseObservable
-import android.databinding.Bindable
-import android.databinding.ObservableBoolean
+import androidx.databinding.BaseObservable
+import androidx.databinding.Bindable
+import androidx.databinding.ObservableBoolean
 import androidx.navigation.NavController
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
