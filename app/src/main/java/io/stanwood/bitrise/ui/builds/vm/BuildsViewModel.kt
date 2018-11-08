@@ -22,12 +22,12 @@
 
 package io.stanwood.bitrise.ui.builds.vm
 
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.OnLifecycleEvent
 import android.content.res.Resources
 import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableBoolean
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.OnLifecycleEvent
 import androidx.navigation.NavController
 import io.stanwood.bitrise.R
 import io.stanwood.bitrise.data.model.App
@@ -35,9 +35,9 @@ import io.stanwood.bitrise.data.model.RepoProvider
 import io.stanwood.bitrise.data.net.BitriseService
 import io.stanwood.bitrise.di.Properties
 import io.stanwood.bitrise.util.extensions.bundleOf
+import kotlinx.coroutines.experimental.CancellationException
 import kotlinx.coroutines.experimental.Deferred
-import kotlinx.coroutines.experimental.JobCancellationException
-import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.GlobalScope
 import kotlinx.coroutines.experimental.async
 import org.joda.time.format.PeriodFormatter
 import timber.log.Timber
@@ -107,7 +107,7 @@ class BuildsViewModel(private val router: NavController,
             }
 
     private fun loadMoreItems() {
-        deferred = async(UI) {
+        deferred = GlobalScope.async {
             try {
                 isLoading.set(true)
 
@@ -115,7 +115,7 @@ class BuildsViewModel(private val router: NavController,
                     .forEach { viewModel ->
                         items.add(viewModel)
                     }
-            } catch (exception: JobCancellationException) {
+            } catch (exception: CancellationException) {
                 /* noop */
             } catch (exception: Exception) {
                 Timber.e(exception)

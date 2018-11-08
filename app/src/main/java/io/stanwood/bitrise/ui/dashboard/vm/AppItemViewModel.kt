@@ -37,7 +37,7 @@ import io.stanwood.bitrise.data.net.BitriseService
 import io.stanwood.bitrise.di.Properties
 import io.stanwood.bitrise.util.extensions.bundleOf
 import kotlinx.coroutines.experimental.Deferred
-import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.GlobalScope
 import kotlinx.coroutines.experimental.async
 import org.ocpsoft.prettytime.PrettyTime
 import timber.log.Timber
@@ -117,7 +117,7 @@ class AppItemViewModel(
     private var lastBuild: Build? = null
 
     fun start() {
-        deferred = async(UI) {
+        deferred = GlobalScope.async {
             try {
                 lastBuild = fetchLastBuild()
                 notifyPropertyChanged(BR.lastBuildTime)

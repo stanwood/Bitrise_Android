@@ -22,14 +22,12 @@
 
 package io.stanwood.bitrise.ui.logs.vm
 
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.OnLifecycleEvent
 import androidx.databinding.BaseObservable
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
-import android.text.Html
-import android.text.Spanned
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.OnLifecycleEvent
 import androidx.navigation.NavController
 import io.stanwood.bitrise.R
 import io.stanwood.bitrise.data.model.App
@@ -38,15 +36,11 @@ import io.stanwood.bitrise.data.net.BitriseService
 import io.stanwood.bitrise.di.Properties
 import io.stanwood.bitrise.util.extensions.bundleOf
 import io.stanwood.bitrise.util.extensions.stripAnsiEscapes
+import kotlinx.coroutines.experimental.CancellationException
 import kotlinx.coroutines.experimental.Deferred
-import kotlinx.coroutines.experimental.JobCancellationException
-import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.GlobalScope
 import kotlinx.coroutines.experimental.async
 import timber.log.Timber
-import java.io.InputStreamReader
-import java.nio.ByteBuffer
-import java.nio.charset.Charset
-
 
 class LogsViewModel(
         private val service: BitriseService,
@@ -61,7 +55,7 @@ class LogsViewModel(
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun start() {
-        deferred = async(UI) {
+        deferred = GlobalScope.async {
             onRefresh()
         }
     }
@@ -72,18 +66,13 @@ class LogsViewModel(
     }
 
     fun onRefresh() {
-        deferred = async(UI) {
+        deferred = GlobalScope.async {
             try {
                 isLoading.set(true)
                 log.apply {
-//                    val log = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-//                        Html.fromHtml(fetchLog(), Html.FROM_HTML_MODE_COMPACT)
-//                    } else {
-//                        Html.fromHtml(fetchLog())
-//                    }
                     set(fetchLog())
                 }
-            } catch (exception: JobCancellationException) {
+            } catch (exception: CancellationException) {
                 /* noop */
             } catch (exception: Exception) {
                 Timber.e(exception)

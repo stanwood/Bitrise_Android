@@ -22,13 +22,13 @@
 
 package io.stanwood.bitrise.ui.artifacts.vm
 
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.OnLifecycleEvent
 import androidx.databinding.BaseObservable
 import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.OnLifecycleEvent
 import androidx.navigation.NavController
 import io.stanwood.bitrise.PermissionActivity
 import io.stanwood.bitrise.R
@@ -39,12 +39,11 @@ import io.stanwood.bitrise.data.net.BitriseService
 import io.stanwood.bitrise.di.Properties
 import io.stanwood.bitrise.util.Snacker
 import io.stanwood.bitrise.util.extensions.bundleOf
+import kotlinx.coroutines.experimental.CancellationException
 import kotlinx.coroutines.experimental.Deferred
-import kotlinx.coroutines.experimental.JobCancellationException
-import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.GlobalScope
 import kotlinx.coroutines.experimental.async
 import timber.log.Timber
-
 
 class ArtifactsViewModel(
         private val snacker: Snacker,
@@ -90,14 +89,14 @@ class ArtifactsViewModel(
     }
 
     private fun loadMoreItems() {
-        deferred = async(UI) {
+        deferred = GlobalScope.async {
             try {
                 isLoading.set(true)
                 fetchItems()
                         .forEach { viewModel ->
                             items.add(viewModel)
                         }
-            } catch (exception: JobCancellationException) {
+            } catch (exception: CancellationException) {
                 /* noop */
             } catch (exception: Exception) {
                 Timber.e(exception)

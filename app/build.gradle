@@ -92,8 +92,8 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:3.10.0"
 
     // Kotlin
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.22.5"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:0.22.5"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.27.0"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:0.27.0"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     // Glide
