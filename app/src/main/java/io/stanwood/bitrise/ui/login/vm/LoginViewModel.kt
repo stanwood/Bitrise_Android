@@ -22,13 +22,12 @@
 
 package io.stanwood.bitrise.ui.login.vm
 
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.OnLifecycleEvent
 import android.content.SharedPreferences
 import androidx.databinding.Bindable
 import androidx.databinding.ObservableBoolean
-import android.util.Log
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.OnLifecycleEvent
 import androidx.navigation.NavController
 import io.stanwood.bitrise.BuildConfig
 import io.stanwood.bitrise.R
@@ -38,7 +37,7 @@ import io.stanwood.bitrise.util.databinding.ObservableViewModel
 import io.stanwood.bitrise.util.extensions.bundleOf
 import io.stanwood.bitrise.util.extensions.setProperty
 import kotlinx.coroutines.experimental.Deferred
-import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.GlobalScope
 import kotlinx.coroutines.experimental.async
 import retrofit2.HttpException
 import timber.log.Timber
@@ -84,7 +83,7 @@ class LoginViewModel(
     }
 
     fun onTokenEntered(newToken: String) {
-        deferred = async(UI) {
+        deferred = GlobalScope.async {
             tryLogin(newToken)
         }
     }

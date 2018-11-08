@@ -22,23 +22,25 @@
 
 package io.stanwood.bitrise.ui.build.vm
 
-import androidx.lifecycle.LifecycleObserver
 import android.content.res.Resources
 import androidx.databinding.ObservableBoolean
+import androidx.lifecycle.LifecycleObserver
 import androidx.navigation.NavController
 import io.stanwood.bitrise.R
-import io.stanwood.bitrise.data.model.*
+import io.stanwood.bitrise.data.model.App
+import io.stanwood.bitrise.data.model.Build
+import io.stanwood.bitrise.data.model.BuildParams
+import io.stanwood.bitrise.data.model.BuildStatus
+import io.stanwood.bitrise.data.model.NewBuildParams
 import io.stanwood.bitrise.data.net.BitriseService
 import io.stanwood.bitrise.di.Properties
 import io.stanwood.bitrise.ui.build.ui.FragmentAdapter
 import io.stanwood.bitrise.util.Snacker
 import io.stanwood.bitrise.util.extensions.bundleOf
-import kotlinx.coroutines.experimental.JobCancellationException
+import kotlinx.coroutines.experimental.CancellationException
 import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
 import timber.log.Timber
-
 
 class BuildViewModel(
         private val resources: Resources,
@@ -67,7 +69,7 @@ class BuildViewModel(
                     snacker.show(message)
                     router.navigateUp()
                 }
-            } catch (exception: JobCancellationException) {
+            } catch (exception: CancellationException) {
                 /* noop */
             } catch (exception: Exception) {
                 Timber.e(exception)

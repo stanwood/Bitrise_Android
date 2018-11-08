@@ -35,9 +35,9 @@ import io.stanwood.bitrise.data.model.App
 import io.stanwood.bitrise.data.net.BitriseService
 import io.stanwood.bitrise.di.Properties
 import io.stanwood.bitrise.util.extensions.bundleOf
+import kotlinx.coroutines.experimental.CancellationException
 import kotlinx.coroutines.experimental.Deferred
-import kotlinx.coroutines.experimental.JobCancellationException
-import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.GlobalScope
 import kotlinx.coroutines.experimental.async
 import timber.log.Timber
 
@@ -95,7 +95,7 @@ class DashboardViewModel(private val router: NavController,
     }
 
     private fun loadMoreItems() {
-        deferred = async(UI) {
+        deferred = GlobalScope.async {
             try {
                 isLoading.set(true)
                 fetchAllApps()
@@ -104,7 +104,7 @@ class DashboardViewModel(private val router: NavController,
                         items.add(viewModel)
                     }
 
-            } catch (exception: JobCancellationException) {
+            } catch (exception: CancellationException) {
                 /* noop */
             } catch (exception: Exception) {
                 Timber.e(exception)
