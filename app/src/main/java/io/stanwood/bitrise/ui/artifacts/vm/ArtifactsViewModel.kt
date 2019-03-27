@@ -86,7 +86,7 @@ class ArtifactsViewModel(
 
     @Suppress("UNUSED_PARAMETER")
     fun onEndOfListReached(itemCount: Int) {
-        if(shouldLoadMoreItems) {
+        if (shouldLoadMoreItems) {
             loadMoreItems()
         }
     }

@@ -177,7 +177,7 @@ class ArtifactItemViewModel(
                 onDownloadStop()
             }
 
-            if(status == DownloadStatus.SUCCESS) {
+            if (status == DownloadStatus.SUCCESS) {
                 Timber.d("Download completed: $title")
                 installApk(id)
             } else {

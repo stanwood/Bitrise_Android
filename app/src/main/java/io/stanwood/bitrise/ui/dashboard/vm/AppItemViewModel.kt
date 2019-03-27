@@ -66,7 +66,7 @@ class AppItemViewModel(
     @get:Bindable
     val lastBuildTime: String?
         get() {
-            return if(lastBuild?.status == BuildStatus.IN_PROGRESS) {
+            return if (lastBuild?.status == BuildStatus.IN_PROGRESS) {
                 lastBuild?.status?.getTitle(resources)
             } else {
                 lastBuild?.finishedAt?.let { PrettyTime().format(it) }
@@ -104,11 +104,11 @@ class AppItemViewModel(
                     ?.toMutableSet()
                     ?: mutableSetOf()
 
-            if(value == favoriteAppsSlugs.contains(app.slug)) {
+            if (value == favoriteAppsSlugs.contains(app.slug)) {
                 return
             }
 
-            if(value) {
+            if (value) {
                 favoriteAppsSlugs.add(app.slug)
             } else {
                 favoriteAppsSlugs.remove(app.slug)

@@ -45,7 +45,7 @@ open class PermissionActivity: AppCompatActivity() {
                         .map { ContextCompat.checkSelfPermission(this, it) }
                         .any { result -> result == PackageManager.PERMISSION_DENIED }
 
-        if(isRequestRequired) {
+        if (isRequestRequired) {
             ActivityCompat.requestPermissions(this, permissions, uid)
         } else {
             continuation.resume(true)
