@@ -39,10 +39,11 @@ import io.stanwood.bitrise.data.net.BitriseService
 import io.stanwood.bitrise.di.Properties
 import io.stanwood.bitrise.util.Snacker
 import io.stanwood.bitrise.util.extensions.bundleOf
-import kotlinx.coroutines.experimental.CancellationException
-import kotlinx.coroutines.experimental.Deferred
-import kotlinx.coroutines.experimental.GlobalScope
-import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 import timber.log.Timber
 
 class ArtifactsViewModel(
@@ -52,7 +53,9 @@ class ArtifactsViewModel(
         private val token: String,
         private val activity: PermissionActivity,
         private val app: App,
-        private val build: Build) : LifecycleObserver, BaseObservable() {
+        private val build: Build,
+        private val mainScope: CoroutineScope
+) : LifecycleObserver, BaseObservable() {
 
     val isLoading = ObservableBoolean(false)
     var log = ObservableField<String>()
@@ -89,7 +92,7 @@ class ArtifactsViewModel(
     }
 
     private fun loadMoreItems() {
-        deferred = GlobalScope.async {
+        deferred = mainScope.async {
             try {
                 isLoading.set(true)
                 fetchItems()
@@ -116,7 +119,7 @@ class ArtifactsViewModel(
                     .apply { nextCursor = paging.nextCursor }
                     .data
                     .map { artifact -> fetchArtifact(artifact) }
-                    .map { artifact -> ArtifactItemViewModel(snacker, activity, router, artifact) }
+                    .map { artifact -> ArtifactItemViewModel(snacker, activity, router, artifact, mainScope) }
 
     private suspend fun fetchArtifact(artifact: Artifact) =
             service

@@ -55,11 +55,6 @@ android {
         buildConfigField "String", "REPO_URL", "\"https://github.com/stanwood/Bitrise_Android\""
         manifestPlaceholders.appName = "@string/app_name"
     }
-    kotlin {
-        experimental {
-            coroutines 'enable'
-        }
-    }
     androidExtensions {
         experimental = true
     }
@@ -82,18 +77,21 @@ android {
                 break
         }
     }
+    packagingOptions {
+        exclude "META-INF/**"
+    }
 }
 
 dependencies {
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:2.4.0"
     implementation "com.squareup.retrofit2:converter-gson:2.4.0"
-    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-experimental-adapter:1.0.0"
+    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2"
     implementation "com.squareup.okhttp3:logging-interceptor:3.10.0"
 
     // Kotlin
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.27.0"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:0.27.0"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.2.0-alpha'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.2.0-alpha'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     // Glide

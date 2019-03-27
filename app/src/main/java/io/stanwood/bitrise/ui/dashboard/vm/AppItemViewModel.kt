@@ -36,9 +36,10 @@ import io.stanwood.bitrise.data.model.BuildStatus
 import io.stanwood.bitrise.data.net.BitriseService
 import io.stanwood.bitrise.di.Properties
 import io.stanwood.bitrise.util.extensions.bundleOf
-import kotlinx.coroutines.experimental.Deferred
-import kotlinx.coroutines.experimental.GlobalScope
-import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 import org.ocpsoft.prettytime.PrettyTime
 import timber.log.Timber
 
@@ -49,7 +50,9 @@ class AppItemViewModel(
         private val resources: Resources,
         private val router: NavController,
         private val sharedPreferences: SharedPreferences,
-        private val app: App) : BaseObservable() {
+        private val app: App,
+        private val mainScope: CoroutineScope
+) : BaseObservable() {
 
     val title: String
         get() = app.title
@@ -117,7 +120,7 @@ class AppItemViewModel(
     private var lastBuild: Build? = null
 
     fun start() {
-        deferred = GlobalScope.async {
+        deferred = mainScope.async {
             try {
                 lastBuild = fetchLastBuild()
                 notifyPropertyChanged(BR.lastBuildTime)

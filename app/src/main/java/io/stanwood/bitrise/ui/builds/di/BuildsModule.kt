@@ -41,7 +41,8 @@ val buildsModule = module {
             getProperty(Properties.TOKEN),
             androidApplication().resources,
             get(),
-            app
+            app,
+            get("main")
         )
     }
 

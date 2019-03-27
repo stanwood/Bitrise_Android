@@ -38,7 +38,8 @@ val logsModule = module {
             token,
             get(),
             app,
-            build
+            build,
+            get("main")
         )
     }
 

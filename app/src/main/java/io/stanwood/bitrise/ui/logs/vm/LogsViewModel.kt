@@ -36,10 +36,11 @@ import io.stanwood.bitrise.data.net.BitriseService
 import io.stanwood.bitrise.di.Properties
 import io.stanwood.bitrise.util.extensions.bundleOf
 import io.stanwood.bitrise.util.extensions.stripAnsiEscapes
-import kotlinx.coroutines.experimental.CancellationException
-import kotlinx.coroutines.experimental.Deferred
-import kotlinx.coroutines.experimental.GlobalScope
-import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 import timber.log.Timber
 
 class LogsViewModel(
@@ -47,7 +48,9 @@ class LogsViewModel(
         private val token: String,
         private val router: NavController,
         private val app: App,
-        private val build: Build) : LifecycleObserver, BaseObservable() {
+        private val build: Build,
+        private val mainScope: CoroutineScope
+) : LifecycleObserver, BaseObservable() {
 
     val isLoading = ObservableBoolean(false)
     var log = ObservableField<String>()
@@ -55,7 +58,7 @@ class LogsViewModel(
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun start() {
-        deferred = GlobalScope.async {
+        deferred = mainScope.async {
             onRefresh()
         }
     }
@@ -66,7 +69,7 @@ class LogsViewModel(
     }
 
     fun onRefresh() {
-        deferred = GlobalScope.async {
+        deferred = mainScope.async {
             try {
                 isLoading.set(true)
                 log.apply {

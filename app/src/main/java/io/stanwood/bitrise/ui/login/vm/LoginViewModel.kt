@@ -36,9 +36,9 @@ import io.stanwood.bitrise.di.Properties
 import io.stanwood.bitrise.util.databinding.ObservableViewModel
 import io.stanwood.bitrise.util.extensions.bundleOf
 import io.stanwood.bitrise.util.extensions.setProperty
-import kotlinx.coroutines.experimental.Deferred
-import kotlinx.coroutines.experimental.GlobalScope
-import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.async
 import retrofit2.HttpException
 import timber.log.Timber
 import java.net.HttpURLConnection
@@ -46,7 +46,8 @@ import java.net.HttpURLConnection
 class LoginViewModel(
     private val service: BitriseService,
     private val router: NavController,
-    private val sharedPreferences: SharedPreferences
+    private val sharedPreferences: SharedPreferences,
+    private val mainScope: CoroutineScope
 ) : LifecycleObserver, ObservableViewModel() {
 
     val isError = ObservableBoolean()
@@ -83,7 +84,7 @@ class LoginViewModel(
     }
 
     fun onTokenEntered(newToken: String) {
-        deferred = GlobalScope.async {
+        deferred = mainScope.async {
             tryLogin(newToken)
         }
     }

@@ -40,7 +40,8 @@ val artifactsModule = module {
             token = token,
             activity = getProperty(Properties.ACTIVITY),
             app = app,
-            build = build
+            build = build,
+            mainScope = get("main")
         )
     }
 }

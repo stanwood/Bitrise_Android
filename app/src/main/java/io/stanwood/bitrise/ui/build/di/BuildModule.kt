@@ -45,7 +45,8 @@ val buildModule = module {
             snacker = get(),
             token = token,
             app = app,
-            build = build
+            build = build,
+            mainScope = get("main")
         )
     }
 

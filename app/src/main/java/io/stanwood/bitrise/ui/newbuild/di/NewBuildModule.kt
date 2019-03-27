@@ -40,6 +40,7 @@ val newBuildModule = module {
                 sharedPreferences = get(),
                 snacker = get(),
                 token = token,
-                app = app)
+                app = app,
+                mainScope = get("main"))
     }
 }
