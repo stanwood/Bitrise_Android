@@ -98,6 +98,21 @@
             app:layout_constraintTop_toTopOf="@+id/build_status_icon"
             tools:text="2 days ago" />
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/last_build_workflow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@{vm.lastBuildWorkflow}"
+            android:textColor="@{vm.buildStatusColor}"
+            android:textSize="@dimen/listSecondaryItemTextSize"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="@+id/build_status_icon"
+            app:layout_constraintStart_toEndOf="@+id/last_build_time"
+            app:layout_constraintTop_toTopOf="@+id/build_status_icon"
+            app:layout_constraintVertical_bias="0.6"
+            tools:text="stage" />
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/build_status_icon"
             android:layout_width="wrap_content"

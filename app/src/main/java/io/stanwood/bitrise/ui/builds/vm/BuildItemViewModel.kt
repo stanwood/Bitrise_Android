@@ -44,8 +44,8 @@ class BuildItemViewModel(
         private val token: String,
         private val app: App) {
 
-    val status: String
-        get() = build.status.getTitle(resources)
+    val workflow: String
+        get() = build.triggeredWorkflow
 
     val color: Int
         get() = build.status.getColor(resources)

@@ -41,7 +41,7 @@ class NewBuildFragment : Fragment() {
     private val token: String
         get() = arguments?.getString(Properties.TOKEN) as String
 
-    private val viewModel: NewBuildViewModel by inject(parameters = { parametersOf(app, token) })
+    private val viewModel: NewBuildViewModel by inject(parameters = { parametersOf(token, app) })
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
         FragmentNewBuildBinding.inflate(inflater, container, false).apply {

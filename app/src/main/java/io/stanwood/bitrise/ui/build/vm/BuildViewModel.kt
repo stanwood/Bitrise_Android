@@ -54,7 +54,7 @@ class BuildViewModel(
         private val mainScope: CoroutineScope): LifecycleObserver {
 
     val title: String
-        get() = "${app.title} #${build.number}"
+        get() = "${app.title} #${build.number} (${build.triggeredWorkflow})"
 
     val isLoading = ObservableBoolean(false)
 

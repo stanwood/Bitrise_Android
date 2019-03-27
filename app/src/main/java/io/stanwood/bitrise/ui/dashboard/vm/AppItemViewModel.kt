@@ -73,6 +73,10 @@ class AppItemViewModel(
             }
         }
 
+    @get:Bindable
+    val lastBuildWorkflow: String?
+        get() = lastBuild?.triggeredWorkflow
+
     @get:Bindable("lastBuildTime")
     val buildStatusColor: Int
         get() = lastBuild?.status?.getColor(resources) ?: 0
@@ -124,6 +128,7 @@ class AppItemViewModel(
             try {
                 lastBuild = fetchLastBuild()
                 notifyPropertyChanged(BR.lastBuildTime)
+                notifyPropertyChanged(BR.lastBuildWorkflow)
             } catch (exception: Exception) {
                 Timber.e(exception)
                 bundleOf(Properties.MESSAGE to exception.message).apply {
