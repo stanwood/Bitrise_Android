@@ -39,6 +39,9 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.view.View
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import kotlinx.android.synthetic.main.layout_toolbar.*
 import org.koin.core.parameter.parametersOf
 
@@ -59,6 +62,9 @@ class BuildsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         (activity as? AppCompatActivity)?.setSupportActionBar(toolbar)
+        findNavController().let {
+            toolbar.setupWithNavController(it, AppBarConfiguration(it.graph))
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
