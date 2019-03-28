@@ -62,6 +62,8 @@
                     android:id="@+id/tabs"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
+                    app:tabIndicatorColor="@android:color/white"
+                    app:tabIndicatorHeight="3dp"
                     app:tabGravity="fill" />
 
             </com.google.android.material.appbar.AppBarLayout>
