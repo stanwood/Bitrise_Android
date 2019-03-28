@@ -34,6 +34,9 @@ import io.stanwood.bitrise.util.extensions.*
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import android.content.Intent
 import android.net.Uri
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import io.stanwood.bitrise.BuildConfig
 
 class SettingsFragment: PreferenceFragmentCompat() {
@@ -53,6 +56,9 @@ class SettingsFragment: PreferenceFragmentCompat() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        findNavController().let {
+            toolbar.setupWithNavController(it, AppBarConfiguration(it.graph))
+        }
         findPreference(R.string.pref_key_contribute).setOnPreferenceClickListener {
             onContributeClick()
             true

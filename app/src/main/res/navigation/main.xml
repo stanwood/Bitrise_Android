@@ -49,7 +49,7 @@
         android:label="BuildsFragment" >
         <argument
             android:name="arg_app"
-            app:argType="reference" />
+            app:argType="io.stanwood.bitrise.data.model.App" />
         <argument
             android:name="arg_token"
             app:argType="string" />
@@ -69,10 +69,10 @@
             app:argType="string" />
         <argument
             android:name="arg_build"
-            app:argType="reference" />
+            app:argType="io.stanwood.bitrise.data.model.Build" />
         <argument
             android:name="arg_app"
-            app:argType="reference" />
+            app:argType="io.stanwood.bitrise.data.model.App" />
     </fragment>
     <fragment
         android:id="@+id/screen_new_build"
@@ -83,7 +83,7 @@
             app:argType="string" />
         <argument
             android:name="arg_app"
-            app:argType="reference" />
+            app:argType="io.stanwood.bitrise.data.model.App" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
