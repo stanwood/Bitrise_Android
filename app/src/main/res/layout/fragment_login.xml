@@ -40,6 +40,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageButton
+            android:id="@+id/loginBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:src="@drawable/ic_arrow_forward_green_48dp"
+            android:onClick="@{view -> vm.onTokenEntered(inputEdit.getText().toString())}"
+            android:visibility="@{vm.isLoading? View.INVISIBLE : View.VISIBLE}"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:layout_constraintBottom_toBottomOf="@+id/input"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/input" />
+
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"
             android:layout_width="wrap_content"
@@ -61,19 +74,19 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/input"
             error="@{vm.isError? @string/invalid_token : null}"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
+            android:layout_marginEnd="8dp"
             android:hint="@string/label_token"
             android:visibility="@{vm.isLoading? View.INVISIBLE : View.VISIBLE}"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/loginBtn"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/logo">
 
             <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/test"
+                android:id="@+id/inputEdit"
                 onTextSubmitted="@{(text) -> vm.onTokenEntered(text)}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
