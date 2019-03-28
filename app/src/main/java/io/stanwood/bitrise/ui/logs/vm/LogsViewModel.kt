@@ -37,12 +37,9 @@ import io.stanwood.bitrise.data.net.BitriseService
 import io.stanwood.bitrise.di.Properties
 import io.stanwood.bitrise.util.extensions.ansiEscapeToSpannable
 import io.stanwood.bitrise.util.extensions.bundleOf
-import io.stanwood.bitrise.util.extensions.stripAnsiEscapes
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class LogsViewModel(
@@ -56,25 +53,17 @@ class LogsViewModel(
 
     val isLoading = ObservableBoolean(false)
     var log = ObservableField<Spannable>()
-    private var deferred: Deferred<Any>? = null
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun start() {
-        deferred = mainScope.async {
-            onRefresh()
-        }
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-    fun stop() {
-        deferred?.cancel()
+        onRefresh()
     }
 
     fun onRefresh() {
-        deferred = mainScope.async {
+        mainScope.launch {
             try {
                 isLoading.set(true)
-         log.apply {
+                log.apply {
                     set(fetchLog().ansiEscapeToSpannable())
                 }
             } catch (exception: CancellationException) {
@@ -91,20 +80,20 @@ class LogsViewModel(
     }
 
     private suspend fun fetchLog() =
-        service
-            .getBuildLog(token, app.slug, build.slug)
-            .await()
-                .let {
-                    if (it.isArchived) {
-                        service.downloadFile(it.expiringRawLogUrl)
-                                .await()
-                                .charStream()
-                                .readText()
-                    } else {
-                        it.logChunks
-                                .asSequence()
-                                .sortedBy { logChunk -> logChunk.position }
-                                .joinToString { logChunk -> logChunk.chunk }
+            service
+                    .getBuildLog(token, app.slug, build.slug)
+                    .await()
+                    .let {
+                        if (it.isArchived) {
+                            service.downloadFile(it.expiringRawLogUrl)
+                                    .await()
+                                    .charStream()
+                                    .readText()
+                        } else {
+                            it.logChunks
+                                    .asSequence()
+                                    .sortedBy { logChunk -> logChunk.position }
+                                    .joinToString { logChunk -> logChunk.chunk }
+                        }
                     }
-                }
 }

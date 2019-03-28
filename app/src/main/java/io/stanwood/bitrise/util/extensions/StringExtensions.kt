@@ -15,71 +15,40 @@ private val ansiRegex by lazy { Regex("\u001B\\[[;\\d]*m") }
 
 fun String.stripAnsiEscapes() = replace(ansiRegex, "")
 
-enum class AnsiCode(val code: Byte) {
-    RESET(0),
-    BOLD(1),
-    ITALIC(3),
-    UNDERSCORE(4),
-    FOREGROUND_BLACK(30),
-    FOREGROUND_RED(31),
-    FOREGROUND_GREEN(32),
-    FOREGROUND_YELLOW(33),
-    FOREGROUND_BLUE(34),
-    FOREGROUND_MAGENTA(35),
-    FOREGROUND_CYAN(36),
-    FOREGROUND_WHITE(37),
-    BACKGROUND_BLACK(40),
-    BACKGROUND_RED(41),
-    BACKGROUND_GREEN(42),
-    BACKGROUND_YELLOW(43),
-    BACKGROUND_BLUE(44),
-    BACKGROUND_MAGENTA(45),
-    BACKGROUND_CYAN(46),
-    BACKGROUND_WHITE(47);
-
-    val span: ParcelableSpan?
-        get() = when(this) {
-            RESET -> null
-            BOLD -> StyleSpan(Typeface.BOLD)
-            ITALIC -> StyleSpan(Typeface.ITALIC)
-            UNDERSCORE -> UnderlineSpan()
-            FOREGROUND_BLACK -> ForegroundColorSpan(Color.BLACK)
-            FOREGROUND_RED -> ForegroundColorSpan(Color.RED)
-            FOREGROUND_GREEN -> ForegroundColorSpan(Color.GREEN)
-            FOREGROUND_YELLOW -> ForegroundColorSpan(Color.YELLOW)
-            FOREGROUND_BLUE -> ForegroundColorSpan(Color.BLUE)
-            FOREGROUND_MAGENTA -> ForegroundColorSpan(Color.MAGENTA)
-            FOREGROUND_CYAN -> ForegroundColorSpan(Color.CYAN)
-            FOREGROUND_WHITE -> ForegroundColorSpan(Color.WHITE)
-            BACKGROUND_BLACK -> BackgroundColorSpan(Color.BLACK)
-            BACKGROUND_RED -> BackgroundColorSpan(Color.RED)
-            BACKGROUND_GREEN -> BackgroundColorSpan(Color.GREEN)
-            BACKGROUND_YELLOW -> BackgroundColorSpan(Color.YELLOW)
-            BACKGROUND_BLUE -> BackgroundColorSpan(Color.BLUE)
-            BACKGROUND_MAGENTA -> BackgroundColorSpan(Color.MAGENTA)
-            BACKGROUND_CYAN -> BackgroundColorSpan(Color.CYAN)
-            BACKGROUND_WHITE -> BackgroundColorSpan(Color.WHITE)
-        }
-
-    companion object {
-        fun fromByte(code: Byte) =
-            AnsiCode
-                .values()
-                .firstOrNull { ansi -> ansi.code == code }
-
-        fun fromString(code: String) = fromByte(code.toByte())
+fun getSpan(code: String?): ParcelableSpan? =
+    when(code) {
+        "0" -> null
+        "1" -> StyleSpan(Typeface.BOLD)
+        "3" -> StyleSpan(Typeface.ITALIC)
+        "4" -> UnderlineSpan()
+        "30" -> ForegroundColorSpan(Color.BLACK)
+        "31" -> ForegroundColorSpan(Color.RED)
+        "32" -> ForegroundColorSpan(Color.GREEN)
+        "33" -> ForegroundColorSpan(Color.YELLOW)
+        "34" -> ForegroundColorSpan(Color.BLUE)
+        "35" -> ForegroundColorSpan(Color.MAGENTA)
+        "36" -> ForegroundColorSpan(Color.CYAN)
+        "37" -> ForegroundColorSpan(Color.WHITE)
+        "40" -> BackgroundColorSpan(Color.BLACK)
+        "41" -> BackgroundColorSpan(Color.RED)
+        "42" -> BackgroundColorSpan(Color.GREEN)
+        "43" -> BackgroundColorSpan(Color.YELLOW)
+        "44" -> BackgroundColorSpan(Color.BLUE)
+        "45" -> BackgroundColorSpan(Color.MAGENTA)
+        "46" -> BackgroundColorSpan(Color.CYAN)
+        "47" -> BackgroundColorSpan(Color.WHITE)
+        else -> null
     }
-}
 
 class AnsiInstruction(code: String) {
     val spans: List<ParcelableSpan> by lazy {
-        listOfNotNull(colorCode?.span, decorationCode?.span)
+        listOfNotNull(getSpan(colorCode), getSpan(decorationCode))
     }
 
-    var colorCode: AnsiCode? = null
+    var colorCode: String? = null
         private set
 
-    var decorationCode: AnsiCode? = null
+    var decorationCode: String? = null
         private set
 
     init {
@@ -91,15 +60,15 @@ class AnsiInstruction(code: String) {
 
         when (colorCodes.size) {
             3 -> {
-                colorCode = colorCodes[1].let { AnsiCode.fromString(it) }
-                decorationCode = colorCodes[2].let { AnsiCode.fromString(it) }
+                colorCode = colorCodes[1]
+                decorationCode = colorCodes[2]
             }
             2 -> {
-                colorCode = colorCodes[0].let { AnsiCode.fromString(it) }
-                decorationCode = colorCodes[1].let { AnsiCode.fromString(it) }
+                colorCode = colorCodes[0]
+                decorationCode = colorCodes[1]
             }
             1 -> {
-                decorationCode = colorCodes[0].let { AnsiCode.fromString(it) }
+                decorationCode = colorCodes[0]
             }
         }
     }
@@ -124,7 +93,7 @@ fun String.ansiEscapeToSpannable(): Spannable {
         val ansiInstruction = AnsiInstruction(stringCode)
         offset += stringCode.length
         when (ansiInstruction.decorationCode) {
-            AnsiCode.RESET -> {
+            "0" -> {
                 val topInstruction = stack.pop().copy(end = end - offset)
                 spans.add(topInstruction)
             }
