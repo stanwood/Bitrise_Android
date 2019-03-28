@@ -63,12 +63,12 @@
             tools:src="@drawable/ic_pull_request" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/status"
+            android:id="@+id/workflow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="@{vm.status}"
+            android:text="@{vm.workflow}"
             android:textColor="@{vm.color}"
             android:textSize="@dimen/listPrimaryItemTextSize"
             app:layout_constraintStart_toEndOf="@+id/type_icon"
@@ -135,10 +135,10 @@
             android:maxLines="1"
             android:text="@{vm.branch}"
             android:textSize="@dimen/listSecondaryItemTextSize"
-            app:layout_constraintBottom_toBottomOf="@+id/status"
+            app:layout_constraintBottom_toBottomOf="@+id/workflow"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/status"
-            app:layout_constraintTop_toTopOf="@+id/status"
+            app:layout_constraintStart_toEndOf="@+id/workflow"
+            app:layout_constraintTop_toTopOf="@+id/workflow"
             tools:text="feature/CIN-426 CI fix > Develop" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

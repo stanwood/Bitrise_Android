@@ -30,5 +30,5 @@ val loginModule = module {
     /**
      * View Model
      */
-    single { LoginViewModel(get(), get(), get()) }
+    single { LoginViewModel(get(), get(), get(), get("main")) }
 }

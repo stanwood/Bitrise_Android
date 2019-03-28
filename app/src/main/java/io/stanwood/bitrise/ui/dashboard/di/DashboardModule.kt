@@ -38,6 +38,7 @@ val dashboardModule = module {
             get(),
             getProperty(Properties.TOKEN),
             get(),
-            androidApplication().resources)
+            androidApplication().resources,
+            get("main"))
     }
 }

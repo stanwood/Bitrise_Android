@@ -35,17 +35,18 @@ import io.stanwood.bitrise.data.model.App
 import io.stanwood.bitrise.data.net.BitriseService
 import io.stanwood.bitrise.di.Properties
 import io.stanwood.bitrise.util.extensions.bundleOf
-import kotlinx.coroutines.experimental.CancellationException
-import kotlinx.coroutines.experimental.Deferred
-import kotlinx.coroutines.experimental.GlobalScope
-import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.async
 import timber.log.Timber
 
 class DashboardViewModel(private val router: NavController,
                          private val service: BitriseService,
                          private val token: String,
                          private val sharedPreferences: SharedPreferences,
-                         private val resources: Resources): LifecycleObserver {
+                         private val resources: Resources,
+                         private val mainScope: CoroutineScope): LifecycleObserver {
 
     val isLoading = ObservableBoolean(false)
     val items = ObservableArrayList<AppItemViewModel>()
@@ -77,7 +78,7 @@ class DashboardViewModel(private val router: NavController,
 
     @Suppress("UNUSED_PARAMETER")
     fun onEndOfListReached(itemCount: Int) {
-        if(shouldLoadMoreItems) {
+        if (shouldLoadMoreItems) {
             loadMoreItems()
         }
     }
@@ -95,7 +96,7 @@ class DashboardViewModel(private val router: NavController,
     }
 
     private fun loadMoreItems() {
-        deferred = GlobalScope.async {
+        deferred = mainScope.async {
             try {
                 isLoading.set(true)
                 fetchAllApps()
@@ -139,5 +140,5 @@ class DashboardViewModel(private val router: NavController,
     private suspend fun fetchAllApps() =
         listOf(if(items.isEmpty()) fetchFavoriteApps() else emptyList(), fetchNonFavoriteApps())
             .flatten()
-            .map { app -> AppItemViewModel(service, token, resources, router, sharedPreferences, app) }
+            .map { app -> AppItemViewModel(service, token, resources, router, sharedPreferences, app, mainScope) }
 }

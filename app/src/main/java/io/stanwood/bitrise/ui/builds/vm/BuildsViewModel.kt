@@ -35,10 +35,11 @@ import io.stanwood.bitrise.data.model.RepoProvider
 import io.stanwood.bitrise.data.net.BitriseService
 import io.stanwood.bitrise.di.Properties
 import io.stanwood.bitrise.util.extensions.bundleOf
-import kotlinx.coroutines.experimental.CancellationException
-import kotlinx.coroutines.experimental.Deferred
-import kotlinx.coroutines.experimental.GlobalScope
-import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 import org.joda.time.format.PeriodFormatter
 import timber.log.Timber
 
@@ -47,7 +48,9 @@ class BuildsViewModel(private val router: NavController,
                       private val token: String,
                       private val resources: Resources,
                       private val periodFormatter: PeriodFormatter,
-                      private val app: App) : LifecycleObserver {
+                      private val app: App,
+                      private val mainScope: CoroutineScope
+) : LifecycleObserver {
 
     val isLoading = ObservableBoolean(false)
     val items = ObservableArrayList<BuildItemViewModel>()
@@ -107,7 +110,7 @@ class BuildsViewModel(private val router: NavController,
             }
 
     private fun loadMoreItems() {
-        deferred = GlobalScope.async {
+        deferred = mainScope.async {
             try {
                 isLoading.set(true)
 

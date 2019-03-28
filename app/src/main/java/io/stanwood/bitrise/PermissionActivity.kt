@@ -27,9 +27,10 @@ import android.content.pm.PackageManager
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.coroutines.experimental.CancellableContinuation
-import kotlinx.coroutines.experimental.suspendCancellableCoroutine
+import kotlinx.coroutines.CancellableContinuation
+import kotlinx.coroutines.suspendCancellableCoroutine
 import java.util.concurrent.atomic.AtomicInteger
+import kotlin.coroutines.resume
 
 @SuppressLint("Registered")
 open class PermissionActivity: AppCompatActivity() {
@@ -44,7 +45,7 @@ open class PermissionActivity: AppCompatActivity() {
                         .map { ContextCompat.checkSelfPermission(this, it) }
                         .any { result -> result == PackageManager.PERMISSION_DENIED }
 
-        if(isRequestRequired) {
+        if (isRequestRequired) {
             ActivityCompat.requestPermissions(this, permissions, uid)
         } else {
             continuation.resume(true)
