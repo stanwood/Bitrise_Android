@@ -15,6 +15,13 @@ private val ansiRegex by lazy { Regex("\u001B\\[[;\\d]*m") }
 
 fun String.stripAnsiEscapes() = replace(ansiRegex, "")
 
+private val red by lazy { Color.parseColor("#f44336") }
+private val green by lazy { Color.parseColor("#4caf50") }
+private val yellow by lazy { Color.parseColor("#ffeb3b") }
+private val blue by lazy { Color.parseColor("#2196f3") }
+private val magenta by lazy { Color.parseColor("#e91e63") }
+private val cyan by lazy { Color.parseColor("#00bcd4") }
+
 fun getSpan(code: String?): ParcelableSpan? =
     when(code) {
         "0" -> null
@@ -22,20 +29,20 @@ fun getSpan(code: String?): ParcelableSpan? =
         "3" -> StyleSpan(Typeface.ITALIC)
         "4" -> UnderlineSpan()
         "30" -> ForegroundColorSpan(Color.BLACK)
-        "31" -> ForegroundColorSpan(Color.RED)
-        "32" -> ForegroundColorSpan(Color.GREEN)
-        "33" -> ForegroundColorSpan(Color.YELLOW)
-        "34" -> ForegroundColorSpan(Color.BLUE)
-        "35" -> ForegroundColorSpan(Color.MAGENTA)
-        "36" -> ForegroundColorSpan(Color.CYAN)
+        "31" -> ForegroundColorSpan(red)
+        "32" -> ForegroundColorSpan(green)
+        "33" -> ForegroundColorSpan(yellow)
+        "34" -> ForegroundColorSpan(blue)
+        "35" -> ForegroundColorSpan(magenta)
+        "36" -> ForegroundColorSpan(cyan)
         "37" -> ForegroundColorSpan(Color.WHITE)
         "40" -> BackgroundColorSpan(Color.BLACK)
-        "41" -> BackgroundColorSpan(Color.RED)
-        "42" -> BackgroundColorSpan(Color.GREEN)
-        "43" -> BackgroundColorSpan(Color.YELLOW)
-        "44" -> BackgroundColorSpan(Color.BLUE)
-        "45" -> BackgroundColorSpan(Color.MAGENTA)
-        "46" -> BackgroundColorSpan(Color.CYAN)
+        "41" -> BackgroundColorSpan(red)
+        "42" -> BackgroundColorSpan(green)
+        "43" -> BackgroundColorSpan(yellow)
+        "44" -> BackgroundColorSpan(blue)
+        "45" -> BackgroundColorSpan(magenta)
+        "46" -> BackgroundColorSpan(cyan)
         "47" -> BackgroundColorSpan(Color.WHITE)
         else -> null
     }
