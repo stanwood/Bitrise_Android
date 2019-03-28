@@ -22,8 +22,7 @@
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -71,8 +70,8 @@
 
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/pager"
-                adapter="@{vm.adapter}"
-                tabs="@{tabs}"
+                app:adapter="@{vm.adapter}"
+                app:tabs="@{tabs}"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>

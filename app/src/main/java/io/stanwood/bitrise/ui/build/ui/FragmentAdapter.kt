@@ -37,18 +37,17 @@ class FragmentAdapter(
     private val token: String,
     private val app: App,
     private val build: Build
-) :
-    FragmentStatePagerAdapter(fragmentManager) {
+) : FragmentStatePagerAdapter(fragmentManager) {
 
     override fun getItem(position: Int) = when (position) {
-        0 -> LogsFragment.newInstance(token, build, app)
-        else -> ArtifactsFragment.newInstance(token, build, app)
+        0 -> ArtifactsFragment.newInstance(token, build, app)
+        else -> LogsFragment.newInstance(token, build, app)
     }
 
     override fun getCount() = 2
 
     override fun getPageTitle(position: Int) = when (position) {
-        0 -> resources.getText(R.string.title_logs)
-        else -> resources.getText(R.string.title_artifacts)
+        0 -> resources.getText(R.string.title_artifacts)
+        else -> resources.getText(R.string.title_logs)
     }
 }

@@ -23,9 +23,9 @@
 package io.stanwood.bitrise.ui.logs.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import io.stanwood.bitrise.data.model.App
 import io.stanwood.bitrise.data.model.Build
 import io.stanwood.bitrise.databinding.FragmentLogsBinding
@@ -65,7 +65,6 @@ class LogsFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
         FragmentLogsBinding.inflate(inflater, container, false).apply {
-            lifecycle.addObserver(viewModel)
             vm = viewModel
         }.root
 }

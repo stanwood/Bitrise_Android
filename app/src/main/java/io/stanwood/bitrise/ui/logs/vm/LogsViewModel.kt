@@ -26,9 +26,6 @@ import android.text.Spannable
 import androidx.databinding.BaseObservable
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.OnLifecycleEvent
 import androidx.navigation.NavController
 import io.stanwood.bitrise.R
 import io.stanwood.bitrise.data.model.App
@@ -49,17 +46,14 @@ class LogsViewModel(
         private val app: App,
         private val build: Build,
         private val mainScope: CoroutineScope
-) : LifecycleObserver, BaseObservable() {
+) : BaseObservable() {
 
     val isLoading = ObservableBoolean(false)
+    var showLog = ObservableBoolean(false)
     var log = ObservableField<Spannable>()
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-    fun start() {
-        onRefresh()
-    }
-
     fun onRefresh() {
+        showLog.set(true)
         mainScope.launch {
             try {
                 isLoading.set(true)
