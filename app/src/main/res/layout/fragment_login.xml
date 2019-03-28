@@ -45,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="32dp"
-            android:src="@drawable/ic_arrow_forward_green_48dp"
+            android:src="@drawable/ic_arrow_forward_violet_48dp"
             android:onClick="@{view -> vm.onTokenEntered(inputEdit.getText().toString())}"
             android:visibility="@{vm.isLoading? View.INVISIBLE : View.VISIBLE}"
             android:background="?attr/selectableItemBackgroundBorderless"
