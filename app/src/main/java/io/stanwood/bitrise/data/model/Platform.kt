@@ -23,7 +23,7 @@
 package io.stanwood.bitrise.data.model
 
 import android.content.res.Resources
-import android.support.annotation.DrawableRes
+import androidx.annotation.DrawableRes
 import com.google.gson.annotations.SerializedName
 import io.stanwood.bitrise.R
 

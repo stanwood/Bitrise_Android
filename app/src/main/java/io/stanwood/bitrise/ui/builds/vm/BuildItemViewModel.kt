@@ -44,8 +44,8 @@ class BuildItemViewModel(
         private val token: String,
         private val app: App) {
 
-    val status: String
-        get() = build.status.getTitle(resources)
+    val workflow: String
+        get() = build.triggeredWorkflow
 
     val color: Int
         get() = build.status.getColor(resources)
@@ -72,14 +72,14 @@ class BuildItemViewModel(
 
     val icon: Drawable
         get() =
-            if(build.pullRequestTargetBranch != null && build.status == BuildStatus.SUCCESS) {
+            if (build.pullRequestTargetBranch != null && build.status == BuildStatus.SUCCESS) {
                 resources.getDrawable(R.drawable.ic_pull_request)
             } else {
                 build.status.getIcon(resources)
             }
 
     val branch: String
-        get() = if(build.pullRequestTargetBranch == null) {
+        get() = if (build.pullRequestTargetBranch == null) {
             build.branch
         } else {
             "${build.branch}>${build.pullRequestTargetBranch}"

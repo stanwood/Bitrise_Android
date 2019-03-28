@@ -22,7 +22,7 @@
 
 package io.stanwood.bitrise.util.databinding
 
-import android.databinding.BindingAdapter
+import androidx.databinding.BindingAdapter
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 

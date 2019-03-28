@@ -24,7 +24,7 @@ package io.stanwood.bitrise.data.net
 
 import io.stanwood.bitrise.BuildConfig
 import io.stanwood.bitrise.data.model.*
-import kotlinx.coroutines.experimental.Deferred
+import kotlinx.coroutines.Deferred
 import okhttp3.ResponseBody
 import retrofit2.http.*
 

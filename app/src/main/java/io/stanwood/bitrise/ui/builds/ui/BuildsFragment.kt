@@ -23,7 +23,7 @@
 package io.stanwood.bitrise.ui.builds.ui
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -37,17 +37,20 @@ import io.stanwood.bitrise.ui.builds.vm.BuildsViewModel
 import org.koin.android.ext.android.inject
 import android.content.Intent
 import android.net.Uri
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.view.View
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import kotlinx.android.synthetic.main.layout_toolbar.*
-
+import org.koin.core.parameter.parametersOf
 
 class BuildsFragment : Fragment() {
 
     private val app: App
         get() = arguments?.getParcelable(Properties.APP) as App
 
-    private val viewModel: BuildsViewModel by inject(parameters = { mapOf(Properties.APP to app) })
+    private val viewModel: BuildsViewModel by inject(parameters = { parametersOf(app) })
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
         FragmentBuildsBinding.inflate(inflater, container, false).apply {
@@ -59,15 +62,18 @@ class BuildsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         (activity as? AppCompatActivity)?.setSupportActionBar(toolbar)
+        findNavController().let {
+            toolbar.setupWithNavController(it, AppBarConfiguration(it.graph))
+        }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        inflater?.inflate(R.menu.builds, menu)
-        menu?.findItem(R.id.menu_github)?.isVisible = viewModel.isProvidedByGithub
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.builds, menu)
+        menu.findItem(R.id.menu_github)?.isVisible = viewModel.isProvidedByGithub
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when(item?.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
             R.id.menu_github -> openGithub()
         }
         return super.onOptionsItemSelected(item)

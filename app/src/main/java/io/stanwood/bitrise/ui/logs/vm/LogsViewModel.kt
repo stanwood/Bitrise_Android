@@ -22,13 +22,13 @@
 
 package io.stanwood.bitrise.ui.logs.vm
 
-import android.arch.lifecycle.Lifecycle
-import android.arch.lifecycle.LifecycleObserver
-import android.arch.lifecycle.OnLifecycleEvent
-import android.databinding.BaseObservable
-import android.databinding.ObservableBoolean
-import android.databinding.ObservableField
 import android.text.Spannable
+import androidx.databinding.BaseObservable
+import androidx.databinding.ObservableBoolean
+import androidx.databinding.ObservableField
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.OnLifecycleEvent
 import androidx.navigation.NavController
 import io.stanwood.bitrise.R
 import io.stanwood.bitrise.data.model.App
@@ -37,10 +37,12 @@ import io.stanwood.bitrise.data.net.BitriseService
 import io.stanwood.bitrise.di.Properties
 import io.stanwood.bitrise.util.extensions.ansiEscapeToSpannable
 import io.stanwood.bitrise.util.extensions.bundleOf
-import kotlinx.coroutines.experimental.Deferred
-import kotlinx.coroutines.experimental.JobCancellationException
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.async
+import io.stanwood.bitrise.util.extensions.stripAnsiEscapes
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 import timber.log.Timber
 
 class LogsViewModel(
@@ -48,7 +50,9 @@ class LogsViewModel(
         private val token: String,
         private val router: NavController,
         private val app: App,
-        private val build: Build) : LifecycleObserver, BaseObservable() {
+        private val build: Build,
+        private val mainScope: CoroutineScope
+) : LifecycleObserver, BaseObservable() {
 
     val isLoading = ObservableBoolean(false)
     var log = ObservableField<Spannable>()
@@ -56,7 +60,7 @@ class LogsViewModel(
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun start() {
-        deferred = async(UI) {
+        deferred = mainScope.async {
             onRefresh()
         }
     }
@@ -67,13 +71,13 @@ class LogsViewModel(
     }
 
     fun onRefresh() {
-        deferred = async(UI) {
+        deferred = mainScope.async {
             try {
                 isLoading.set(true)
          log.apply {
                     set(fetchLog().ansiEscapeToSpannable())
                 }
-            } catch (exception: JobCancellationException) {
+            } catch (exception: CancellationException) {
                 /* noop */
             } catch (exception: Exception) {
                 Timber.e(exception)

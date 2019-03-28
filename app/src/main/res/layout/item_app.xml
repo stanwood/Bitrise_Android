@@ -32,7 +32,7 @@
             type="io.stanwood.bitrise.ui.dashboard.vm.AppItemViewModel" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="72dp"
         android:background="?selectableItemBackground"
@@ -48,7 +48,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:background="@color/build_status_aborted"/>
 
-        <android.support.v7.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/icon"
             android:layout_width="32dp"
             android:layout_height="32dp"
@@ -61,7 +61,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/ic_platform_android" />
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/repo_owner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -73,7 +73,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Repo/" />
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -85,7 +85,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Title" />
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/last_build_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -98,7 +98,22 @@
             app:layout_constraintTop_toTopOf="@+id/build_status_icon"
             tools:text="2 days ago" />
 
-        <android.support.v7.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/last_build_workflow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@{vm.lastBuildWorkflow}"
+            android:textColor="@{vm.buildStatusColor}"
+            android:textSize="@dimen/listSecondaryItemTextSize"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="@+id/build_status_icon"
+            app:layout_constraintStart_toEndOf="@+id/last_build_time"
+            app:layout_constraintTop_toTopOf="@+id/build_status_icon"
+            app:layout_constraintVertical_bias="0.6"
+            tools:text="stage" />
+
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/build_status_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -110,7 +125,7 @@
             app:layout_constraintStart_toEndOf="@+id/icon"
             tools:src="@drawable/ic_build_status_aborted" />
 
-        <android.support.v7.widget.AppCompatCheckBox
+        <androidx.appcompat.widget.AppCompatCheckBox
             android:id="@+id/favorite_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -123,5 +138,5 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

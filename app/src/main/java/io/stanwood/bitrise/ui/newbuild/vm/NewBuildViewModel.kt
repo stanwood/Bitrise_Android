@@ -24,9 +24,9 @@ package io.stanwood.bitrise.ui.newbuild.vm
 
 import android.content.SharedPreferences
 import android.content.res.Resources
-import android.databinding.BaseObservable
-import android.databinding.Bindable
-import android.databinding.ObservableBoolean
+import androidx.databinding.BaseObservable
+import androidx.databinding.Bindable
+import androidx.databinding.ObservableBoolean
 import androidx.navigation.NavController
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
@@ -39,9 +39,8 @@ import io.stanwood.bitrise.data.net.BitriseService
 import io.stanwood.bitrise.di.Properties
 import io.stanwood.bitrise.util.Snacker
 import io.stanwood.bitrise.util.extensions.bundleOf
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.async
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import timber.log.Timber
 
@@ -53,7 +52,8 @@ class NewBuildViewModel(
                         private val sharedPreferences: SharedPreferences,
                         private val snacker: Snacker,
                         private val token: String,
-                        private val app: App): BaseObservable() {
+                        private val app: App,
+                        private val mainScope: CoroutineScope): BaseObservable() {
 
     val title: String
         get() = app.title
@@ -71,7 +71,7 @@ class NewBuildViewModel(
     val isLoading = ObservableBoolean(false)
 
     fun onStartNewBuild() {
-        launch(UI) {
+        mainScope.launch {
             try {
                 isLoading.set(true)
                 startNewBuild().let {

@@ -24,8 +24,8 @@ package io.stanwood.bitrise.ui.dashboard.vm
 
 import android.content.SharedPreferences
 import android.content.res.Resources
-import android.databinding.BaseObservable
-import android.databinding.Bindable
+import androidx.databinding.BaseObservable
+import androidx.databinding.Bindable
 import android.graphics.drawable.Drawable
 import androidx.navigation.NavController
 import io.stanwood.bitrise.BR
@@ -36,9 +36,10 @@ import io.stanwood.bitrise.data.model.BuildStatus
 import io.stanwood.bitrise.data.net.BitriseService
 import io.stanwood.bitrise.di.Properties
 import io.stanwood.bitrise.util.extensions.bundleOf
-import kotlinx.coroutines.experimental.Deferred
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 import org.ocpsoft.prettytime.PrettyTime
 import timber.log.Timber
 
@@ -49,7 +50,9 @@ class AppItemViewModel(
         private val resources: Resources,
         private val router: NavController,
         private val sharedPreferences: SharedPreferences,
-        private val app: App) : BaseObservable() {
+        private val app: App,
+        private val mainScope: CoroutineScope
+) : BaseObservable() {
 
     val title: String
         get() = app.title
@@ -63,12 +66,16 @@ class AppItemViewModel(
     @get:Bindable
     val lastBuildTime: String?
         get() {
-            return if(lastBuild?.status == BuildStatus.IN_PROGRESS) {
+            return if (lastBuild?.status == BuildStatus.IN_PROGRESS) {
                 lastBuild?.status?.getTitle(resources)
             } else {
                 lastBuild?.finishedAt?.let { PrettyTime().format(it) }
             }
         }
+
+    @get:Bindable
+    val lastBuildWorkflow: String?
+        get() = lastBuild?.triggeredWorkflow
 
     @get:Bindable("lastBuildTime")
     val buildStatusColor: Int
@@ -97,11 +104,11 @@ class AppItemViewModel(
                     ?.toMutableSet()
                     ?: mutableSetOf()
 
-            if(value == favoriteAppsSlugs.contains(app.slug)) {
+            if (value == favoriteAppsSlugs.contains(app.slug)) {
                 return
             }
 
-            if(value) {
+            if (value) {
                 favoriteAppsSlugs.add(app.slug)
             } else {
                 favoriteAppsSlugs.remove(app.slug)
@@ -117,10 +124,11 @@ class AppItemViewModel(
     private var lastBuild: Build? = null
 
     fun start() {
-        deferred = async(UI) {
+        deferred = mainScope.async {
             try {
                 lastBuild = fetchLastBuild()
                 notifyPropertyChanged(BR.lastBuildTime)
+                notifyPropertyChanged(BR.lastBuildWorkflow)
             } catch (exception: Exception) {
                 Timber.e(exception)
                 bundleOf(Properties.MESSAGE to exception.message).apply {

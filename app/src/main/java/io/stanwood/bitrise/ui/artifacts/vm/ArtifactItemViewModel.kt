@@ -29,15 +29,15 @@ import android.app.DownloadManager.Request
 import android.content.Context
 import android.content.Intent
 import android.database.Cursor
-import android.databinding.BaseObservable
-import android.databinding.Bindable
-import android.databinding.ObservableBoolean
-import android.databinding.ObservableInt
+import androidx.databinding.BaseObservable
+import androidx.databinding.Bindable
+import androidx.databinding.ObservableBoolean
+import androidx.databinding.ObservableInt
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
-import android.support.v4.app.ShareCompat
+import androidx.core.app.ShareCompat
 import android.text.format.Formatter
 import androidx.navigation.NavController
 import io.stanwood.bitrise.BuildConfig
@@ -47,10 +47,14 @@ import io.stanwood.bitrise.data.model.Artifact
 import io.stanwood.bitrise.di.Properties
 import io.stanwood.bitrise.util.Snacker
 import io.stanwood.bitrise.util.extensions.bundleOf
-import kotlinx.coroutines.experimental.CancellationException
-import kotlinx.coroutines.experimental.Job
-import kotlinx.coroutines.experimental.delay
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 
@@ -64,7 +68,9 @@ class ArtifactItemViewModel(
         private val snacker: Snacker,
         private val activity: PermissionActivity,
         private val router: NavController,
-        private val artifact: Artifact) : BaseObservable() {
+        private val artifact: Artifact,
+        private val mainScope: CoroutineScope
+) : BaseObservable() {
 
     val icon: Drawable?
         get() = artifact.artifactType?.getIcon(activity.resources)
@@ -122,7 +128,7 @@ class ArtifactItemViewModel(
             return
         }
         try {
-            downloadingJob = launch {
+            downloadingJob = mainScope.launch {
                 if (activity.requestPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                     download()
                 }
@@ -171,7 +177,7 @@ class ArtifactItemViewModel(
                 onDownloadStop()
             }
 
-            if(status == DownloadStatus.SUCCESS) {
+            if (status == DownloadStatus.SUCCESS) {
                 Timber.d("Download completed: $title")
                 installApk(id)
             } else {

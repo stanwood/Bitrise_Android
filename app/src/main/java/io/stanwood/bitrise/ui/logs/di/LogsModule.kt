@@ -22,23 +22,25 @@
 
 package io.stanwood.bitrise.ui.logs.di
 
-
-import io.stanwood.bitrise.di.Properties
+import io.stanwood.bitrise.data.model.App
+import io.stanwood.bitrise.data.model.Build
 import io.stanwood.bitrise.ui.logs.vm.LogsViewModel
-import org.koin.dsl.module.applicationContext
+import org.koin.dsl.module.module
 
-val logsModule = applicationContext {
+val logsModule = module {
 
     /**
      * View Model
      */
-    factory { args ->
+    factory { (token: String, app: App, build: Build) ->
         LogsViewModel(
-                get(),
-                args[Properties.TOKEN],
-                get(),
-                args[Properties.APP],
-                args[Properties.BUILD])
+            get(),
+            token,
+            get(),
+            app,
+            build,
+            get("main")
+        )
     }
 
 }

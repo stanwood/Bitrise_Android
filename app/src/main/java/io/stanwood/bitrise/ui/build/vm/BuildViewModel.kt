@@ -22,23 +22,25 @@
 
 package io.stanwood.bitrise.ui.build.vm
 
-import android.arch.lifecycle.LifecycleObserver
 import android.content.res.Resources
-import android.databinding.ObservableBoolean
+import androidx.databinding.ObservableBoolean
+import androidx.lifecycle.LifecycleObserver
 import androidx.navigation.NavController
 import io.stanwood.bitrise.R
-import io.stanwood.bitrise.data.model.*
+import io.stanwood.bitrise.data.model.App
+import io.stanwood.bitrise.data.model.Build
+import io.stanwood.bitrise.data.model.BuildParams
+import io.stanwood.bitrise.data.model.BuildStatus
+import io.stanwood.bitrise.data.model.NewBuildParams
 import io.stanwood.bitrise.data.net.BitriseService
 import io.stanwood.bitrise.di.Properties
 import io.stanwood.bitrise.ui.build.ui.FragmentAdapter
 import io.stanwood.bitrise.util.Snacker
 import io.stanwood.bitrise.util.extensions.bundleOf
-import kotlinx.coroutines.experimental.JobCancellationException
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.async
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 import timber.log.Timber
-
 
 class BuildViewModel(
         private val resources: Resources,
@@ -48,10 +50,11 @@ class BuildViewModel(
         private val snacker: Snacker,
         private val token: String,
         private val app: App,
-        private val build: Build): LifecycleObserver {
+        private val build: Build,
+        private val mainScope: CoroutineScope): LifecycleObserver {
 
     val title: String
-        get() = "${app.title} #${build.number}"
+        get() = "${app.title} #${build.number} (${build.triggeredWorkflow})"
 
     val isLoading = ObservableBoolean(false)
 
@@ -59,7 +62,7 @@ class BuildViewModel(
         get() = build.status == BuildStatus.IN_PROGRESS
 
     fun onRestartBuild() {
-        launch(UI) {
+        mainScope.launch {
             try {
                 isLoading.set(true)
                 restartBuild().let {
@@ -67,7 +70,7 @@ class BuildViewModel(
                     snacker.show(message)
                     router.navigateUp()
                 }
-            } catch (exception: JobCancellationException) {
+            } catch (exception: CancellationException) {
                 /* noop */
             } catch (exception: Exception) {
                 Timber.e(exception)

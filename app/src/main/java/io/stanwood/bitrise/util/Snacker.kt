@@ -23,9 +23,9 @@
 package io.stanwood.bitrise.util
 
 import android.app.Activity
-import android.support.annotation.IdRes
-import android.support.annotation.StringRes
-import android.support.design.widget.Snackbar
+import androidx.annotation.IdRes
+import androidx.annotation.StringRes
+import com.google.android.material.snackbar.Snackbar
 import android.view.View
 
 class Snacker(private val view: View) {

@@ -23,13 +23,12 @@
 package io.stanwood.bitrise.ui.login.di
 
 import io.stanwood.bitrise.ui.login.vm.LoginViewModel
-import org.koin.dsl.module.applicationContext
+import org.koin.dsl.module.module
 
-
-val loginModule = applicationContext {
+val loginModule = module {
 
     /**
      * View Model
      */
-    bean { LoginViewModel(get(), get(), get()) }
+    single { LoginViewModel(get(), get(), get(), get("main")) }
 }
