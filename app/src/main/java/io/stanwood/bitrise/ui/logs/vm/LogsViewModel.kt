@@ -22,25 +22,21 @@
 
 package io.stanwood.bitrise.ui.logs.vm
 
+import android.text.Spannable
 import androidx.databinding.BaseObservable
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.OnLifecycleEvent
 import androidx.navigation.NavController
 import io.stanwood.bitrise.R
 import io.stanwood.bitrise.data.model.App
 import io.stanwood.bitrise.data.model.Build
 import io.stanwood.bitrise.data.net.BitriseService
 import io.stanwood.bitrise.di.Properties
+import io.stanwood.bitrise.util.extensions.ansiEscapeToSpannable
 import io.stanwood.bitrise.util.extensions.bundleOf
-import io.stanwood.bitrise.util.extensions.stripAnsiEscapes
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class LogsViewModel(
@@ -50,30 +46,19 @@ class LogsViewModel(
         private val app: App,
         private val build: Build,
         private val mainScope: CoroutineScope
-) : LifecycleObserver, BaseObservable() {
+) : BaseObservable() {
 
     val isLoading = ObservableBoolean(false)
-    var log = ObservableField<String>()
-    private var deferred: Deferred<Any>? = null
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-    fun start() {
-        deferred = mainScope.async {
-            onRefresh()
-        }
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-    fun stop() {
-        deferred?.cancel()
-    }
+    var showLog = ObservableBoolean(false)
+    var log = ObservableField<Spannable>()
 
     fun onRefresh() {
-        deferred = mainScope.async {
+        showLog.set(true)
+        mainScope.launch {
             try {
                 isLoading.set(true)
                 log.apply {
-                    set(fetchLog())
+                    set(fetchLog().ansiEscapeToSpannable())
                 }
             } catch (exception: CancellationException) {
                 /* noop */
@@ -89,22 +74,20 @@ class LogsViewModel(
     }
 
     private suspend fun fetchLog() =
-        service
-            .getBuildLog(token, app.slug, build.slug)
-            .await()
-                .let {
-                    if (it.isArchived) {
-                        service.downloadFile(it.expiringRawLogUrl)
-                                .await()
-                                .charStream()
-                                .readText()
-                                .stripAnsiEscapes()
-                    } else {
-                        it.logChunks
-                                .asSequence()
-                                .sortedBy { logChunk -> logChunk.position }
-                                .joinToString { logChunk -> logChunk.chunk }
-                                .stripAnsiEscapes()
+            service
+                    .getBuildLog(token, app.slug, build.slug)
+                    .await()
+                    .let {
+                        if (it.isArchived) {
+                            service.downloadFile(it.expiringRawLogUrl)
+                                    .await()
+                                    .charStream()
+                                    .readText()
+                        } else {
+                            it.logChunks
+                                    .asSequence()
+                                    .sortedBy { logChunk -> logChunk.position }
+                                    .joinToString { logChunk -> logChunk.chunk }
+                        }
                     }
-                }
 }

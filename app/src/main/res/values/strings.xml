@@ -55,4 +55,5 @@
     <string name="contribute">Contribute</string>
     <string name="make_bitrise_better">Make Bitrise Unofficial better</string>
     <string name="open_source_notices">Open source notices</string>
+    <string name="label_load_log">Load log</string>
 </resources>

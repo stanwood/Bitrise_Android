@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2018 stanwood Gmbh
   ~
   ~ Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -22,8 +21,7 @@
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -34,32 +32,56 @@
         <import type="androidx.recyclerview.widget.LinearLayoutManager" />
     </data>
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/log_bg_color"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:onClick="@{view -> vm.onRefresh()}"
+            android:visibility="@{!vm.showLog}"
+            android:text="@string/label_load_log"/>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:onRefreshListener="@{() -> vm.onRefresh()}"
-            app:refreshing="@{vm.isLoading}">
+            android:background="@color/log_bg_color"
+            android:orientation="vertical"
+            android:visibility="@{vm.showLog}">
 
-            <ScrollView
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="8dp"
-                android:clipToPadding="false">
+                app:onRefreshListener="@{() -> vm.onRefresh()}"
+                app:refreshing="@{vm.isLoading}">
 
-                <TextView
+                <ScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@{vm.log}"
-                    android:textColor="@android:color/white"
-                    android:textSize="12sp"
-                    android:fontFamily="@font/sourcecodevariable_roman"/>
-            </ScrollView>
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-    </LinearLayout>
+                    android:layout_height="match_parent"
+                    android:clipToPadding="false"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp">
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fillViewport="true">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:fontFamily="@font/sourcecodevariable_roman"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:scrollHorizontally="true"
+                            android:text="@{vm.log}"
+                            android:textColor="@android:color/white"
+                            android:textSize="12sp" />
+                    </HorizontalScrollView>
+                </ScrollView>
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        </LinearLayout>
+    </FrameLayout>
 </layout>
