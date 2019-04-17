@@ -23,18 +23,18 @@
 package io.stanwood.bitrise.ui.logs.ui
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import io.stanwood.bitrise.data.model.App
 import io.stanwood.bitrise.data.model.Build
 import io.stanwood.bitrise.databinding.FragmentLogsBinding
 import io.stanwood.bitrise.di.Properties
 import io.stanwood.bitrise.ui.logs.vm.LogsViewModel
 import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 
-
-class LogsFragment: Fragment() {
+class LogsFragment : Fragment() {
     companion object {
         fun newInstance(token: String, build: Build, app: App) = LogsFragment().apply {
             arguments = Bundle().apply {
@@ -56,15 +56,15 @@ class LogsFragment: Fragment() {
 
     private val viewModel: LogsViewModel
         by inject(parameters = {
-            mapOf(
-                    Properties.TOKEN to token,
-                    Properties.APP to app,
-                    Properties.BUILD to build)
+            parametersOf(
+                token,
+                app,
+                build
+            )
         })
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
-            FragmentLogsBinding.inflate(inflater, container, false).apply {
-                lifecycle.addObserver(viewModel)
-                vm = viewModel
-            }.root
+        FragmentLogsBinding.inflate(inflater, container, false).apply {
+            vm = viewModel
+        }.root
 }

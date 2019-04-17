@@ -35,4 +35,8 @@
         <item name="android:layout">@layout/fragment_settings</item>
     </style>
 
+    <style name="TabLayoutTheme" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">@android:color/white</item>
+    </style>
+
 </resources>

@@ -22,11 +22,11 @@
 
 package io.stanwood.bitrise.util.databinding
 
-import android.databinding.BindingAdapter
-import android.support.annotation.LayoutRes
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.databinding.BindingAdapter
+import androidx.annotation.LayoutRes
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import io.stanwood.bitrise.BR
 
 interface EndOfListReachedListener {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.preference.PreferenceScreen
+<androidx.preference.PreferenceScreen
         xmlns:android="http://schemas.android.com/apk/res/android">
 
     <Preference android:title="@string/contribute"
@@ -15,4 +15,4 @@
             android:persistent="false"
             android:summary="@string/copyright_notice"/>
 
-</android.support.v7.preference.PreferenceScreen>
+</androidx.preference.PreferenceScreen>

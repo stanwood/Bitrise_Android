@@ -24,7 +24,8 @@ package io.stanwood.bitrise.data.net
 
 import io.stanwood.bitrise.BuildConfig
 import io.stanwood.bitrise.data.model.*
-import kotlinx.coroutines.experimental.Deferred
+import kotlinx.coroutines.Deferred
+import okhttp3.ResponseBody
 import retrofit2.http.*
 
 
@@ -58,7 +59,12 @@ interface BitriseService {
             @Path("APP-SLUG") appSlug: String,
             @Path("BUILD-SLUG") buildLog: String,
             @Query("next") cursor: String? = null,
-            @Query("limit") limit: Int = BuildConfig.DEFAULT_PAGE_SIZE): Deferred<Log>
+            @Query("limit") limit: Int? = null): Deferred<Log>
+
+    @GET
+    fun downloadFile(
+            @Url url: String
+    ): Deferred<ResponseBody>
 
     @GET("v0.1/apps/{APP-SLUG}/builds/{BUILD-SLUG}/artifacts")
     fun getBuildArtifacts(
@@ -66,7 +72,7 @@ interface BitriseService {
             @Path("APP-SLUG") appSlug: String,
             @Path("BUILD-SLUG") buildSlug: String,
             @Query("next") cursor: String? = null,
-            @Query("limit") limit: Int = BuildConfig.DEFAULT_PAGE_SIZE): Deferred<Response<List<Artifact>>>
+            @Query("limit") limit: Int? = null): Deferred<Response<List<Artifact>>>
 
     @GET("v0.1/apps/{APP-SLUG}/builds/{BUILD-SLUG}/artifacts/{ARTIFACT-SLUG}")
     fun getBuildArtifact(

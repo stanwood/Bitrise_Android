@@ -31,14 +31,14 @@
             name="vm"
             type="io.stanwood.bitrise.ui.newbuild.vm.NewBuildViewModel" />
 
-        <import type="android.support.v7.widget.LinearLayoutManager" />
+        <import type="androidx.recyclerview.widget.LinearLayoutManager" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -84,7 +84,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_branch" />
 
-        <android.support.v7.widget.AppCompatButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -114,6 +114,6 @@
             app:layout_constraintStart_toStartOf="parent" />
 
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

@@ -22,31 +22,34 @@
 
 package io.stanwood.bitrise.ui.builds.di
 
+import io.stanwood.bitrise.data.model.App
 import io.stanwood.bitrise.di.Properties
 import io.stanwood.bitrise.ui.builds.vm.BuildsViewModel
 import org.joda.time.format.PeriodFormatterBuilder
 import org.koin.android.ext.koin.androidApplication
-import org.koin.dsl.module.applicationContext
+import org.koin.dsl.module.module
 
-val buildsModule = applicationContext {
+val buildsModule = module {
 
     /**
      * View Model
      */
-    factory { args ->
+    factory { (app: App) ->
         BuildsViewModel(
-                get(),
-                get(),
-                getProperty(Properties.TOKEN),
-                androidApplication().resources,
-                get(),
-                args[Properties.APP])
+            get(),
+            get(),
+            getProperty(Properties.TOKEN),
+            androidApplication().resources,
+            get(),
+            app,
+            get("main")
+        )
     }
 
     /**
      * Period Formatter
      */
-    bean {
+    single {
         PeriodFormatterBuilder()
             .printZeroAlways()
             .appendMinutes()

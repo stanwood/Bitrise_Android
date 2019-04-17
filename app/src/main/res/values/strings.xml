@@ -38,6 +38,7 @@
     <string name="workflow">Workflow</string>
     <string name="start_new_build">Start new build</string>
     <string name="label_token">Token</string>
+    <string name="label_login">Login</string>
     <string name="login_instructions">Don\'t have a token? Get it <a href="https://www.bitrise.io/me/profile#/security">here!</a></string>
     <string name="invalid_token">Invalid token</string>
     <string name="default_error_message">Unexpected error</string>
@@ -54,4 +55,5 @@
     <string name="contribute">Contribute</string>
     <string name="make_bitrise_better">Make Bitrise Unofficial better</string>
     <string name="open_source_notices">Open source notices</string>
+    <string name="label_load_log">Load log</string>
 </resources>

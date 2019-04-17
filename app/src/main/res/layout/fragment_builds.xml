@@ -31,12 +31,12 @@
             name="vm"
             type="io.stanwood.bitrise.ui.builds.vm.BuildsViewModel" />
 
-        <import type="android.support.v7.widget.LinearLayoutManager" />
+        <import type="androidx.recyclerview.widget.LinearLayoutManager" />
 
         <import type="io.stanwood.bitrise.BuildConfig" />
     </data>
 
-    <android.support.design.widget.CoordinatorLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/main_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -52,13 +52,13 @@
                 android:layout_height="?attr/actionBarSize"
                 app:title="@{vm.title}" />
 
-            <android.support.v4.widget.SwipeRefreshLayout
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:onRefreshListener="@{() -> vm.onRefresh()}"
                 app:refreshing="@{vm.isLoading}">
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     divider="@{LinearLayoutManager.VERTICAL}"
                     endOfListReached="@{vm.onEndOfListReached}"
                     itemLayout="@{@layout/item_build}"
@@ -68,11 +68,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
 
-            </android.support.v4.widget.SwipeRefreshLayout>
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         </LinearLayout>
 
-        <android.support.design.widget.FloatingActionButton
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
@@ -80,5 +80,5 @@
             android:onClick="@{() -> vm.onStartNewBuild()}"
             android:src="@drawable/ic_build"
             app:fabSize="normal" />
-    </android.support.design.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

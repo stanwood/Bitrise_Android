@@ -22,7 +22,7 @@
 
 package io.stanwood.bitrise.ui.error.vm
 
-import android.arch.lifecycle.LifecycleObserver
+import androidx.lifecycle.LifecycleObserver
 import androidx.navigation.NavController
 
 
