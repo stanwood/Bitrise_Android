@@ -33,3 +33,7 @@ fun setHtml(textView: TextView, enable: Boolean) {
         textView.movementMethod = LinkMovementMethod.getInstance()
     }
 }
+@BindingAdapter("app:autoStartMarquee")
+fun setAutoStartMarquee(textView: TextView, autoStartMarquee: Boolean) {
+    textView.isSelected = autoStartMarquee
+}
