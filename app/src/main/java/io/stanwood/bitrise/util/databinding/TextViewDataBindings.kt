@@ -22,14 +22,19 @@
 
 package io.stanwood.bitrise.util.databinding
 
-import androidx.databinding.BindingAdapter
 import android.text.method.LinkMovementMethod
 import android.widget.TextView
+import androidx.databinding.BindingAdapter
 
 
 @BindingAdapter("enableLinks")
 fun setHtml(textView: TextView, enable: Boolean) {
-    if(enable) {
+    if (enable) {
         textView.movementMethod = LinkMovementMethod.getInstance()
     }
+}
+
+@BindingAdapter("app:autoStartMarquee")
+fun setAutoStartMarquee(textView: TextView, autoStartMarquee: Boolean) {
+    textView.isSelected = autoStartMarquee
 }
