@@ -3,9 +3,9 @@ Unofficial Bitrise client for Android
 
 <a href='https://play.google.com/store/apps/details?id=io.stanwood.bitrise&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' width="20%"/></a>
 
-Develop: <img src="https://www.bitrise.io/app/8690e88b0025eabb/status.svg?token=eh7elLjmVEJnif_1HDgt1Q&branch=develop"/>
+Develop: <img src="https://app.bitrise.io/app/8690e88b0025eabb/status.svg?token=eh7elLjmVEJnif_1HDgt1Q&branch=develop"/>
 
-Master: <img src="https://www.bitrise.io/app/8690e88b0025eabb/status.svg?token=eh7elLjmVEJnif_1HDgt1Q&branch=master"/>
+Master: <img src="https://app.bitrise.io/app/8690e88b0025eabb/status.svg?token=eh7elLjmVEJnif_1HDgt1Q&branch=master"/>
 
 ## Screenshots
 
